@@ -4,7 +4,7 @@ const LogoBar = () => {
   return (
     <nav
       class="navbar navbar-dark bg-dark"
-      style={{ position: "fixed", width: "100%" }}
+      style={{ position: "relative", width: "100%" }}
     >
       <div class="custom-container d-flex align-items-center">
         <a class="navbar-brand" href="/">
