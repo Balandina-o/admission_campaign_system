@@ -5,6 +5,8 @@ import StatementsPage from "./pages/StatementsPage";
 import AuthPage from "./pages/AuthPage";
 import LogoBar from "./components/LogoBar";
 import Sidebar from "./components/SideBar";
+import UsersPage from "./pages/UsersPage";
+import NewStatementPage from "./pages/NewStatementPage";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <Routes>
             <Route path="/statements" element={<StatementsPage />}></Route>
             <Route path="/auth" element={<AuthPage />} />
+            <Route path="/user" element={<UsersPage />} />
+            <Route path="/newStatement" element={<NewStatementPage />} />
           </Routes>
             </div>
           </div>

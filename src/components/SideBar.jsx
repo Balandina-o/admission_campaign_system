@@ -19,7 +19,7 @@ const SideBar = () => {
   return (
     <CDBSidebar>
       <CDBSidebarHeader prefix={<i className="fa fa-bars" /> }>
-        Выбор операции
+        действия в системе
       </CDBSidebarHeader>
       <CDBSidebarContent>
         <CDBSidebarMenu >
@@ -68,7 +68,7 @@ const SideBar = () => {
         </div> */}
  
           <CDBSidebarMenuItem icon="credit-card" iconType="solid">
-          <Link to={'/'}>
+          <Link to={'/user'}>
           <CDBBtn color="light" onClick={alerty}>
               Личный кабинет
             </CDBBtn>
@@ -81,7 +81,6 @@ const SideBar = () => {
             </CDBBtn>
           </Link>
           </CDBSidebarMenuItem>
-          2023 г.
       </CDBSidebarFooter>
       </CDBSidebarContent>
 

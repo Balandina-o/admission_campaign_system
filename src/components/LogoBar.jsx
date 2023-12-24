@@ -17,7 +17,6 @@ const LogoBar = () => {
         </a>
         <div style={{ color: "aliceblue" }}>
           ИС приемной кампании УУНиТ | Admission Campaign System
-          {/* <hr style={{ margintop: "1px", marginbottom: "1px" }}></hr> */}
         </div>
       </div>
     </nav>
