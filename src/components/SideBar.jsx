@@ -19,7 +19,7 @@ const SideBar = () => {
       <CDBSidebarContent>
         <CDBSidebarMenu>
           <CDBSidebarMenuItem icon="th-large">
-            <CDBBtn color="warning" onClick={alert("hello")}>
+            <CDBBtn color="warning">
               Warning
             </CDBBtn>
           </CDBSidebarMenuItem>

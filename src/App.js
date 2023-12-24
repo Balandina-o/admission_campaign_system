@@ -13,11 +13,13 @@ function App() {
       <header className="App-header">
         <HashRouter>
           <LogoBar />
+          <div class="two_main_elements">
           <Sidebar />
           <Routes>
             <Route path="/" element={<MainPage />}></Route>
             <Route path="/auth" element={<AuthPage />} />
           </Routes>
+          </div>
         </HashRouter>
       </header>
     </div>
