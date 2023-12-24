@@ -1,3 +1,23 @@
-.two_main_elements {
+.two_great_elements {
+  padding-top: 76px; 
+/* чтобы лого не наползало на контент */
   display: flex;
+  
+}
+
+.sidebar{
+}
+
+.content{
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.app{
+  background-image: url("/public/icon_uust.jpg");
+}
+
+body {
+  overflow: hidden;
+  /* чтобы не было двух скролов*/
 }

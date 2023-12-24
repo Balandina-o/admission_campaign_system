@@ -1,13 +1,13 @@
 import React from "react";
-
+//background:"#111827"
 const LogoBar = () => {
   return (
     <nav
-      class="navbar navbar-dark bg-dark"
-      style={{ position: "relative", width: "100%" }}
+      class="navbar"
+      style={{ position: "fixed", width: "100%" ,background:"#111827"}}
     >
-      <div class="custom-container d-flex align-items-center">
-        <a class="navbar-brand" href="/">
+      <div class="custom-container d-flex align-items-center ps-3">
+        <a class="navbar-brand" href="/"> {/*указать адрес*/}
           <img
             src={require("../icons/icon_uust.jpg")}
             height="50"

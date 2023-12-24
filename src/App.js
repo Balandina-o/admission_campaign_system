@@ -1,27 +1,28 @@
 import React from "react";
 import "./App.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
-import MainPage from "./pages/MainPage";
+import StatementsPage from "./pages/StatementsPage";
 import AuthPage from "./pages/AuthPage";
-import OperationPanel from "./components/OperationPanel";
 import LogoBar from "./components/LogoBar";
 import Sidebar from "./components/SideBar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div class="app">
         <HashRouter>
           <LogoBar />
-          <div class="two_main_elements">
-          <Sidebar />
-          <Routes>
-            <Route path="/" element={<MainPage />}></Route>
+          <div class="two_great_elements">
+            <div class="sidebar"> 
+            <Sidebar />
+            </div>
+            <div class="content">
+            <Routes>
+            <Route path="/statements" element={<StatementsPage />}></Route>
             <Route path="/auth" element={<AuthPage />} />
           </Routes>
+            </div>
           </div>
         </HashRouter>
-      </header>
     </div>
   );
 }

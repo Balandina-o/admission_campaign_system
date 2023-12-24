@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import {
   CDBSidebar,
@@ -10,32 +11,87 @@ import {
   CDBBtn,
 } from "cdbreact";
 
+function alerty () {
+ // alert("warning")
+}
+
 const SideBar = () => {
   return (
     <CDBSidebar>
-      <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
-        Contrast
+      <CDBSidebarHeader prefix={<i className="fa fa-bars" /> }>
+        Выбор операции
       </CDBSidebarHeader>
       <CDBSidebarContent>
-        <CDBSidebarMenu>
+        <CDBSidebarMenu >
           <CDBSidebarMenuItem icon="th-large">
-            <CDBBtn color="warning">
-              Warning
+          <Link to={'/statements'}>
+            <CDBBtn color="light" onClick={alerty}>
+              Заявления
             </CDBBtn>
+            </Link>
           </CDBSidebarMenuItem>
-          <CDBSidebarMenuItem icon="sticky-note">Components</CDBSidebarMenuItem>
+          <CDBSidebarMenuItem icon="sticky-note">
+          <Link to={'/main'}>
+          <CDBBtn color="light" onClick={alerty}>
+              Военно-учетные специальности
+            </CDBBtn>
+          </Link>
+          </CDBSidebarMenuItem>
           <CDBSidebarMenuItem icon="credit-card" iconType="solid">
-            Metrics
+          <Link to={'/'}>
+          <CDBBtn color="light" onClick={alerty}>
+              Направления подготовки
+            </CDBBtn>
+          </Link>
           </CDBSidebarMenuItem>
+
+          <CDBSidebarMenuItem icon="credit-card" iconType="solid">
+          <Link to={'/'}>
+          <CDBBtn color="light" onClick={alerty}>
+              Протоколы
+            </CDBBtn>
+          </Link>
+          </CDBSidebarMenuItem>
+          <CDBSidebarMenuItem icon="credit-card" iconType="solid">
+          <Link to={'/'}>
+          <CDBBtn color="light" onClick={alerty}>
+              Отчет
+            </CDBBtn>
+          </Link>
+          </CDBSidebarMenuItem>
+
+
         </CDBSidebarMenu>
+        <CDBSidebarFooter style={{ textAlign: "center" }}>
+        {/* <div className="sidebar-btn-wrapper" style={{ padding: "20px 5px" }}>
+          Sidebar Footer
+        </div> */}
+ 
+          <CDBSidebarMenuItem icon="credit-card" iconType="solid">
+          <Link to={'/'}>
+          <CDBBtn color="light" onClick={alerty}>
+              Личный кабинет
+            </CDBBtn>
+          </Link>
+          </CDBSidebarMenuItem>
+          <CDBSidebarMenuItem icon="credit-card" iconType="solid">
+          <Link to={'/'}>
+          <CDBBtn color="light" onClick={alerty}>
+             Выйти из аккаунта
+            </CDBBtn>
+          </Link>
+          </CDBSidebarMenuItem>
+          2023 г.
+      </CDBSidebarFooter>
       </CDBSidebarContent>
 
-      <CDBSidebarFooter style={{ textAlign: "center" }}>
+      {/* <CDBSidebarFooter style={{ textAlign: "center" }}>
         <div className="sidebar-btn-wrapper" style={{ padding: "20px 5px" }}>
           Sidebar Footer
         </div>
-      </CDBSidebarFooter>
+      </CDBSidebarFooter> */}
     </CDBSidebar>
+   
   );
 };
 
