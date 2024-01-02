@@ -11,13 +11,15 @@
 .content{
   overflow-y: scroll;
   height: 100vh;
+  flex-grow: 1;
+  min-width: 0;
 }
 
 .app{
   background-image: url("/public/back.png");
+  
 }
 
 body {
-  overflow: hidden;
   /* чтобы не было двух скролов*/
 }

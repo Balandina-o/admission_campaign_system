@@ -1,55 +1,61 @@
 import React from 'react'
-import { Container, Form, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom'
 
 const NewStatementPage = () => {
   return (
     <div style={{width:"100%", background:"white"}}>
       <h1>Создание нового заявления</h1>
   
-      <Container className="d-flex justify-content-center align-items-center">
-      <Form
-        className="bg-primary bg-opacity-10 p-4 mt-5 rounded"
-        style={{ width: "50%", minWidth: "500px " }}
-      >
-        <h2>Регистрация</h2>
-        <Form.Control
-          type="text"
-          className="mt-3"
-          placeholder="Имя..."
-        />
-        <Form.Control
-          type="text"
-          className="mt-3"
-          placeholder="Фамилия..."
-        />
-        <Form.Control
-          type="text"
-          className="mt-3"
-          placeholder="email..."
-        />
-        <Form.Control
-          type="text"
-          className="mt-3"
-          placeholder="Login..."
-    
-        />
-        <Form.Control
-          type="password"
-          className="mt-3"
-          placeholder="Password..."
-
-        />
-        <br />
-        Прикрепите файл для аватара:
-        <Form.Control type="file" className="mt-3"  />
-        <div className="d-flex justify-content-end align-items-start mt-3">
-          <Button variant="success" className="mt-1" >
-            {" "}
-            Зарегистрироваться
-          </Button>
+      <div class="container ">
+        
+      <div class="row">
+        <div class="col-md-12">
+          <form class="form-inline" accept-charset="UTF-8" method="get">
+          <h2>Основная информация</h2>
+            <div class="flex-fill mr-2 d-flex align-items-center mt-1">
+              <label style={{width:"150px"}}>Фамилия: </label>
+              <input id="" value="" placeholder="Введите фамилию кандидата" class="form-control w-100"/>
+            </div>
+            <div class="flex-fill mr-2 d-flex align-items-center mt-1">
+              <label style={{width:"150px"}}>Имя: </label>
+              <input id="" value="" placeholder="Введите имя кандидата" class="form-control w-100"/>
+            </div>
+            <div class="flex-fill mr-2 d-flex align-items-center mt-1">
+              <label style={{width:"150px"}}>Отчество: </label>
+              <input id="" value="" placeholder="Введите отчество кандидата" class="form-control w-100"/>
+            </div>
+            <div class="flex-fill mr-2 d-flex align-items-center mt-1">
+              <label style={{width:"150px"}}>Пол: </label>
+                <select id="" class="form-select w-100">
+                  <option value="">Мужской</option>
+                  <option value="">Женский</option>
+              </select>
+            </div>
+            <div class="flex-fill mr-2 d-flex align-items-center mt-1">
+              <label style={{width:"150px"}}>Дата рождения: </label>
+              <input type="date" id="" value="" class="form-control w-100"/>
+            </div>
+            <div class="flex-fill mr-2 d-flex align-items-center mt-1">
+              <label style={{width:"150px"}}>Специальность: </label>
+              <input id="" value="" placeholder="Введите специальность кандидата" class="form-control w-100"/>
+            </div>
+            <div class="flex-fill mr-2 d-flex align-items-center mt-1">
+              <label style={{width:"150px"}}>Учебная группа: </label>
+              <input id="" value="" placeholder="Введите учебную группу кандидата" class="form-control w-100"/>
+            </div>
+            <div class="flex-fill mr-2 d-flex align-items-center mt-1">
+              <label style={{width:"150px"}}>ВУС: </label>
+              <input id="" value="" placeholder="Введите ВУС кандидата" class="form-control w-100"/>
+            </div>
+           
+            <Link to={'/existingStatement'}>
+             <button type="button" class="btn btn-primary mt-4 mb-2" style={{float:"right"}}>Сохранить основные данные</button>
+           </Link>
+      
+          </form>
         </div>
-      </Form>
-    </Container>
+      </div>
+    </div>
     </div>
   )
 }

@@ -7,6 +7,8 @@ import LogoBar from "./components/LogoBar";
 import Sidebar from "./components/SideBar";
 import UsersPage from "./pages/UsersPage";
 import NewStatementPage from "./pages/NewStatementPage";
+import SpecialtiesPage from "./pages/SpecialtiesPage";
+import ExistingStatementPage from "./pages/ExistingStatementPage";
 
 function App() {
   return (
@@ -17,15 +19,22 @@ function App() {
             <div class="sidebar"> 
             <Sidebar />
             </div>
+
             <div class="content">
-            <Routes>
-            <Route path="/statements" element={<StatementsPage />}></Route>
-            <Route path="/auth" element={<AuthPage />} />
-            <Route path="/user" element={<UsersPage />} />
-            <Route path="/newStatement" element={<NewStatementPage />} />
-          </Routes>
+              <div>
+                <Routes>
+                <Route path="/statements" element={<StatementsPage />}></Route>
+                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/user" element={<UsersPage />} />
+                <Route path="/newStatement" element={<NewStatementPage />} />
+                <Route path="/existingStatement" element={<ExistingStatementPage />} />
+                <Route path="/spec" element={<SpecialtiesPage />} />
+                </Routes>
+              </div>
             </div>
+
           </div>
+            
         </HashRouter>
     </div>
   );
