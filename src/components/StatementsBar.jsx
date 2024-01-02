@@ -6,7 +6,7 @@ const StatementsBar = () => {
   return (
     <nav
       class="navbar"
-      style={{ position: "fixed", background:"#4d18cb",  flexgrow:"1"}}
+      style={{ position: "fixed", zIndex:"1", width: "58%", background:"#4d18cb",  flexgrow:"1"}}
     >
       <div class="custom-container d-flex align-items-center ps-3">
         <div style={{ color: "aliceblue" }}>

@@ -1,17 +1,29 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const NewStatementPage = () => {
   return (
     <div style={{width:"100%", background:"white"}}>
-      <h1>Создание нового заявления</h1>
-  
       <div class="container ">
         
       <div class="row">
         <div class="col-md-12">
           <form class="form-inline" accept-charset="UTF-8" method="get">
-          <h2>Основная информация</h2>
+          <div class="d-flex justify-content-between" style={{ paddingTop:"10px"}}>
+      <h3>Создание нового заявления</h3>
+        <Link to={'/statements'}>
+          <Button
+            variant="primary"
+            style={{ width: "35px", height: "35px", fontSize: "16px"}}
+            className="bottom-0 end-0 me-3 pt-0"
+          >
+            &#10008;
+          </Button>
+        </Link>
+      </div>
+      <hr></hr>
+          <h4>Основная информация</h4>
             <div class="flex-fill mr-2 d-flex align-items-center mt-1">
               <label style={{width:"150px"}}>Фамилия: </label>
               <input id="" value="" placeholder="Введите фамилию кандидата" class="form-control w-100"/>

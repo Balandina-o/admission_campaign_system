@@ -9,6 +9,7 @@ import UsersPage from "./pages/UsersPage";
 import NewStatementPage from "./pages/NewStatementPage";
 import SpecialtiesPage from "./pages/SpecialtiesPage";
 import ExistingStatementPage from "./pages/ExistingStatementPage";
+import NewSpecialityPage from "./pages/NewSpecialityPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/user" element={<UsersPage />} />
                 <Route path="/newStatement" element={<NewStatementPage />} />
+                <Route path="/newSpeciality" element={<NewSpecialityPage />} />
                 <Route path="/existingStatement" element={<ExistingStatementPage />} />
                 <Route path="/spec" element={<SpecialtiesPage />} />
                 </Routes>

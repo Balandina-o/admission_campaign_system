@@ -2,7 +2,6 @@
   padding-top: 76px; 
 /* чтобы лого не наползало на контент */
   display: flex;
-  
 }
 
 .sidebar{
@@ -13,6 +12,8 @@
   height: 100vh;
   flex-grow: 1;
   min-width: 0;
+  padding-bottom: 5%;
+  /* чтобы не терялся контент снизу */
 }
 
 .app{
@@ -21,5 +22,7 @@
 }
 
 body {
-  /* чтобы не было двух скролов*/
+  height: 100%;
+  overflow-y: hidden;
+  margin: 0;
 }

@@ -6,13 +6,12 @@ const SpecialityBar = () => {
   return (
     <nav
       class="navbar"
-      style={{ position: "fixed", background:"#4d18cb"}}
+      style={{ position: "fixed", zIndex:"1", background:"#4d18cb"}}
     >
-      <div class="custom-container d-flex align-items-center ps-3">
+      <div class=" d-flex align-items-center ps-3">
         <div style={{ color: "aliceblue" }}>
           Военно-учетные специальности
         </div>
-      </div>
       <Link to={'/newSpeciality'}>
       <Button
           variant="primary"
@@ -22,6 +21,7 @@ const SpecialityBar = () => {
           +
       </Button>
       </Link>
+      </div>
     </nav>
   );
 };

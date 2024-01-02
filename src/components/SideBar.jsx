@@ -26,7 +26,7 @@ const SideBar = () => {
    }
 
   return (
-    <CDBSidebar>
+    <CDBSidebar style={{height:"100vh"}}>
       <CDBSidebarHeader prefix={<i className="fa fa-bars" /> }>
         {/* действия в системе */}
       </CDBSidebarHeader>
