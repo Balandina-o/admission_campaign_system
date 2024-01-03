@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 const SpecialityBar = () => {
   return (
     <nav
-      class="navbar"
+      className="navbar"
       style={{ position: "fixed", zIndex:"1", background:"#4d18cb"}}
     >
-      <div class=" d-flex align-items-center ps-3">
+      <div className=" d-flex align-items-center ps-3">
         <div style={{ color: "aliceblue" }}>
           Военно-учетные специальности
         </div>

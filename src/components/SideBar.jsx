@@ -47,7 +47,7 @@ const SideBar = () => {
           </Link>
           </CDBSidebarMenuItem>
           <CDBSidebarMenuItem icon="table" iconType="solid">
-          <Link to={'/'}>
+          <Link to={'/directions'}>
           <CDBBtn color="light" onClick={alerty} style={{ width: "150px" }}>
                Направления {/*<br/>подготовки */}
             </CDBBtn>

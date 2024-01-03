@@ -3,11 +3,11 @@ import React from "react";
 const LogoBar = () => {
   return (
     <nav
-      class="navbar"
+      className="navbar"
       style={{ position: "fixed", width: "100%" ,background:"#111827"}}
     >
-      <div class="custom-container d-flex align-items-center ps-3">
-        <a class="navbar-brand" href="/"> {/*указать адрес*/}
+      <div className="custom-container d-flex align-items-center ps-3">
+        <a className="navbar-brand" href="/"> {/*указать адрес*/}
           <img
             src={require("../icons/icon_uust.jpg")}
             height="50"

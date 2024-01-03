@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 const StatementsBar = () => {
   return (
     <nav
-      class="navbar"
+      className="navbar"
       style={{ position: "fixed", zIndex:"1", width: "58%", background:"#4d18cb",  flexgrow:"1"}}
     >
-      <div class="custom-container d-flex align-items-center ps-3">
+      <div className="custom-container d-flex align-items-center ps-3">
         <div style={{ color: "aliceblue" }}>
           Прикрепленные заявления
         </div>

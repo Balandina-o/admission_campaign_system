@@ -1,11 +1,12 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 
 const SpecialityCardUnit = ({name, cypher, type}) => {
   return (
-<div class="p-2 card">
-    <div class="d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center">
+<div className="p-2 card">
+    <div className="d-flex justify-content-between align-items-center">
+        <div className="d-flex align-items-center">
             <div>
                 {cypher}
             </div>
@@ -38,6 +39,12 @@ const SpecialityCardUnit = ({name, cypher, type}) => {
     </div>
     </div>
   )
+}
+
+SpecialityCardUnit.propTypes = {
+    name: PropTypes.string,
+    cypher: PropTypes.string,
+    type: PropTypes.string
 }
 
 export default SpecialityCardUnit

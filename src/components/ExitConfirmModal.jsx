@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 
 const ExitConfirmModal = ({ show, onClose}) => {
   return (
@@ -26,6 +27,11 @@ const ExitConfirmModal = ({ show, onClose}) => {
       </div>
     </div>
   )
+}
+
+ExitConfirmModal.propTypes = {
+  onClose: PropTypes.func,
+  show: PropTypes.bool,
 }
 
 export default ExitConfirmModal

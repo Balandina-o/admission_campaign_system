@@ -1,9 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-const SpecUnit = ({name, cypher, type}) => {
+const SpecUnit = ({name, cypher, type, clicked}) => {
   return (
-    <div class="p-2 card">
-        <div class="d-flex">
+    <div className="p-2 card" onClick={clicked}>
+        <div className="d-flex">
             <div>
                 {name}
             </div>
@@ -16,6 +17,13 @@ const SpecUnit = ({name, cypher, type}) => {
       </div>
     </div>
   )
+}
+
+SpecUnit.propTypes = {
+  name: PropTypes.string,
+  cypher: PropTypes.string,
+  type: PropTypes.string,
+  clicked: PropTypes.func,
 }
 
 export default SpecUnit
