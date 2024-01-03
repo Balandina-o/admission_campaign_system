@@ -1,12 +1,16 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
+const campaign = require("./campaign");
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    webPreferences: { enableRemoteModule: true },
+    webPreferences: {
+      enableRemoteModule: true,
+      preload: path.join(__dirname, 'preload.js')
+    },
     icon: path.join(__dirname, "icon_uust.jpg"),
   });
   mainWindow.setTitle("Баландина ПИ-426 DIPLOMA");
@@ -18,5 +22,9 @@ const createWindow = () => {
   );
 };
 
-app.whenReady().then(() => createWindow());
+app.whenReady().then(() => {
+  ipcMain.handle("campaign:specialities", () => campaign.getSpecialities());
+  ipcMain.handle("campaign:directions", () => campaign.getDirections());
+  createWindow();
+});
 app.on("window-all-closed", () => app.quit());

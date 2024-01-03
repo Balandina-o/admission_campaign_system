@@ -1,16 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap'
-import { Context } from "../App"
 
 const DirectionsPage = () => {
   const [directions, setDirections] = useState([]);
-  const campaign = useContext(Context);
 
-
-  useEffect(() => {
-    const dir = campaign.getDirections();
+  useEffect(() => void (async () => {
+    const dir = await window.electronAPI.getDirections();
     setDirections(dir);
-  }, [])
+  })(), [])
 
   return (
     <div className="p-2 card">
