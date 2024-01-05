@@ -32,7 +32,7 @@ const SpecialityEditPage = () => {
 
     return (
         <div>
-            <div style={{ width: "100%", background: "white" }}>
+            <div style={{ width: "100%", background: "white", padding: "10px" }}>
                 <div className="container ">
                     <div className="row">
                         <div className="col-md-12">
@@ -53,7 +53,7 @@ const SpecialityEditPage = () => {
                                     <label style={{ width: "150px" }}>Подготовка: </label>
                                     <input id="type" value={type} onChange={(event) => setType(event.target.value)} placeholder="Введите тип кандидатов" className="form-control w-100" />
                                 </div>
-                                <button type="button" onClick={updateExistingSpec} className="btn btn-primary mt-4 mb-2" style={{ float: "right" }}>Сохранить основные данные</button>
+                                <button type="button" onClick={updateExistingSpec} className="btn btn-primary mt-4 mb-2" >Сохранить основные данные</button>
                             </form>
                         </div>
                     </div>

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
 
 const StatementCardUnit = ({ fullName, group }) => {
-
   return (
     <div className="p-2 card">
       <div className="d-flex justify-content-between align-items-center">

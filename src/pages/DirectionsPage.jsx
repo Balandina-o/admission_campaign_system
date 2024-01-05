@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Button } from 'react-bootstrap'
+import DirectionBar from '../components/DirectionBar';
+import DirecrionsCardUnit from '../components/DirecrionsCardUnit';
 
 const DirectionsPage = () => {
   const [directions, setDirections] = useState([]);
@@ -10,30 +11,23 @@ const DirectionsPage = () => {
   })(), [])
 
   return (
-    <div className="p-2 card">
-      {directions.map(x => (
-        <div className="d-flex justify-content-between align-items-center" key={x.id}>
-          <div>
-            <div>
-              {x.name}
-            </div>
-            <div>
-              {x.cypher}
-            </div>
-            <div>
-              {x.acronym}
-            </div>
-          </div>
-          <Button
-            variant="primary"
-            style={{ width: "35px", height: "35px", fontSize: "16px" }}
-            className="bottom-0 end-0 me-3 pt-0"
-          >
-            &#62;
-          </Button>
+    <div>
+      <DirectionBar></DirectionBar>
+      <div style={{ paddingTop: "50px" }}>
+        <div className="p-2 card">
+          {directions.map(dir => (
+            <DirecrionsCardUnit
+              key={dir.id}
+              id={dir.id}
+              name={dir.name}
+              cypher={dir.cypher}
+              acronym={dir.acronym}
+            />
+          ))}
         </div>
-      ))}
+      </div>
     </div>
+
   )
 }
 
