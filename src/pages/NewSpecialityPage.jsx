@@ -20,7 +20,7 @@ const NewSpecialityPage = () => {
 
   return (
     <div>
-      <div style={{ width: "100%", background: "white" }}>
+      <div style={{ width: "100%", background: "white", padding: "10px" }}>
         <div className="container ">
           <div className="row">
             <div className="col-md-12">

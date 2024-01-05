@@ -1,25 +1,30 @@
 import { makeAutoObservable } from "mobx";
 
 class SpecialitiesStore {
-    SpecialitiesList = [];
+    specialitiesList = [];
 
     constructor() {
         makeAutoObservable(this);
     }
 
     setSpecialities(spec) {
-        this.SpecialitiesList = spec;
+        this.specialitiesList = spec;
     }
 
     findSpeciality(spec_id) {
-        const spec = this.SpecialitiesList.find(x => x.id == spec_id);
+        const spec = this.specialitiesList.find(x => x.id == spec_id);
         return spec;
     }
 
     updateSpecInStore(spec_id, specForEdit) {
-        const spec = this.SpecialitiesList.find(x => x.id == spec_id);
+        const spec = this.specialitiesList.find(x => x.id == spec_id);
         spec == specForEdit;
         return spec;
+    }
+
+    removeSpecInStore(spec_id) {
+        this.specialitiesList = this.specialitiesList.filter((spec) => spec.id !== spec_id);
+        return this.specialitiesList;
     }
 }
 

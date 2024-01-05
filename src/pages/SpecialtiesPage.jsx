@@ -1,11 +1,28 @@
 import React, { useEffect, useContext, useState } from 'react'
-import SpecialityBar from '../components/SpecialityBar'
+import { useNavigate } from "react-router-dom";
+import { Context } from "../App";
 import SpecialityCardUnit from '../components/SpecialityCardUnit'
-import { Context } from "../App"; ////
+import SpecialityBar from '../components/SpecialityBar'
+import DeleteSpecConfirmModal from '../components/DeleteSpecConfirmModal';
 
 const SpecialtiesPage = () => {
+  const navigate = useNavigate();
   const { specialitiesFromStore } = useContext(Context);
   const [specialities, setSpecialities] = useState([]);
+  const [showCreateDeleteSpecConfirmModal, setShowCreateDeleteSpecConfirmModal] = useState();
+  const [selectedSpecName, setSelectedSpecName] = useState([]);
+
+  // function delete() {
+  //   setShowCreateExitConfirmModal(true);
+  // }
+
+  const deleteSpec = async (id_spec, name) => {
+    setSelectedSpecName(name);
+    setShowCreateDeleteSpecConfirmModal(true);
+    await window.electronAPI.deleteExistingSpec(id_spec);
+    setSpecialities(specialitiesFromStore.removeSpecInStore(id_spec));
+    navigate("/spec");
+  };
 
   useEffect(() => void (async () => {
     const specialitiesWhatWeGet = await window.electronAPI.getSpecialities();
@@ -27,9 +44,15 @@ const SpecialtiesPage = () => {
             name={spec.name}
             cypher={spec.cypher}
             type={spec.type}
+            onDelete={deleteSpec}
           />
         ))}
       </div>
+      <DeleteSpecConfirmModal
+        show={showCreateDeleteSpecConfirmModal}
+        onClose={() => setShowCreateDeleteSpecConfirmModal(false)}
+        selectedSpecName={selectedSpecName}>
+      </DeleteSpecConfirmModal>
     </div>
   )
 }

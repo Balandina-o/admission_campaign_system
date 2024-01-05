@@ -6,7 +6,7 @@ const StatementsBar = () => {
   return (
     <nav
       className="navbar"
-      style={{ position: "fixed", zIndex:"1", width: "58%", background:"#4d18cb",  flexgrow:"1"}}
+      style={{ position: "fixed", zIndex: "1", width: "57%", background: "#4d18cb", flexgrow: "1" }}
     >
       <div className="custom-container d-flex align-items-center ps-3">
         <div style={{ color: "aliceblue" }}>
@@ -14,13 +14,13 @@ const StatementsBar = () => {
         </div>
       </div>
       <Link to={'/newStatement'}>
-      <Button
+        <Button
           variant="primary"
-          style={{ width: "35px", height: "35px", fontSize: "16px"}}
+          style={{ width: "35px", height: "35px", fontSize: "16px" }}
           className="bottom-0 end-0 me-3 pt-0"
         >
           +
-      </Button>
+        </Button>
       </Link>
     </nav>
   );
