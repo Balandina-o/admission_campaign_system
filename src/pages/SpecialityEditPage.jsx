@@ -1,15 +1,26 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Context } from "../App";
 
 const SpecialityEditPage = () => {
+    const navigate = useNavigate();
     const { specialitiesFromStore } = useContext(Context);
     const { id } = useParams();
 
-    const [name, setName] = useState(""); //`${id}`
+    const [name, setName] = useState("");
     const [cypher, setCypher] = useState("");
     const [type, setType] = useState("");
 
+    const updateExistingSpec = async () => {
+        const specForEdit = {
+            name: name,
+            cypher: cypher,
+            type: type,
+        };
+        await window.electronAPI.updateCurrentSpec(id, specForEdit);
+        specialitiesFromStore.updateSpecInStore(id, specForEdit);
+        navigate("/spec");
+    };
 
     useEffect(() => void (async () => {
         console.log(id);
@@ -42,7 +53,7 @@ const SpecialityEditPage = () => {
                                     <label style={{ width: "150px" }}>Подготовка: </label>
                                     <input id="type" value={type} onChange={(event) => setType(event.target.value)} placeholder="Введите тип кандидатов" className="form-control w-100" />
                                 </div>
-                                <button type="button" className="btn btn-primary mt-4 mb-2" style={{ float: "right" }}>Сохранить основные данные</button>
+                                <button type="button" onClick={updateExistingSpec} className="btn btn-primary mt-4 mb-2" style={{ float: "right" }}>Сохранить основные данные</button>
                             </form>
                         </div>
                     </div>

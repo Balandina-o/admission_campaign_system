@@ -15,6 +15,12 @@ class SpecialitiesStore {
         const spec = this.SpecialitiesList.find(x => x.id == spec_id);
         return spec;
     }
+
+    updateSpecInStore(spec_id, specForEdit) {
+        const spec = this.SpecialitiesList.find(x => x.id == spec_id);
+        spec == specForEdit;
+        return spec;
+    }
 }
 
 export default SpecialitiesStore;

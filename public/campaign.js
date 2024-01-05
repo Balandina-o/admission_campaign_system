@@ -87,9 +87,15 @@ module.exports = {
     return users.map(x => x.toJSON());
   },
   async createSpeciality(newSpec) {
-    console.log(newSpec);
     await connect();
     const speciality = await Speciality.create(newSpec);
     return speciality.toJSON();
+  },
+  async updateCurrentSpec(spec_id, specForEdit) {
+    console.log(specForEdit);
+    const speciality = await Speciality.update(specForEdit, {
+      where: { id: spec_id }
+    });
+    return speciality;
   }
 }

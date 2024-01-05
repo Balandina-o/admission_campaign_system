@@ -26,6 +26,7 @@ app.whenReady().then(() => {
   ipcMain.handle("campaign:specialities:load", () => campaign.getSpecialities());
   ipcMain.handle("campaign:directions:load", () => campaign.getDirections());
   ipcMain.handle("campaign:speciality:create", (event, data) => campaign.createSpeciality(data));
+  ipcMain.handle("campaign:speciality:update", (event, id, data) => campaign.updateCurrentSpec(id, data));
   createWindow();
 });
 app.on("window-all-closed", () => app.quit());
