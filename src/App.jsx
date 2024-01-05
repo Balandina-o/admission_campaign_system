@@ -13,6 +13,8 @@ import NewSpecialityPage from "./pages/NewSpecialityPage";
 import DirectionsPage from "./pages/DirectionsPage";
 import SpecialityEditPage from "./pages/SpecialityEditPage";
 import SpecialitiesStore from "./store/SpecialitiesStore";
+import NewDirectionPage from "./pages/NewDirectionPage";
+import DirectionEditPage from "./pages/DirectionEditPage";
 
 export const Context = createContext(null);
 
@@ -40,7 +42,9 @@ function App() {
                   <Route path="/user" element={<UsersPage />} />
                   <Route path="/newStatement" element={<NewStatementPage />} />
                   <Route path="/newSpeciality" element={<NewSpecialityPage />} />
+                  <Route path="/newDirection" element={<NewDirectionPage />} />
                   <Route path="/editSpeciality/:id" element={<SpecialityEditPage />} />
+                  <Route path="/editDirection/:id" element={<DirectionEditPage />} />
                   <Route path="/existingStatement" element={<ExistingStatementPage />} />
                   <Route path="/spec" element={<SpecialtiesPage />} />
                   <Route path="/directions" element={<DirectionsPage />} />

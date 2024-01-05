@@ -13,7 +13,7 @@ const DirectionsPage = () => {
   return (
     <div>
       <DirectionBar></DirectionBar>
-      <div style={{ paddingTop: "50px" }}>
+      <div>
         <div className="p-2 card">
           {directions.map(dir => (
             <DirecrionsCardUnit

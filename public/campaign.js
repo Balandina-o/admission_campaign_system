@@ -91,6 +91,11 @@ module.exports = {
     const speciality = await Speciality.create(newSpec);
     return speciality.toJSON();
   },
+  async createDirection(newDir) {
+    await connect();
+    const direction = await Direction.create(newDir);
+    return direction.toJSON();
+  },
   async updateCurrentSpec(spec_id, specForEdit) {
     console.log(specForEdit);
     const speciality = await Speciality.update(specForEdit, {
