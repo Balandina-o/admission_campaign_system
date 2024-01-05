@@ -7,7 +7,7 @@ const SpecialityBar = () => {
   return (
     <nav
       className={classes.navbar}
-      style={{ position: "fixed", width: "81.3%", zIndex: "1", display: "block", flexgrow: "1" }}
+      style={{ position: "sticky", top: "0", zIndex: "1", display: "block", flexgrow: "1" }}
     >
       <div className=" d-flex align-items-center ps-3">
         <div style={{ color: "aliceblue" }}>

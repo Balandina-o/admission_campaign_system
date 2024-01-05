@@ -23,7 +23,7 @@ const StatementsPage = () => {
       <div className="main_content" style={{ display: "flex" }}>
         <div className="content" style={{ background: "white", width: "30%", display: "block" }}>
           <SpecBar></SpecBar>
-          <div style={{ marginTop: "40px" }}>
+          <div>
             {specialities.map(item => (
               <SpecUnit
                 key={item.id}
@@ -40,7 +40,7 @@ const StatementsPage = () => {
         </div>
         <div className="content" style={{ background: "white", width: "70%" }}>
           <StatementsBar style={{ flexgrow: "1" }}></StatementsBar>
-          <div style={{ marginTop: "50px", flexgrow: "5" }}>
+          <div >
             {selectedSpec && selectedSpec.Statements.map(item => (
               <CandidateCardUnit
                 key={item.id}
