@@ -35,7 +35,7 @@ const DirecrionsCardUnit = ({ id, name, cypher, acronym, onDelete }) => {
                         variant="primary"
                         style={{ width: "35px", height: "35px", fontSize: "13px" }}
                         className="bottom-0 end-0 me-3 fa fa-pencil"
-                        onClick={() => navigate(`/editSpeciality/${id}`)}
+                        onClick={() => navigate(`/editDirection/${id}`)}
                     >
                         &#9998;
                     </Button>

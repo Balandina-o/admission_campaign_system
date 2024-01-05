@@ -29,6 +29,7 @@ app.whenReady().then(() => {
   ipcMain.handle("campaign:speciality:delete", (event, id) => campaign.deleteExistingSpec(id));
   ipcMain.handle("campaign:directions:load", () => campaign.getDirections());
   ipcMain.handle("campaign:direction:create", (event, data) => campaign.createDirection(data));
+  ipcMain.handle("campaign:direction:update", (event, id, data) => campaign.updateCurrentDir(id, data));
   createWindow();
 });
 app.on("window-all-closed", () => app.quit());

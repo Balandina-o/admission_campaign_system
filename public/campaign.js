@@ -103,6 +103,13 @@ module.exports = {
     });
     return speciality;
   },
+  async updateCurrentDir(dir_id, dirForEdit) {
+    console.log(dirForEdit);
+    const speciality = await Direction.update(dirForEdit, {
+      where: { id: dir_id }
+    });
+    return speciality;
+  },
   async deleteExistingSpec(spec_id) {
     const speciality = await Speciality.destroy({
       where: { id: spec_id }

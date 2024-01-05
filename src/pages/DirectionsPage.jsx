@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import DirectionBar from '../components/DirectionBar';
 import DirecrionsCardUnit from '../components/DirecrionsCardUnit';
+import { Context } from "../App";
 
 const DirectionsPage = () => {
+  const { directionsFromStore } = useContext(Context);
   const [directions, setDirections] = useState([]);
 
   useEffect(() => void (async () => {
-    const dir = await window.electronAPI.getDirections();
-    setDirections(dir);
+    const directionsWhatWeGet = await window.electronAPI.getDirections();
+    setDirections(directionsWhatWeGet);
+    directionsFromStore.setDirections(directionsWhatWeGet);
   })(), [])
 
   return (
@@ -27,7 +30,6 @@ const DirectionsPage = () => {
         </div>
       </div>
     </div>
-
   )
 }
 

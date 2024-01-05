@@ -15,6 +15,7 @@ import SpecialityEditPage from "./pages/SpecialityEditPage";
 import SpecialitiesStore from "./store/SpecialitiesStore";
 import NewDirectionPage from "./pages/NewDirectionPage";
 import DirectionEditPage from "./pages/DirectionEditPage";
+import DirectionsStore from "./store/DirectionsStore";
 
 export const Context = createContext(null);
 
@@ -23,6 +24,7 @@ function App() {
     <Context.Provider
       value={{
         specialitiesFromStore: new SpecialitiesStore(),
+        directionsFromStore: new DirectionsStore(),
       }}
     >
       <div className="app">
