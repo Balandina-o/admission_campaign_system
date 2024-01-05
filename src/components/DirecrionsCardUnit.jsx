@@ -11,14 +11,14 @@ const DirecrionsCardUnit = ({ id, name, cypher, acronym, onDelete }) => {
             <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center">
                     <div>
+                        {acronym}
+                    </div>
+                    <div>
                         <div>
                             {name}
                         </div>
                         <div>
                             {cypher}
-                        </div>
-                        <div>
-                            {acronym}
                         </div>
                     </div>
                 </div>
@@ -40,9 +40,8 @@ const DirecrionsCardUnit = ({ id, name, cypher, acronym, onDelete }) => {
                         &#9998;
                     </Button>
                 </div>
-
             </div>
-        </div>
+        </div >
     )
 }
 
