@@ -6,6 +6,21 @@ const sequelize = new Sequelize({
   storage: path.resolve(process.cwd(), 'db.sqlite'),
 });
 
+const User = sequelize.define('User', {
+  login: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  role: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+});
+
 const Direction = sequelize.define('Direction', {
   name: {
     type: DataTypes.STRING,
@@ -59,12 +74,22 @@ module.exports = {
     const specialities = await Speciality.findAll({
       include: [{ model: Statement }]
     });
-
     return specialities.map(x => x.toJSON());
   },
   async getDirections() {
     await connect();
     const directions = await Direction.findAll();
     return directions.map(x => x.toJSON());
+  },
+  async getUsers() {
+    await connect();
+    const users = await User.findAll();
+    return users.map(x => x.toJSON());
+  },
+  async createSpeciality(newSpec) {
+    console.log(newSpec);
+    await connect();
+    const speciality = await Speciality.create(newSpec);
+    return speciality.toJSON();
   }
 }

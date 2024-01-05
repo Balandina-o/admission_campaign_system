@@ -23,8 +23,9 @@ const createWindow = () => {
 };
 
 app.whenReady().then(() => {
-  ipcMain.handle("campaign:specialities", () => campaign.getSpecialities());
-  ipcMain.handle("campaign:directions", () => campaign.getDirections());
+  ipcMain.handle("campaign:specialities:load", () => campaign.getSpecialities());
+  ipcMain.handle("campaign:directions:load", () => campaign.getDirections());
+  ipcMain.handle("campaign:speciality:create", (event, data) => campaign.createSpeciality(data));
   createWindow();
 });
 app.on("window-all-closed", () => app.quit());

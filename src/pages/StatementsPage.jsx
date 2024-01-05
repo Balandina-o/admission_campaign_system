@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import StatementsBar from "../components/StatementsBar";
 import SpecBar from "../components/SpecBar";
 import SpecUnit from "../components/SpecUnit";
-import CandidateCardUnit from "../components/CandidateCardUnit";
+import CandidateCardUnit from "../components/StatementCardUnit";
 
 const StatementsPage = () => {
   const [specialities, setSpecialities] = useState([])
@@ -27,6 +27,7 @@ const StatementsPage = () => {
             {specialities.map(item => (
               <SpecUnit
                 key={item.id}
+                id={item.id}
                 name={item.name}
                 cypher={item.cypher}
                 type={item.type}

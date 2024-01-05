@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from "react";
 import "./App.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import StatementsPage from "./pages/StatementsPage";
@@ -11,36 +11,48 @@ import SpecialtiesPage from "./pages/SpecialtiesPage";
 import ExistingStatementPage from "./pages/ExistingStatementPage";
 import NewSpecialityPage from "./pages/NewSpecialityPage";
 import DirectionsPage from "./pages/DirectionsPage";
+import SpecialityEditPage from "./pages/SpecialityEditPage";
+import SpecialitiesStore from "./store/SpecialitiesStore";
+
+export const Context = createContext(null);
 
 function App() {
   return (
-    <div className="app">
-      <HashRouter>
-        <LogoBar />
-        <div className="two_great_elements">
-          <div className="sidebar">
-            <Sidebar />
-          </div>
-
-          <div className="content">
-            <div>
-              <Routes>
-                <Route path="/statements" element={<StatementsPage />}></Route>
-                <Route path="/auth" element={<AuthPage />} />
-                <Route path="/user" element={<UsersPage />} />
-                <Route path="/newStatement" element={<NewStatementPage />} />
-                <Route path="/newSpeciality" element={<NewSpecialityPage />} />
-                <Route path="/existingStatement" element={<ExistingStatementPage />} />
-                <Route path="/spec" element={<SpecialtiesPage />} />
-                <Route path="/directions" element={<DirectionsPage />} />
-              </Routes>
+    <Context.Provider
+      value={{
+        specialitiesFromStore: new SpecialitiesStore(),
+      }}
+    >
+      <div className="app">
+        <HashRouter>
+          <LogoBar />
+          <div className="two_great_elements">
+            {/* {true & ( */}
+            <div className="sidebar">
+              <Sidebar />
             </div>
+            {/* )} */}
+            <div className="content">
+              <div>
+                <Routes>
+                  <Route path="/statements" element={<StatementsPage />}></Route>
+                  <Route path="/auth" element={<AuthPage />} />
+                  <Route path="/user" element={<UsersPage />} />
+                  <Route path="/newStatement" element={<NewStatementPage />} />
+                  <Route path="/newSpeciality" element={<NewSpecialityPage />} />
+                  <Route path="/editSpeciality/:id" element={<SpecialityEditPage />} />
+                  <Route path="/existingStatement" element={<ExistingStatementPage />} />
+                  <Route path="/spec" element={<SpecialtiesPage />} />
+                  <Route path="/directions" element={<DirectionsPage />} />
+                </Routes>
+              </div>
+            </div>
+
           </div>
 
-        </div>
-
-      </HashRouter>
-    </div>
+        </HashRouter>
+      </div>
+    </Context.Provider >
   );
 }
 
