@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
+import WrongAuthModal from "../components/WrongAuthModal";
 // import { Context } from "../App";
 
 const AuthPage = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [showCreateWrongAuthModal, setShowCreateWrongAuthModal] = useState();
   // const { userFromStore } = useContext(Context);
   const navigate = useNavigate();
 
@@ -20,7 +22,7 @@ const AuthPage = () => {
       navigate("/statements");
 
     } else {
-      alert("Неверный логин или пароль");
+      setShowCreateWrongAuthModal(true);
     }
   }
 
@@ -42,7 +44,7 @@ const AuthPage = () => {
           <Form.Control
             type="text"
             className="mt-3"
-            placeholder="username"
+            placeholder="Введите логин"
             value={login}
             onChange={(e) => setLogin(e.target.value)}
           />
@@ -52,7 +54,7 @@ const AuthPage = () => {
           <Form.Control
             type="password"
             className="mt-3"
-            placeholder="password"
+            placeholder="ВВедите пароль"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -63,6 +65,11 @@ const AuthPage = () => {
           </Button>
         </div>
       </Form>
+      <WrongAuthModal
+        show={showCreateWrongAuthModal}
+        onClose={() => setShowCreateWrongAuthModal(false)}
+      >
+      </WrongAuthModal>
     </Container>
   );
 };

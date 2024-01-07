@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
-const ExitConfirmModal = ({ show, onClose}) => {
+const ExitConfirmModal = ({ show, onClose }) => {
   return (
     <div>
       <div>
@@ -16,10 +16,13 @@ const ExitConfirmModal = ({ show, onClose}) => {
             <Modal.Title>Вы действительно хотите осуществить выход из аккаунта?</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-           Подтвердите выход нажатием на кнопку
+            Подтвердите выход нажатием на кнопку
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={() => onClose()}>
+            <Button class="btn-close" variant="secondary" onClick={() => onClose("no")}>
+              Нет, я остаюсь
+            </Button>
+            <Button variant="primary" onClick={() => onClose("yesImRedyToExit")}>
               Да, я хочу выйти
             </Button>
           </Modal.Footer>

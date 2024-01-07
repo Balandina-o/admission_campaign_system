@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   CDBSidebar,
@@ -14,14 +14,18 @@ import {
 import ExitConfirmModal from "./ExitConfirmModal";
 
 const SideBar = () => {
+  const navigate = useNavigate();
   const [showCreateExitConfirmModal, setShowCreateExitConfirmModal] = useState();
 
   function alerty() {
     // alert("warning")
   }
 
-  function exit() {
-    setShowCreateExitConfirmModal(true);
+  function closeExitConfirmModal(x) {
+    setShowCreateExitConfirmModal(false)
+    if (x == "yesImRedyToExit") {
+      navigate(`/`)
+    }
   }
 
   return (
@@ -80,18 +84,16 @@ const SideBar = () => {
             </Link>
           </CDBSidebarMenuItem>
           <CDBSidebarMenuItem icon="exit" iconType="solid">
-            <Link to={'/'}>
-              <CDBBtn color="light" onClick={exit} style={{ width: "150px" }}>
-                Выйти из аккаунта
-              </CDBBtn>
-            </Link>
+            <CDBBtn color="light" onClick={() => setShowCreateExitConfirmModal(true)} style={{ width: "150px" }}>
+              Выйти из аккаунта
+            </CDBBtn>
           </CDBSidebarMenuItem>
         </CDBSidebarFooter>
       </CDBSidebarContent>
 
       <ExitConfirmModal
         show={showCreateExitConfirmModal}
-        onClose={() => setShowCreateExitConfirmModal(false)}>
+        onClose={(x) => { closeExitConfirmModal(x) }}>
       </ExitConfirmModal>
     </CDBSidebar>
 

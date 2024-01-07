@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
-const WrongAuthModal = ({ show, onClose, selectedSpecName }) => {
+const WrongAuthModal = ({ show, onClose }) => {
     return (
         <div>
             <div>
@@ -13,14 +13,14 @@ const WrongAuthModal = ({ show, onClose, selectedSpecName }) => {
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title>Вы действительно хотите удалить ВУС &quot;{selectedSpecName}&quot;?</Modal.Title>
+                        <Modal.Title>Внимание! Неверный логин или пароль</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        Подтвердите удаление нажатием на кнопку
+                        Проверьте корректность вводимых логина и пароля и повторите процедуру авторизации
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={() => onClose()}>
-                            Да, я хочу удалить данную ВУС
+                            Ок
                         </Button>
                     </Modal.Footer>
                 </Modal>
