@@ -48,9 +48,21 @@ const Speciality = sequelize.define('Speciality', {
 });
 
 const Statement = sequelize.define('Statement', {
-  fullName: {
+  lastName: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  firstName: {
+    type: DataTypes.STRING
+  },
+  secondName: {
+    type: DataTypes.STRING
+  },
+  gender: {
+    type: DataTypes.STRING
+  },
+  birthday: {
+    type: DataTypes.DATE
   },
   group: {
     type: DataTypes.STRING
@@ -95,6 +107,11 @@ module.exports = {
     await connect();
     const direction = await Direction.create(newDir);
     return direction.toJSON();
+  },
+  async createStatement(newState) {
+    await connect();
+    const statement = await Statement.create(newState);
+    return statement.toJSON();
   },
   async updateCurrentSpec(spec_id, specForEdit) {
     console.log(specForEdit);

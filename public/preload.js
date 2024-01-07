@@ -9,4 +9,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     createDirection: (data) => ipcRenderer.invoke('campaign:direction:create', data),
     updateCurrentDir: (id, data) => ipcRenderer.invoke('campaign:direction:update', id, data),
     deleteExistingDir: (id) => ipcRenderer.invoke('campaign:direction:delete', id),
+    createStatement: (data) => ipcRenderer.invoke('campaign:statement:create', data),
 })

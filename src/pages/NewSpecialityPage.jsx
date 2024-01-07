@@ -32,6 +32,7 @@ const NewSpecialityPage = () => {
                 <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                   <label style={{ width: "150px" }}>Наименование: </label>
                   <input id="name" value={name} onChange={(event) => setName(event.target.value)} placeholder="Введите наименование новой специальности" className="form-control w-100" />
+
                 </div>
                 <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                   <label style={{ width: "150px" }}>Шифр: </label>

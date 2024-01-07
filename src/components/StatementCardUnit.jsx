@@ -1,17 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
+import { useNavigate } from "react-router-dom";
 
-const StatementCardUnit = ({ fullName, group }) => {
+const StatementCardUnit = ({ id, lastName, firstName, secondName, group }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="p-2 card">
       <div className="d-flex justify-content-between align-items-center">
         <div>
           <div>
-            {fullName}
+            {lastName} {firstName} {secondName}
           </div>
           <div>
-            {group}
+            Учебная группа: {group}
           </div>
 
         </div>
@@ -19,6 +22,7 @@ const StatementCardUnit = ({ fullName, group }) => {
           variant="primary"
           style={{ width: "35px", height: "35px", fontSize: "16px" }}
           className="bottom-0 end-0 me-3 pt-0"
+          onClick={() => navigate(`/editStatement/${id}`)}
         >
           &#62;
         </Button>
@@ -29,8 +33,15 @@ const StatementCardUnit = ({ fullName, group }) => {
 
 StatementCardUnit.propTypes = {
   id: PropTypes.number,
+  lastName: PropTypes.string,
+  firstName: PropTypes.string,
+  secondName: PropTypes.number,
   fullName: PropTypes.string,
+  gender: PropTypes.string,
+  birthday: PropTypes.string,
+  specialityId: PropTypes.string,
   group: PropTypes.string,
+  directionId: PropTypes.string,
 }
 
 export default StatementCardUnit

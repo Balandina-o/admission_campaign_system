@@ -8,7 +8,7 @@ import Sidebar from "./components/SideBar";
 import UsersPage from "./pages/UsersPage";
 import NewStatementPage from "./pages/NewStatementPage";
 import SpecialtiesPage from "./pages/SpecialtiesPage";
-import ExistingStatementPage from "./pages/ExistingStatementPage";
+import StatementEditPage from "./pages/StatementEditPage";
 import NewSpecialityPage from "./pages/NewSpecialityPage";
 import DirectionsPage from "./pages/DirectionsPage";
 import SpecialityEditPage from "./pages/SpecialityEditPage";
@@ -47,7 +47,7 @@ function App() {
                   <Route path="/newDirection" element={<NewDirectionPage />} />
                   <Route path="/editSpeciality/:id" element={<SpecialityEditPage />} />
                   <Route path="/editDirection/:id" element={<DirectionEditPage />} />
-                  <Route path="/existingStatement" element={<ExistingStatementPage />} />
+                  <Route path="/editStatement/:id" element={<StatementEditPage />} />
                   <Route path="/spec" element={<SpecialtiesPage />} />
                   <Route path="/directions" element={<DirectionsPage />} />
                 </Routes>
