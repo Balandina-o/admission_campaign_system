@@ -16,6 +16,7 @@ import SpecialitiesStore from "./store/SpecialitiesStore";
 import NewDirectionPage from "./pages/NewDirectionPage";
 import DirectionEditPage from "./pages/DirectionEditPage";
 import DirectionsStore from "./store/DirectionsStore";
+import UserStore from "./store/UserStore";
 
 export const Context = createContext(null);
 
@@ -25,6 +26,7 @@ function App() {
       value={{
         specialitiesFromStore: new SpecialitiesStore(),
         directionsFromStore: new DirectionsStore(),
+        userFromStore: new UserStore(),
       }}
     >
       <div className="app">
@@ -40,7 +42,7 @@ function App() {
               <div>
                 <Routes>
                   <Route path="/statements" element={<StatementsPage />}></Route>
-                  <Route path="/auth" element={<AuthPage />} />
+                  <Route path="/" element={<AuthPage />} />
                   <Route path="/user" element={<UsersPage />} />
                   <Route path="/newStatement" element={<NewStatementPage />} />
                   <Route path="/newSpeciality" element={<NewSpecialityPage />} />

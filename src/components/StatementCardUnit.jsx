@@ -35,7 +35,7 @@ StatementCardUnit.propTypes = {
   id: PropTypes.number,
   lastName: PropTypes.string,
   firstName: PropTypes.string,
-  secondName: PropTypes.number,
+  secondName: PropTypes.string,
   fullName: PropTypes.string,
   gender: PropTypes.string,
   birthday: PropTypes.string,

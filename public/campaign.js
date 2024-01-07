@@ -93,7 +93,7 @@ module.exports = {
     const directions = await Direction.findAll();
     return directions.map(x => x.toJSON());
   },
-  async getUsers() {
+  async getUsersForAuth() {
     await connect();
     const users = await User.findAll();
     return users.map(x => x.toJSON());

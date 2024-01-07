@@ -10,4 +10,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     updateCurrentDir: (id, data) => ipcRenderer.invoke('campaign:direction:update', id, data),
     deleteExistingDir: (id) => ipcRenderer.invoke('campaign:direction:delete', id),
     createStatement: (data) => ipcRenderer.invoke('campaign:statement:create', data),
+    getUsersForAuth: () => ipcRenderer.invoke('campaign:usersForAuth:load'),
 })

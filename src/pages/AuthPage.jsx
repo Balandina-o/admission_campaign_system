@@ -1,10 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+// import { Context } from "../App";
 
 const AuthPage = () => {
-  const [username, setUsername] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  // const { userFromStore } = useContext(Context);
+  const navigate = useNavigate();
+
+  const [users, setUserss] = useState([])
+  const [currentUser, setCurrentUser] = useState(null)
+
+  function checkUser() {
+    const user = users.find(x => x.login == login & x.password == password)
+    if (user != null) {
+      setCurrentUser(user);
+      console.log(currentUser);
+      navigate("/statements");
+
+    } else {
+      alert("Неверный логин или пароль");
+    }
+  }
+
+  useEffect(() => void (async () => {
+    const list = await window.electronAPI.getUsersForAuth();
+    setUserss(list);
+    console.log(list);
+  })(), [])
 
   return (
     <Container className="d-flex justify-content-center align-items-center">
@@ -19,8 +43,8 @@ const AuthPage = () => {
             type="text"
             className="mt-3"
             placeholder="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={login}
+            onChange={(e) => setLogin(e.target.value)}
           />
         </div>
         <div className="d-flex align-items-baseline">
@@ -34,13 +58,9 @@ const AuthPage = () => {
           />
         </div>
         <div className="mt-3">
-
-          <Link to="/statements" className="mt-5">
-            <Button variant="success" className="mt-1" style={{ float: "right" }}>
-              Авторизоваться
-            </Button>
-          </Link>
-
+          <Button variant="success" className="mt-1" style={{ float: "right" }} onClick={checkUser}>
+            Авторизоваться
+          </Button>
         </div>
       </Form>
     </Container>

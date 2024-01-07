@@ -1,5 +1,5 @@
 {
-  "name": "admission_campaign_system",
+  "name": "admission-campaign-system",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,7 +25,7 @@
     "web-vitals": "^2.1.4"
   },
   "main": "public/main.js",
-  "homepage": "./statements",
+  "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
