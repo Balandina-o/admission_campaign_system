@@ -6,7 +6,7 @@ const SpecBar = () => {
       className="navbar"
       style={{ position: "sticky", top: "0", zIndex: "1", display: "block", flexgrow: "1", background: "#4d18cb" }}
     >
-      <div className="custom-container d-flex align-items-center ps-3">
+      <div className="custom-container d-flex align-items-center ps-3" style={{ paddingBottom: "6px", paddingTop: "6px" }}>
         <div style={{ color: "aliceblue" }}>
           Военные специальности
         </div>

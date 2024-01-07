@@ -105,15 +105,21 @@ module.exports = {
   },
   async updateCurrentDir(dir_id, dirForEdit) {
     console.log(dirForEdit);
-    const speciality = await Direction.update(dirForEdit, {
+    const direction = await Direction.update(dirForEdit, {
       where: { id: dir_id }
     });
-    return speciality;
+    return direction;
   },
   async deleteExistingSpec(spec_id) {
     const speciality = await Speciality.destroy({
       where: { id: spec_id }
     })
     return speciality;
+  },
+  async deleteExistingDir(dir_id) {
+    const direction = await Direction.destroy({
+      where: { id: dir_id }
+    })
+    return direction;
   },
 }

@@ -30,6 +30,7 @@ app.whenReady().then(() => {
   ipcMain.handle("campaign:directions:load", () => campaign.getDirections());
   ipcMain.handle("campaign:direction:create", (event, data) => campaign.createDirection(data));
   ipcMain.handle("campaign:direction:update", (event, id, data) => campaign.updateCurrentDir(id, data));
+  ipcMain.handle("campaign:direction:delete", (event, id) => campaign.deleteExistingDir(id));
   createWindow();
 });
 app.on("window-all-closed", () => app.quit());

@@ -12,10 +12,6 @@ const SpecialtiesPage = () => {
   const [showCreateDeleteSpecConfirmModal, setShowCreateDeleteSpecConfirmModal] = useState();
   const [selectedSpecName, setSelectedSpecName] = useState([]);
 
-  // function delete() {
-  //   setShowCreateExitConfirmModal(true);
-  // }
-
   const deleteSpec = async (id_spec, name) => {
     setSelectedSpecName(name);
     setShowCreateDeleteSpecConfirmModal(true);
