@@ -16,24 +16,24 @@ import SpecialitiesStore from "./store/SpecialitiesStore";
 import NewDirectionPage from "./pages/NewDirectionPage";
 import DirectionEditPage from "./pages/DirectionEditPage";
 import DirectionsStore from "./store/DirectionsStore";
-import UserStore from "./store/UserStore";
+import UsersStore from "./store/UsersStore";
 
 export const Context = createContext(null);
-
 function App() {
+
   return (
     <Context.Provider
       value={{
         specialitiesFromStore: new SpecialitiesStore(),
         directionsFromStore: new DirectionsStore(),
-        userFromStore: new UserStore(),
+        userFromStore: new UsersStore(),
       }}
     >
       <div className="app">
         <HashRouter>
           <LogoBar />
           <div className="two_great_elements">
-            {/* {true & ( */}
+            {/* {userFromStore.isAdmin && ( */}
             <div className="sidebar">
               <Sidebar />
             </div>

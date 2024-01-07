@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import WrongAuthModal from "../components/WrongAuthModal";
-// import { Context } from "../App";
+import { Context } from "../App";
 
 const AuthPage = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [showCreateWrongAuthModal, setShowCreateWrongAuthModal] = useState();
-  // const { userFromStore } = useContext(Context);
+  const { userFromStore } = useContext(Context);
   const navigate = useNavigate();
 
   const [users, setUserss] = useState([])
-  const [currentUser, setCurrentUser] = useState(null)
+  // const [currentUser, setCurrentUser] = useState(null)
 
   function checkUser() {
     const user = users.find(x => x.login == login & x.password == password)
     if (user != null) {
-      setCurrentUser(user);
-      console.log(currentUser);
+      userFromStore.setUser(user);
+      userFromStore.setLoggedIn(true);
+      if (user.role == "admin") {
+        userFromStore.setIsAdmin(true);
+      }
+
       navigate("/statements");
 
     } else {
@@ -28,8 +32,8 @@ const AuthPage = () => {
 
   useEffect(() => void (async () => {
     const list = await window.electronAPI.getUsersForAuth();
+    userFromStore.setUsersList(list);
     setUserss(list);
-    console.log(list);
   })(), [])
 
   return (

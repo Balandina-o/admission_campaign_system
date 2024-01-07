@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../App";
 
 import {
   CDBSidebar,
@@ -15,15 +16,14 @@ import ExitConfirmModal from "./ExitConfirmModal";
 
 const SideBar = () => {
   const navigate = useNavigate();
+  const { userFromStore } = useContext(Context);
   const [showCreateExitConfirmModal, setShowCreateExitConfirmModal] = useState();
-
-  function alerty() {
-    // alert("warning")
-  }
 
   function closeExitConfirmModal(x) {
     setShowCreateExitConfirmModal(false)
     if (x == "yesImRedyToExit") {
+      userFromStore.setLoggedIn(false);
+      userFromStore.setIsAdmin(false);
       navigate(`/`)
     }
   }
@@ -37,36 +37,36 @@ const SideBar = () => {
         <CDBSidebarMenu >
           <CDBSidebarMenuItem icon="users">
             <Link to={'/statements'}>
-              <CDBBtn color="light" onClick={alerty} style={{ width: "150px" }}>
+              <CDBBtn color="light" style={{ width: "150px" }}>
                 Заявления
               </CDBBtn>
             </Link>
           </CDBSidebarMenuItem>
           <CDBSidebarMenuItem icon="table">
             <Link to={'/spec'}>
-              <CDBBtn color="light" onClick={alerty} style={{ width: "150px" }}>
+              <CDBBtn color="light" style={{ width: "150px" }}>
                 Военно-учетные <br />специальности
               </CDBBtn>
             </Link>
           </CDBSidebarMenuItem>
           <CDBSidebarMenuItem icon="table" iconType="solid">
             <Link to={'/directions'}>
-              <CDBBtn color="light" onClick={alerty} style={{ width: "150px" }}>
+              <CDBBtn color="light" style={{ width: "150px" }}>
                 Направления {/*<br/>подготовки */}
               </CDBBtn>
             </Link>
           </CDBSidebarMenuItem>
 
           <CDBSidebarMenuItem icon="sticky-note" iconType="solid">
-            <Link to={'/'}>
-              <CDBBtn color="light" onClick={alerty} style={{ width: "150px" }}>
+            <Link to={'/protocol'}>
+              <CDBBtn color="light" style={{ width: "150px" }}>
                 Протокол
               </CDBBtn>
             </Link>
           </CDBSidebarMenuItem>
           <CDBSidebarMenuItem icon="sticky-note" iconType="solid">
-            <Link to={'/auth'}>
-              <CDBBtn color="light" onClick={alerty} style={{ width: "150px" }}>
+            <Link to={'/report'}>
+              <CDBBtn color="light" style={{ width: "150px" }}>
                 Отчет
               </CDBBtn>
             </Link>
@@ -78,7 +78,7 @@ const SideBar = () => {
 
           <CDBSidebarMenuItem icon="user" iconType="solid">
             <Link to={'/user'}>
-              <CDBBtn color="light" onClick={alerty} style={{ width: "150px" }}>
+              <CDBBtn color="light" style={{ width: "150px" }}>
                 Личный кабинет
               </CDBBtn>
             </Link>

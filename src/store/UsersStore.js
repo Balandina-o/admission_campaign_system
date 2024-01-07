@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 class UsersStore {
+    usersList = [];
     _user = {};
     _loggedIn = false;
     _isAdmin = false;
@@ -31,6 +32,26 @@ class UsersStore {
 
     get isAdmin() {
         return this._isAdmin;
+    }
+
+    setUsersList(users) {
+        this.usersList = users;
+    }
+
+    findUserInList(user_id) {
+        const user = this.usersList.find(x => x.id == user_id);
+        return user;
+    }
+
+    updateUserInStore(user_id, userForEdit) {
+        const user = this.usersList.find(x => x.id == user_id);
+        user == userForEdit;
+        return user;
+    }
+
+    removeUserInStore(user_id) {
+        this.usersList = this.usersList.filter((x) => x.id !== user_id);
+        return this.usersList;
     }
 }
 
