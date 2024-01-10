@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
+const { globalShortcut } = require('electron');
 const path = require("path");
 const isDev = require("electron-is-dev");
 const campaign = require("./campaign");
@@ -37,4 +38,11 @@ app.whenReady().then(() => {
   ipcMain.handle("campaign:usersForAuth:load", () => campaign.getUsersForAuth());
   createWindow();
 });
+
+app.on('browser-window-focus', function () {
+  globalShortcut.register("CommandOrControl+Shift+R", () => {
+    console.log("CommandOrControl+R is pressed: Shortcut Disabled!");
+  });
+});
+
 app.on("window-all-closed", () => app.quit());
