@@ -1,8 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
+import { Context } from "../App";
 
 const NewStatementPage = () => {
+  const { specialitiesFromStore } = useContext(Context);
+  //const selectDir = document.getElementById('selectDir');
+
+  //const [specialities, setSpecialities] = useState([])
+
   const [firstName, setFirstName] = useState("");
   const [secondName, setSecondName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -29,6 +35,20 @@ const NewStatementPage = () => {
     console.log(res);
     navigate("/statements");
   };
+
+  useEffect(() => void (async () => {
+    const selectSpec = document.getElementById('selectSpec');
+
+    const list = specialitiesFromStore.specList;
+    selectSpec.innerHTML = "";
+    for (let i = 0; i < list.length; i++) {
+      let opt = document.createElement('option');
+      opt.value = list[i].id;
+      opt.innerHTML = list[i].name;
+      selectSpec.appendChild(opt);
+    }
+
+  })(), [])
 
   return (
     <div style={{ width: "100%", background: "white" }}>
@@ -76,7 +96,7 @@ const NewStatementPage = () => {
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "150px" }}>Специальность: </label>
-                <select id="spec" onChange={(event) => setSpec(event.target.value)} className="form-select w-100">
+                <select id="selectSpec" onChange={(event) => setSpec(event.target.value)} className="form-select w-100">
                   <option value="1">1</option>
                   <option value="4">4</option>
                 </select>
@@ -87,7 +107,7 @@ const NewStatementPage = () => {
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "150px" }}>ВУС: </label>
-                <select id="dir" onChange={(event) => setDir(event.target.value)} className="form-select w-100">
+                <select id="selectDir" onChange={(event) => setDir(event.target.value)} className="form-select w-100">
                   <option value="1">1</option>
                   <option value="2">2</option>
                 </select>

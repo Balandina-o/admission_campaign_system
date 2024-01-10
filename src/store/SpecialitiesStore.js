@@ -7,6 +7,10 @@ class SpecialitiesStore {
         makeAutoObservable(this);
     }
 
+    get specList() {
+        return this.specialitiesList;
+    }
+
     setSpecialities(spec) {
         this.specialitiesList = spec;
     }

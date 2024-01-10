@@ -58,7 +58,7 @@ const AuthPage = () => {
           <Form.Control
             type="password"
             className="mt-3"
-            placeholder="ВВедите пароль"
+            placeholder="Ведите пароль"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

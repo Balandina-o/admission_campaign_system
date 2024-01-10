@@ -33,7 +33,7 @@ function App() {
         <HashRouter>
           <LogoBar />
           <div className="two_great_elements">
-            {/* {userFromStore.isAdmin && ( */}
+            {/* {UsersStore.loggedIn && ( */}
             <div className="sidebar">
               <Sidebar />
             </div>

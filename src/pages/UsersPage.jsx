@@ -41,34 +41,34 @@ const UsersPage = () => {
                 className="bg-primary bg-opacity-10 p-4 rounded"
                 style={{ width: "50%", minWidth: "500px " }}
               >
-                <h2>Регистрация</h2>
+                <h3>Создание нового пользователя</h3>
                 <Form.Control
                   type="text"
                   className="mt-3"
-                  placeholder="Имя..."
+                  placeholder="Введите имя"
                 />
                 <Form.Control
                   type="text"
                   className="mt-3"
-                  placeholder="Фамилия..."
+                  placeholder="Введите Фамилию"
 
                 />
                 <Form.Control
                   type="text"
                   className="mt-3"
-                  placeholder="email..."
+                  placeholder="Введите email"
 
                 />
                 <Form.Control
                   type="text"
                   className="mt-3"
-                  placeholder="Login..."
+                  placeholder="Введите логин"
 
                 />
                 <Form.Control
                   type="password"
                   className="mt-3"
-                  placeholder="Password..."
+                  placeholder="Введите пароль"
 
                 />
                 <br />

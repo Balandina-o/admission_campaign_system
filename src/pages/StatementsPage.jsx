@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import StatementsBar from "../components/StatementsBar";
 import SpecBar from "../components/SpecBar";
 import SpecUnit from "../components/SpecUnit";
 import StatementCardUnit from "../components/StatementCardUnit";
+import { Context } from "../App";
 
 const StatementsPage = () => {
+  const { specialitiesFromStore } = useContext(Context);
   const [specialities, setSpecialities] = useState([])
   const [selectedSpec, setSelectedSpec] = useState(null)
 
@@ -15,6 +17,7 @@ const StatementsPage = () => {
 
   useEffect(() => void (async () => {
     const list = await window.electronAPI.getSpecialities();
+    specialitiesFromStore.setSpecialities(list);
     setSpecialities(list);
   })(), [])
 
