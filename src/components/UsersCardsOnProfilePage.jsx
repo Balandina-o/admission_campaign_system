@@ -43,7 +43,7 @@ const UsersCardsOnProfilePage = ({ id, login, password, role }) => {
 }
 
 UsersCardsOnProfilePage.propTypes = {
-    id: PropTypes.string,
+    id: PropTypes.number,
     login: PropTypes.string,
     password: PropTypes.string,
     role: PropTypes.string,

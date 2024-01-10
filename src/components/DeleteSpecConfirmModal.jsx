@@ -32,7 +32,7 @@ const DeleteSpecConfirmModal = ({ show, onClose, selectedSpecName }) => {
 DeleteSpecConfirmModal.propTypes = {
     onClose: PropTypes.func,
     show: PropTypes.bool,
-    selectedSpecName: PropTypes.string,
+    selectedSpecName: PropTypes.array,
 }
 
 export default DeleteSpecConfirmModal

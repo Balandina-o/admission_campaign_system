@@ -17,6 +17,7 @@ import NewDirectionPage from "./pages/NewDirectionPage";
 import DirectionEditPage from "./pages/DirectionEditPage";
 import DirectionsStore from "./store/DirectionsStore";
 import UsersStore from "./store/UsersStore";
+import StatementsStore from "./store/StatementsStore";
 
 export const Context = createContext(null);
 function App() {
@@ -24,6 +25,7 @@ function App() {
   return (
     <Context.Provider
       value={{
+        statementsFromStore: new StatementsStore(),
         specialitiesFromStore: new SpecialitiesStore(),
         directionsFromStore: new DirectionsStore(),
         userFromStore: new UsersStore(),

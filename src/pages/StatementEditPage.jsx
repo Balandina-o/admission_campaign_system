@@ -1,8 +1,72 @@
-import React from 'react'
-import { Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect, useContext } from 'react'
+import { useParams, Link } from 'react-router-dom';
+import { Context } from "../App";
+import { Button } from 'react-bootstrap';
 
-export default function ExistingStatementPage() {
+export default function StatementEditPage() {
+  const { specialitiesFromStore } = useContext(Context);
+  const { directionsFromStore } = useContext(Context);
+  const { statementsFromStore } = useContext(Context);
+  const { id } = useParams();
+
+  const [firstName, setFirstName] = useState("");
+  const [secondName, setSecondName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [gender, setGender] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [group, setGroup] = useState("");
+  const [spec, setSpec] = useState("");
+  const [dir, setDir] = useState("");
+
+  useEffect(() => void (async () => {
+    const selectDir = document.getElementById('selectDir');
+    const selectSpec = document.getElementById('selectSpec');
+
+    const stat = statementsFromStore.findStatement(id);
+
+    setFirstName(stat.firstName);
+    setSecondName(stat.secondName);
+    setLastName(stat.lastName);
+    setGender(stat.gender);
+    setBirthday(stat.birthday);
+    setGroup(stat.group);
+    setSpec(stat.SpecialityId);
+    setDir(stat.DirectionId);
+
+    const listOfSpec = specialitiesFromStore.specList;
+    const listOfDir = directionsFromStore.dirList;
+
+    selectSpec.innerHTML = "";
+    for (let i = 0; i < listOfSpec.length; i++) {
+      let opt = document.createElement('option');
+      opt.value = listOfSpec[i].id;
+      opt.innerHTML = listOfSpec[i].name;
+      selectSpec.appendChild(opt);
+    }
+
+    selectDir.innerHTML = "";
+    for (let i = 0; i < listOfDir.length; i++) {
+      let opt = document.createElement('option');
+      opt.value = listOfDir[i].id;
+      opt.innerHTML = listOfDir[i].name;
+      selectDir.appendChild(opt);
+    }
+  })(), [])
+
+  const updateMainInfo = async () => {
+    const stateInfoForEdit = {
+      secondName: secondName,
+      firstName: firstName,
+      lastName: lastName,
+      gender: gender,
+      birthday: birthday,
+      group: group,
+      SpecialityId: spec,
+      DirectionId: dir,
+    };
+    await window.electronAPI.updateCurrentState(id, stateInfoForEdit);
+    statementsFromStore.updateStateInStore(id, stateInfoForEdit);
+  };
 
   return (
     <div style={{ width: "100%", background: "white" }}>
@@ -11,7 +75,7 @@ export default function ExistingStatementPage() {
           <div className="col-md-12">
             <form className="form-inline" action="/search" acceptCharset="UTF-8" method="get">
               <div className="d-flex justify-content-between" style={{ paddingTop: "10px" }}>
-                <h3> Заявление кандидата - </h3>
+                <h3> Заявление кандидата - {secondName} {firstName} {lastName}</h3>
                 <Link to={'/statements'}>
                   <Button
                     variant="primary"
@@ -39,40 +103,42 @@ export default function ExistingStatementPage() {
               <h4>Основная информация</h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Фамилия: </label>
-                <input id="" value="" placeholder="Введите фамилию кандидата" className="form-control w-100" />
+                <input id="" value={secondName} onChange={(event) => setSecondName(event.target.value)} placeholder="Введите фамилию кандидата" className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Имя: </label>
-                <input id="" value="" placeholder="Введите имя кандидата" className="form-control w-100" />
+                <input id="" value={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="Введите имя кандидата" className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Отчество: </label>
-                <input id="" value="" placeholder="Введите отчество кандидата" className="form-control w-100" />
+                <input id="" value={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Введите отчество кандидата" className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Пол: </label>
-                <select id="" className="form-select w-100">
-                  <option value="">Мужской</option>
-                  <option value="">Женский</option>
+                <select id="" value={gender} onChange={(event) => setGender(event.target.value)} className="form-select w-100">
+                  <option value="0">Мужской</option>
+                  <option value="1">Женский</option>
                 </select>
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Дата рождения: </label>
-                <input type="date" id="" value="" className="form-control w-100" />
+                <input type="date" id="" value={birthday} onChange={(event) => setBirthday(event.target.value)} className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Специальность: </label>
-                <input id="" value="" placeholder="Введите специальность кандидата" className="form-control w-100" />
+                <select id="selectSpec" value={spec} onChange={(event) => setSpec(event.target.value)} className="form-select w-100">
+                </select>
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Учебная группа: </label>
-                <input id="" value="" placeholder="Введите учебную группу кандидата" className="form-control w-100" />
+                <input id="" value={group} onChange={(event) => setGroup(event.target.value)} placeholder="Введите учебную группу кандидата" className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>ВУС: </label>
-                <input id="" value="" placeholder="Введите ВУС кандидата" className="form-control w-100" />
+                <select id="selectDir" value={dir} onChange={(event) => setDir(event.target.value)} className="form-select w-100">
+                </select>
               </div>
-              <button type="button" className="btn btn-primary mt-4 mb-2" style={{ float: "right" }}>Сохранить основные данные</button>
+              <button type="button" onClick={updateMainInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right" }}>Сохранить основные данные</button>
 
             </form>
           </div>

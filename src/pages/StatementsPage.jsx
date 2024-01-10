@@ -7,6 +7,9 @@ import { Context } from "../App";
 
 const StatementsPage = () => {
   const { specialitiesFromStore } = useContext(Context);
+  const { directionsFromStore } = useContext(Context);
+  const { statementsFromStore } = useContext(Context);
+
   const [specialities, setSpecialities] = useState([])
   const [selectedSpec, setSelectedSpec] = useState(null)
 
@@ -16,9 +19,15 @@ const StatementsPage = () => {
   }
 
   useEffect(() => void (async () => {
-    const list = await window.electronAPI.getSpecialities();
-    specialitiesFromStore.setSpecialities(list);
-    setSpecialities(list);
+    const listOfSpec = await window.electronAPI.getSpecialities();
+    const listOfDir = await window.electronAPI.getDirections();
+    const listOfState = await window.electronAPI.getStatements();
+
+    specialitiesFromStore.setSpecialities(listOfSpec);
+    directionsFromStore.setDirections(listOfDir);
+    statementsFromStore.setStatements(listOfState);
+
+    setSpecialities(listOfSpec);
   })(), [])
 
   return (

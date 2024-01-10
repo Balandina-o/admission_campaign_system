@@ -36,12 +36,7 @@ StatementCardUnit.propTypes = {
   lastName: PropTypes.string,
   firstName: PropTypes.string,
   secondName: PropTypes.string,
-  fullName: PropTypes.string,
-  gender: PropTypes.string,
-  birthday: PropTypes.string,
-  specialityId: PropTypes.string,
   group: PropTypes.string,
-  directionId: PropTypes.string,
 }
 
 export default StatementCardUnit

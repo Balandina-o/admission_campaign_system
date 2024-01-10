@@ -31,7 +31,9 @@ app.whenReady().then(() => {
   ipcMain.handle("campaign:direction:create", (event, data) => campaign.createDirection(data));
   ipcMain.handle("campaign:direction:update", (event, id, data) => campaign.updateCurrentDir(id, data));
   ipcMain.handle("campaign:direction:delete", (event, id) => campaign.deleteExistingDir(id));
+  ipcMain.handle("campaign:statements:load", () => campaign.getStatements());
   ipcMain.handle("campaign:statement:create", (event, data) => campaign.createStatement(data));
+  ipcMain.handle("campaign:statement:update", (event, id, data) => campaign.updateCurrentState(id, data));
   ipcMain.handle("campaign:usersForAuth:load", () => campaign.getUsersForAuth());
   createWindow();
 });

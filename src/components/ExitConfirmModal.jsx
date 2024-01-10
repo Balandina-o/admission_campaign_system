@@ -19,7 +19,7 @@ const ExitConfirmModal = ({ show, onClose }) => {
             Подтвердите выход нажатием на кнопку
           </Modal.Body>
           <Modal.Footer>
-            <Button class="btn-close" variant="secondary" onClick={() => onClose("no")}>
+            <Button className="btn-close" variant="secondary" onClick={() => onClose("no")}>
               Нет, я остаюсь
             </Button>
             <Button variant="primary" onClick={() => onClose("yesImRedyToExit")}>

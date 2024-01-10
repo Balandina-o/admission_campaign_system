@@ -7,6 +7,10 @@ class DirectionsStore {
         makeAutoObservable(this);
     }
 
+    get dirList() {
+        return this.directionsList;
+    }
+
     setDirections(dir) {
         this.directionsList = dir;
     }

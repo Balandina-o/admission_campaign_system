@@ -62,7 +62,7 @@ const Statement = sequelize.define('Statement', {
     type: DataTypes.STRING
   },
   birthday: {
-    type: DataTypes.DATE
+    type: DataTypes.STRING
   },
   group: {
     type: DataTypes.STRING
@@ -92,6 +92,11 @@ module.exports = {
     await connect();
     const directions = await Direction.findAll();
     return directions.map(x => x.toJSON());
+  },
+  async getStatements() {
+    await connect();
+    const statements = await Statement.findAll();
+    return statements.map(x => x.toJSON());
   },
   async getUsersForAuth() {
     await connect();
@@ -126,6 +131,13 @@ module.exports = {
       where: { id: dir_id }
     });
     return direction;
+  },
+  async updateCurrentState(state_id, stateForEdit) {
+    console.log(stateForEdit);
+    const statement = await Statement.update(stateForEdit, {
+      where: { id: state_id }
+    });
+    return statement;
   },
   async deleteExistingSpec(spec_id) {
     const speciality = await Speciality.destroy({

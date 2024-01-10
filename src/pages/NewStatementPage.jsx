@@ -5,14 +5,12 @@ import { Context } from "../App";
 
 const NewStatementPage = () => {
   const { specialitiesFromStore } = useContext(Context);
-  //const selectDir = document.getElementById('selectDir');
-
-  //const [specialities, setSpecialities] = useState([])
+  const { directionsFromStore } = useContext(Context);
 
   const [firstName, setFirstName] = useState("");
   const [secondName, setSecondName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [gender, setGender] = useState("1");
+  const [gender, setGender] = useState("0");
   const [birthday, setBirthday] = useState("");
   const [group, setGroup] = useState("");
   const [spec, setSpec] = useState("");
@@ -37,15 +35,26 @@ const NewStatementPage = () => {
   };
 
   useEffect(() => void (async () => {
+    const selectDir = document.getElementById('selectDir');
     const selectSpec = document.getElementById('selectSpec');
 
-    const list = specialitiesFromStore.specList;
+    const listOfSpec = specialitiesFromStore.specList;
+    const listOfDir = directionsFromStore.dirList;
+
     selectSpec.innerHTML = "";
-    for (let i = 0; i < list.length; i++) {
+    for (let i = 0; i < listOfSpec.length; i++) {
       let opt = document.createElement('option');
-      opt.value = list[i].id;
-      opt.innerHTML = list[i].name;
+      opt.value = listOfSpec[i].id;
+      opt.innerHTML = listOfSpec[i].name;
       selectSpec.appendChild(opt);
+    }
+
+    selectDir.innerHTML = "";
+    for (let i = 0; i < listOfDir.length; i++) {
+      let opt = document.createElement('option');
+      opt.value = listOfDir[i].id;
+      opt.innerHTML = listOfDir[i].name;
+      selectDir.appendChild(opt);
     }
 
   })(), [])
@@ -97,8 +106,6 @@ const NewStatementPage = () => {
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "150px" }}>Специальность: </label>
                 <select id="selectSpec" onChange={(event) => setSpec(event.target.value)} className="form-select w-100">
-                  <option value="1">1</option>
-                  <option value="4">4</option>
                 </select>
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
@@ -108,8 +115,6 @@ const NewStatementPage = () => {
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "150px" }}>ВУС: </label>
                 <select id="selectDir" onChange={(event) => setDir(event.target.value)} className="form-select w-100">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
                 </select>
               </div>
 
