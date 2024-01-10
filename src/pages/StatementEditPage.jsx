@@ -4,6 +4,8 @@ import { Context } from "../App";
 import { Button } from 'react-bootstrap';
 
 export default function StatementEditPage() {
+  // const isFitCategorySelect = document.getElementById('isFitCategory');
+
   const { specialitiesFromStore } = useContext(Context);
   const { directionsFromStore } = useContext(Context);
   const { statementsFromStore } = useContext(Context);
@@ -17,6 +19,8 @@ export default function StatementEditPage() {
   const [group, setGroup] = useState("");
   const [spec, setSpec] = useState("");
   const [dir, setDir] = useState("");
+
+  const [isFitCategory, setIsFitCategory] = useState("1");
 
   useEffect(() => void (async () => {
     const selectDir = document.getElementById('selectDir');
@@ -32,6 +36,9 @@ export default function StatementEditPage() {
     setGroup(stat.group);
     setSpec(stat.SpecialityId);
     setDir(stat.DirectionId);
+
+
+    setFirstName(stat.firstName);
 
     const listOfSpec = specialitiesFromStore.specList;
     const listOfDir = directionsFromStore.dirList;
@@ -68,6 +75,11 @@ export default function StatementEditPage() {
     statementsFromStore.updateStateInStore(id, stateInfoForEdit);
   };
 
+  function isFitCategoryEvent(x) {
+    console.log(x); //годен или нет
+    (x == "9" | x == "10" | x == "11") ? setIsFitCategory("Не годен") : setIsFitCategory("Годен");
+  }
+
   return (
     <div style={{ width: "100%", background: "white" }}>
       <div className="container">
@@ -103,7 +115,7 @@ export default function StatementEditPage() {
               <h4>Основная информация</h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Фамилия: </label>
-                <input id="" value={secondName} onChange={(event) => setSecondName(event.target.value)} placeholder="Введите фамилию кандидата" className="form-control w-100" />
+                <input id="" value={secondName} onChange={(event) => setSecondName(event.target.value)} placeholder="Введите фамилию кандидата" className="form-control w-100 " />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Имя: </label>
@@ -152,19 +164,28 @@ export default function StatementEditPage() {
               <h4>Результаты медецинского освидетельствования</h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Медицинская категория: </label>
-                <select id="" className="form-select w-100">
-                  <option value="">Данные не предоставлены</option>
-                  <option value="">A1</option>
-                  <option value="">A2</option>
+                <select id="isFitCategory" onChange={(event) => isFitCategoryEvent(event.target.value)} className="form-select w-100" style={{ border: "2px solid red" }}>
+                  <option value="0">Данные не предоставлены</option>
+                  <option value="1">A1</option>
+                  <option value="2">A2</option>
+                  <option value="3">A3</option>
+                  <option value="4">A4</option>
+                  <option value="5">Б1</option>
+                  <option value="6">Б2</option>
+                  <option value="7">Б3</option>
+                  <option value="8">Б4</option>
+                  <option value="9">В</option>
+                  <option value="10">Г</option>
+                  <option value="11">Д</option>
                 </select>
-                <input id="" value="" placeholder="" className="form-control" style={{ width: "205px" }} />
+                <input id="" value={isFitCategory} className="form-control" style={{ width: "205px" }} />
               </div>
               <button type="button" className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные МО</button>
 
             </form>
           </div>
         </div>
-      </div>
+      </div >
 
       <div className="container">
         <div className="row">
@@ -275,6 +296,6 @@ export default function StatementEditPage() {
         </div>
       </div>
 
-    </div>
+    </div >
   )
 }

@@ -8,6 +8,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    show: false,
     webPreferences: {
       enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.js')
@@ -21,6 +22,7 @@ const createWindow = () => {
       ? "http://localhost:3000"
       : path.join(process.cwd(), "build", "index.html")
   );
+  mainWindow.maximize();
 };
 
 app.whenReady().then(() => {
