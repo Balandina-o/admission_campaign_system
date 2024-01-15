@@ -43,6 +43,7 @@ const AuthPage = () => {
         style={{ minWidth: "500px ", marginTop: "150px" }}
       >
         <h2>Авторизация</h2>
+        Для работы в системе необходимо пройти процедуру авторизации
         <div className="d-flex align-items-baseline">
           <label style={{ width: "70px" }}>Логин </label>
           <Form.Control

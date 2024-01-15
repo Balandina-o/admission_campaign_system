@@ -10,15 +10,15 @@ const SpecialityCardUnit = ({ id, name, cypher, type, onDelete }) => {
         <div className="p-2 card">
             <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center">
-                    <div>
+                    <div style={{ width: "70px", background: "rgb(180,182,186)", textAlign: "center" }}>
                         {cypher}
                     </div>
-                    <div>
-                        <div>
-                            {name}
+                    <div style={{ marginLeft: "10px" }}>
+                        <div >
+                            <b>{name}</b>
                         </div>
                         <div>
-                            {type}
+                            Программа подготовки <i>{type.toLowerCase()}</i>
                         </div>
                     </div>
                 </div>

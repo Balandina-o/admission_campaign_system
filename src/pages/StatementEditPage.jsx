@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useParams, Link } from 'react-router-dom';
 import { Context } from "../App";
 import { Button } from 'react-bootstrap';
+import ".//StatementEditPage.module.css"
 
 export default function StatementEditPage() {
   // const isFitCategorySelect = document.getElementById('isFitCategory');
@@ -20,7 +21,8 @@ export default function StatementEditPage() {
   const [spec, setSpec] = useState("");
   const [dir, setDir] = useState("");
 
-  const [isFitCategory, setIsFitCategory] = useState("1");
+  const [isFitCategory, setIsFitCategory] = useState("");
+  const [borderIsFit, setBorderIsFit] = useState("");
 
   useEffect(() => void (async () => {
     const selectDir = document.getElementById('selectDir');
@@ -77,6 +79,7 @@ export default function StatementEditPage() {
 
   function isFitCategoryEvent(x) {
     console.log(x); //годен или нет
+    setBorderIsFit(x);
     (x == "9" | x == "10" | x == "11") ? setIsFitCategory("Не годен") : setIsFitCategory("Годен");
   }
 
@@ -164,7 +167,11 @@ export default function StatementEditPage() {
               <h4>Результаты медецинского освидетельствования</h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Медицинская категория: </label>
-                <select id="isFitCategory" onChange={(event) => isFitCategoryEvent(event.target.value)} className="form-select w-100" style={{ border: "2px solid red" }}>
+                <select id="isFitCategory" onChange={(event) => isFitCategoryEvent(event.target.value)} className="form-select w-100"
+                  style={borderIsFit == "9" | borderIsFit == "10" | borderIsFit == "11"
+                    ? { border: "2px solid green" }
+                    : { border: "2px solid red" }
+                  }>
                   <option value="0">Данные не предоставлены</option>
                   <option value="1">A1</option>
                   <option value="2">A2</option>

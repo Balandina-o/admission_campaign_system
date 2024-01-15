@@ -11,7 +11,7 @@ const StatementCardUnit = ({ id, lastName, firstName, secondName, group }) => {
       <div className="d-flex justify-content-between align-items-center">
         <div>
           <div>
-            {lastName} {firstName} {secondName}
+            <b>{lastName} {firstName} {secondName}</b>
           </div>
           <div>
             Учебная группа: {group}

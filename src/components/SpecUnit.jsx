@@ -4,17 +4,20 @@ import PropTypes from 'prop-types'
 const SpecUnit = ({ name, cypher, type, clicked }) => {
 
   return (
-    <div className="p-2 card" onClick={clicked}>
-      <div className="d-flex">
+    <div className="p-3 card" onClick={clicked}>
+      <div className="d-flex">{/* flex-wrap */}
         <div>
-          {name}
+          <b> {name}</b>
         </div>
-        <div>
-          {cypher}
+        <div >
+          <div style={{ background: "rgb(180,182,186)" }}>
+            {cypher}
+          </div>
+
         </div>
       </div>
       <div>
-        {type}
+        Программа подготовки <i>{type.toLowerCase()}</i>
       </div>
     </div>
   )
