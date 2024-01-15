@@ -41,10 +41,6 @@ const NewDirectionPage = () => {
                                     <label style={{ width: "150px" }}>Аббревиатура: </label>
                                     <input id="acronym" value={acronym} onChange={(event) => setAcronym(event.target.value)} placeholder="Введите аббревиатуру направления" className="form-control w-100" />
                                 </div>
-                                <div style={{ marginTop: "20px" }}>
-                                    <label style={{ width: "340px", whitespace: "nowrap" }} className="form-check-label">Осуществлять прием на основе баллов ЕГЭ </label>
-                                    <input type="checkbox" className="form-check-input" id="exampleCheck1" checked />
-                                </div>
                                 <button type="button" onClick={createNewDir} className="btn btn-primary mt-4 mb-2" >Сохранить данные</button>
                             </form>
                         </div>

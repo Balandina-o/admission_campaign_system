@@ -7,7 +7,7 @@ const campaign = require("./campaign");
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 500,
     show: false,
     webPreferences: {
       enableRemoteModule: true,
@@ -41,10 +41,10 @@ app.whenReady().then(() => {
   createWindow();
 });
 
-app.on('browser-window-focus', function () {
-  globalShortcut.register("CommandOrControl+Shift+R", () => {
-    console.log("CommandOrControl+R is pressed: Shortcut Disabled!");
-  });
-});
+// app.on('browser-window-focus', function () {
+//   globalShortcut.register("CommandOrControl+Shift+R", () => {
+//     console.log("CommandOrControl+R is pressed: Shortcut Disabled!");
+//   });
+// });
 
 app.on("window-all-closed", () => app.quit());

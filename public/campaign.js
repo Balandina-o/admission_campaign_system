@@ -66,6 +66,45 @@ const Statement = sequelize.define('Statement', {
   },
   group: {
     type: DataTypes.STRING
+  },
+  moCat: {
+    type: DataTypes.STRING
+  },
+  ppo: {
+    type: DataTypes.STRING
+  },
+  pp: {
+    type: DataTypes.STRING
+  },
+  au: {
+    type: DataTypes.STRING
+  },
+  fpS: {
+    type: DataTypes.STRING
+  },
+  fpB: {
+    type: DataTypes.STRING
+  },
+  fpV: {
+    type: DataTypes.STRING
+  },
+  fpSDec: {
+    type: DataTypes.STRING
+  },
+  fpBDec: {
+    type: DataTypes.STRING
+  },
+  fpVDec: {
+    type: DataTypes.STRING
+  },
+  fpSum: {
+    type: DataTypes.STRING
+  },
+  fpFinal: {
+    type: DataTypes.STRING
+  },
+  totalScore: {
+    type: DataTypes.STRING
   }
 });
 

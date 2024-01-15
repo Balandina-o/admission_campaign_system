@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useParams, Link } from 'react-router-dom';
 import { Context } from "../App";
 import { Button } from 'react-bootstrap';
-import ".//StatementEditPage.module.css"
 
 export default function StatementEditPage() {
   // const isFitCategorySelect = document.getElementById('isFitCategory');
@@ -15,14 +14,26 @@ export default function StatementEditPage() {
   const [firstName, setFirstName] = useState("");
   const [secondName, setSecondName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("0");
   const [birthday, setBirthday] = useState("");
   const [group, setGroup] = useState("");
   const [spec, setSpec] = useState("");
   const [dir, setDir] = useState("");
 
-  const [isFitCategory, setIsFitCategory] = useState("");
-  const [borderIsFit, setBorderIsFit] = useState("");
+  const [moCat, setMoCat] = useState("0");
+  const [ppo, setPpo] = useState("0");
+  const [pp, setPp] = useState("0");
+  const [au, setAu] = useState("");
+  const [fpS, setFpS] = useState("");
+  const [fpB, setFpB] = useState("");
+  const [fpV, setFpV] = useState("");
+  const [fpSDec, setFpSDec] = useState("");
+  const [fpBDec, setFpBDec] = useState("");
+  const [fpVDec, setFpVDec] = useState("");
+  const [fpSum, setFpSum] = useState("");
+  const [fpFinal, setFpFinal] = useState("");
+  const [totalScore, setTotalScore] = useState("");
+
 
   useEffect(() => void (async () => {
     const selectDir = document.getElementById('selectDir');
@@ -39,8 +50,21 @@ export default function StatementEditPage() {
     setSpec(stat.SpecialityId);
     setDir(stat.DirectionId);
 
+    setMoCat(stat.moCat);
+    setPpo(stat.ppo);
+    setPp(stat.pp);
+    setAu(stat.au);
+    setFpS(stat.fpS);
+    setFpB(stat.fpB);
+    setFpV(stat.fpV);
+    setFpSDec(stat.fpSDec);
+    setFpBDec(stat.fpBDec);
+    setFpVDec(stat.fpVDec);
+    setFpSum(stat.fpSum);
+    setFpFinal(stat.fpFinal);
+    setTotalScore(stat.totalScore);
 
-    setFirstName(stat.firstName);
+    //setFirstName(stat.firstName);
 
     const listOfSpec = specialitiesFromStore.specList;
     const listOfDir = directionsFromStore.dirList;
@@ -77,11 +101,29 @@ export default function StatementEditPage() {
     statementsFromStore.updateStateInStore(id, stateInfoForEdit);
   };
 
-  function isFitCategoryEvent(x) {
-    console.log(x); //годен или нет
-    setBorderIsFit(x);
-    (x == "9" | x == "10" | x == "11") ? setIsFitCategory("Не годен") : setIsFitCategory("Годен");
-  }
+  const updateMOInfo = async () => {
+    const paramForEdit = {
+      moCat: moCat
+    };
+    await window.electronAPI.updateCurrentState(id, paramForEdit);
+    statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
+  };
+
+  const updatePPOInfo = async () => {
+    const paramForEdit = {
+      ppo: ppo
+    };
+    await window.electronAPI.updateCurrentState(id, paramForEdit);
+    statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
+  };
+
+  const updatePPInfo = async () => {
+    const paramForEdit = {
+      pp: pp
+    };
+    await window.electronAPI.updateCurrentState(id, paramForEdit);
+    statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
+  };
 
   return (
     <div style={{ width: "100%", background: "white" }}>
@@ -154,7 +196,6 @@ export default function StatementEditPage() {
                 </select>
               </div>
               <button type="button" onClick={updateMainInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right" }}>Сохранить основные данные</button>
-
             </form>
           </div>
         </div>
@@ -167,10 +208,10 @@ export default function StatementEditPage() {
               <h4>Результаты медецинского освидетельствования</h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Медицинская категория: </label>
-                <select id="isFitCategory" onChange={(event) => isFitCategoryEvent(event.target.value)} className="form-select w-100"
-                  style={borderIsFit == "9" | borderIsFit == "10" | borderIsFit == "11"
-                    ? { border: "2px solid green" }
-                    : { border: "2px solid red" }
+                <select id="isFitCategory" value={moCat} onChange={(event) => setMoCat(event.target.value)} className="form-select w-100"
+                  style={moCat == "0" | moCat == null | moCat == "9" | moCat == "10" | moCat == "11"
+                    ? { border: "2px solid red" }
+                    : { border: "2px solid green" }
                   }>
                   <option value="0">Данные не предоставлены</option>
                   <option value="1">A1</option>
@@ -185,9 +226,12 @@ export default function StatementEditPage() {
                   <option value="10">Г</option>
                   <option value="11">Д</option>
                 </select>
-                <input id="" value={isFitCategory} className="form-control" style={{ width: "205px" }} />
+                {moCat == "0" | moCat == null | moCat == "9" | moCat == "10" | moCat == "11"
+                  ? <input value="Не годен" className="form-control" style={{ width: "205px" }} />
+                  : <input value="Годен" className="form-control" style={{ width: "205px" }} />
+                }
               </div>
-              <button type="button" className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные МО</button>
+              <button type="button" onClick={updateMOInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные МО</button>
 
             </form>
           </div>
@@ -197,18 +241,23 @@ export default function StatementEditPage() {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <form className="form-inline" action="/search" acceptCharset="UTF-8" method="get">
+            <form className="form-inline">
               <h4>Результаты профессионально-психологического отбора</h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Категория ППО: </label>
-                <select id="" className="form-select w-100">
-                  <option value="">Данные не предоставлены</option>
-                  <option value="">I категория </option>
-                  <option value="">II категория </option>
+                <select value={ppo} onChange={(event) => setPpo(event.target.value)} id="" className="form-select w-100"
+                  style={ppo == "0" | ppo == null
+                    ? { border: "2px solid red" }
+                    : { border: "2px solid green" }
+                  }>
+                  <option value="0">Данные не предоставлены</option>
+                  <option value="1">I категория </option>
+                  <option value="2">II категория </option>
+                  <option value="3">III категория </option>
+                  <option value="4">VI категория </option>
                 </select>
-                <input id="" value="" placeholder="" className="form-control" style={{ width: "205px" }} />
               </div>
-              <button type="button" className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные ППО</button>
+              <button type="button" onClick={updatePPOInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные ППО</button>
 
             </form>
           </div>
@@ -218,18 +267,21 @@ export default function StatementEditPage() {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <form className="form-inline" action="/search" acceptCharset="UTF-8" method="get">
+            <form className="form-inline">
               <h4>Приоритетное право</h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
-                <label style={{ width: "170px" }}>Категория ППО: </label>
-                <select id="" className="form-select w-100">
-                  <option value="">Данные не предоставлены</option>
-                  <option value="">Да </option>
-                  <option value="">Нет </option>
+                <label style={{ width: "170px" }}>Наличие приоритетного права: </label>
+                <select value={pp} onChange={(event) => setPp(event.target.value)} id="" className="form-select w-100"
+                  style={pp == "0" | pp == null
+                    ? { border: "2px solid red" }
+                    : { border: "2px solid green" }
+                  }>
+                  <option value="0">Данные не предоставлены</option>
+                  <option value="1">Да </option>
+                  <option value="2">Нет </option>
                 </select>
-                <input id="" value="" placeholder="" className="form-control" style={{ width: "205px" }} />
               </div>
-              <button type="button" className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные ПП</button>
+              <button type="button" onClick={updatePPInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные ПП</button>
 
             </form>
           </div>
@@ -239,14 +291,14 @@ export default function StatementEditPage() {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <form className="form-inline" action="/search" acceptCharset="UTF-8" method="get">
+            <form className="form-inline" >
               <h4>Данные об академической успеваемости</h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Средний балл: </label>
-                <input id="" value="" placeholder="Введите ВУС кандидата" className="form-control w-100" />
-                <input id="" value="" placeholder="" className="form-control" style={{ width: "205px" }} />
+                <input placeholder="Введите средний балл академической умпеваемости" className="form-control w-100" />
+                <input id="au" value={au} placeholder="" className="form-control" style={{ width: "205px" }} />
               </div>
-              <button type="button" className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные АУ</button>
+              <button type="button" onChange={(event) => setAu(event.target.value)} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные АУ</button>
 
             </form>
           </div>
@@ -257,39 +309,39 @@ export default function StatementEditPage() {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <form className="form-inline" action="/search" acceptCharset="UTF-8" method="get">
+            <form className="form-inline">
               <h4>Оценка уровня физической подготовки </h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Сила: </label>
-                <input id="" value="" placeholder="Введите ВУС кандидата" className="form-control w-100" />
-                <input id="" value="" placeholder="" className="form-control" style={{ width: "205px" }} />
+                <input id="" placeholder="Введите значение показателя Сила" className="form-control w-100" />
+                <input id="" value={fpS} placeholder="" className="form-control" style={{ width: "205px" }} />
               </div>
               <label style={{ width: "270px", whitespace: "nowrap", marginLeft: "150px" }}>Не предоставлен показатель &quot;Сила&quot;</label>
               <input type="checkbox" id="scales" name="scales" checked />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Быстрота: </label>
-                <input id="" value="" placeholder="Введите ВУС кандидата" className="form-control w-100" />
-                <input id="" value="" placeholder="" className="form-control" style={{ width: "205px" }} />
+                <input id="" placeholder="Введите значение показателя Быстрота" className="form-control w-100" />
+                <input id="" value={fpB} placeholder="" className="form-control" style={{ width: "205px" }} />
               </div>
               <label style={{ width: "300px", whitespace: "nowrap", marginLeft: "150px" }}>Не предоставлен показатель &quot;Быстрота&quot;</label>
               <input type="checkbox" id="scales" name="scales" checked />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Выносливость: </label>
-                <input id="" value="" placeholder="Введите ВУС кандидата" className="form-control w-100" />
-                <input id="" value="" placeholder="" className="form-control" style={{ width: "205px" }} />
+                <input id="" placeholder="Введите значение показателя Выносливость" className="form-control w-100" />
+                <input id="" value={fpV} placeholder="" className="form-control" style={{ width: "205px" }} />
               </div>
-              <label style={{ width: "330px", whitespace: "nowrap", marginLeft: "150px" }}>Не предоставлен показатель &quot;Выносливость&quot;</label>
+              <label style={{ width: "350px", whitespace: "nowrap", marginLeft: "150px" }}>Не предоставлен показатель &quot;Выносливость&quot;</label>
               <input type="checkbox" id="scales" name="scales" checked />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-5">
                 <label style={{ width: "570px", whitespace: "nowrap", marginLeft: "150px" }}>Суммарный балл по физической подготовленности: </label>
-                <input id="" value="" placeholder="" className="form-control" style={{ width: "205px" }} />
+                <input id="" value={fpSum} placeholder="" className="form-control" style={{ width: "205px" }} />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "570px", whitespace: "nowrap", marginLeft: "150px" }}>Суммарный балл по физической подготовленности в 100-бальной шкале: </label>
-                <input id="" value="" placeholder="" className="form-control" style={{ width: "205px" }} />
+                <input id="" value={fpFinal} placeholder="" className="form-control" style={{ width: "205px" }} />
               </div>
 
               <button type="button" className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные ОФП</button>

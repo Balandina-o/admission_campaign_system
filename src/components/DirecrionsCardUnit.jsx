@@ -10,12 +10,12 @@ const DirecrionsCardUnit = ({ id, name, cypher, acronym, onDelete }) => {
         <div className="p-2 card">
             <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center">
-                    <div>
+                    <div style={{ width: "130px", background: "rgb(180,182,186)", textAlign: "center" }}>
                         {acronym}
                     </div>
-                    <div>
+                    <div style={{ marginLeft: "10px" }}>
                         <div>
-                            {name}
+                            <b>{name}</b>
                         </div>
                         <div>
                             {cypher}
