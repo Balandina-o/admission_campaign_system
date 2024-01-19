@@ -24,6 +24,7 @@ export default function StatementEditPage() {
   const [ppo, setPpo] = useState("0");
   const [pp, setPp] = useState("0");
   const [au, setAu] = useState("");
+  const [auDec, setAuDec] = useState("");
   const [fpS, setFpS] = useState("");
   const [fpB, setFpB] = useState("");
   const [fpV, setFpV] = useState("");
@@ -54,6 +55,7 @@ export default function StatementEditPage() {
     setPpo(stat.ppo);
     setPp(stat.pp);
     setAu(stat.au);
+    setAuDec(stat.auDec);
     setFpS(stat.fpS);
     setFpB(stat.fpB);
     setFpV(stat.fpV);
@@ -64,6 +66,8 @@ export default function StatementEditPage() {
     setFpFinal(stat.fpFinal);
     setTotalScore(stat.totalScore);
 
+
+    setAuDec((stat.au * 100) / 5)
     //setFirstName(stat.firstName);
 
     const listOfSpec = specialitiesFromStore.specList;
@@ -123,6 +127,16 @@ export default function StatementEditPage() {
     };
     await window.electronAPI.updateCurrentState(id, paramForEdit);
     statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
+  };
+
+  const updateAuInfo = async () => {
+    const paramForEdit = {
+      au: au
+    };
+    await window.electronAPI.updateCurrentState(id, paramForEdit);
+    statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
+
+    setAuDec((au * 100) / 5)
   };
 
   return (
@@ -295,10 +309,14 @@ export default function StatementEditPage() {
               <h4>Данные об академической успеваемости</h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Средний балл: </label>
-                <input placeholder="Введите средний балл академической умпеваемости" className="form-control w-100" />
-                <input id="au" value={au} placeholder="" className="form-control" style={{ width: "205px" }} />
+                <input value={au} onChange={(event) => setAu(event.target.value)} placeholder="Введите средний балл академической успеваемости" className="form-control w-100"
+                  style={au == "0" | au == null
+                    ? { border: "2px solid red" }
+                    : { border: "2px solid green" }
+                  } />
+                <input className="form-control" value={auDec} style={{ width: "205px" }} />
               </div>
-              <button type="button" onChange={(event) => setAu(event.target.value)} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные АУ</button>
+              <button type="button" onClick={updateAuInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные АУ</button>
 
             </form>
           </div>
@@ -316,24 +334,24 @@ export default function StatementEditPage() {
                 <input id="" placeholder="Введите значение показателя Сила" className="form-control w-100" />
                 <input id="" value={fpS} placeholder="" className="form-control" style={{ width: "205px" }} />
               </div>
-              <label style={{ width: "270px", whitespace: "nowrap", marginLeft: "150px" }}>Не предоставлен показатель &quot;Сила&quot;</label>
-              <input type="checkbox" id="scales" name="scales" checked />
+              <label style={{ width: "270px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Сила&quot;</label>
+              <input type="checkbox" id="scales" name="scales" />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Быстрота: </label>
                 <input id="" placeholder="Введите значение показателя Быстрота" className="form-control w-100" />
                 <input id="" value={fpB} placeholder="" className="form-control" style={{ width: "205px" }} />
               </div>
-              <label style={{ width: "300px", whitespace: "nowrap", marginLeft: "150px" }}>Не предоставлен показатель &quot;Быстрота&quot;</label>
-              <input type="checkbox" id="scales" name="scales" checked />
+              <label style={{ width: "300px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Быстрота&quot;</label>
+              <input type="checkbox" id="scales" name="scales" />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Выносливость: </label>
                 <input id="" placeholder="Введите значение показателя Выносливость" className="form-control w-100" />
                 <input id="" value={fpV} placeholder="" className="form-control" style={{ width: "205px" }} />
               </div>
-              <label style={{ width: "350px", whitespace: "nowrap", marginLeft: "150px" }}>Не предоставлен показатель &quot;Выносливость&quot;</label>
-              <input type="checkbox" id="scales" name="scales" checked />
+              <label style={{ width: "350px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Выносливость&quot;</label>
+              <input type="checkbox" id="scales" name="scales" />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-5">
                 <label style={{ width: "570px", whitespace: "nowrap", marginLeft: "150px" }}>Суммарный балл по физической подготовленности: </label>
@@ -350,7 +368,7 @@ export default function StatementEditPage() {
           </div>
           <hr></hr>
           <div>
-            <button type="button" className="btn btn-danger mt-4 mb-1" style={{ width: "205px", marginTop: "20px" }}>Удалить заявление</button>
+            <button type="button" className="btn btn-danger mt-4 mb-4" style={{ width: "205px", marginTop: "20px" }}>Удалить заявление</button>
           </div>
         </div>
       </div>

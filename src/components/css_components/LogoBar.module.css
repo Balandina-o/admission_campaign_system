@@ -1,4 +1,4 @@
-@mixin make-container($padding-x: $container-padding-x) {
+/* @mixin make-container($padding-x: $container-padding-x) {
   width: 100%;
   padding-right: $padding-x;
   padding-left: $padding-x;
@@ -9,4 +9,4 @@
 
 .custom-container {
   @include make-container();
-}
+} */
