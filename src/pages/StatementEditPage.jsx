@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Context } from "../App";
 import { Button } from 'react-bootstrap';
 import "../pages/StatementEditPageStyle.css"
+import { calcS } from "../operations/Score"
 
 export default function StatementEditPage() {
   // const isFitCategorySelect = document.getElementById('isFitCategory');
@@ -61,16 +62,18 @@ export default function StatementEditPage() {
     setPp(stat.pp);
     setAu(stat.au);
     setAuDec(stat.auDec);
+
     setFpS(stat.fpS);
     setFpB(stat.fpB);
     setFpV(stat.fpV);
-    setFpSDec(stat.fpSDec);
+
+    setFpSDec(calcS(49, 1)); //stat.fpSDec
     setFpBDec(stat.fpBDec);
     setFpVDec(stat.fpVDec);
+
     setFpSum(stat.fpSum);
     setFpFinal(stat.fpFinal);
     //setTotalScore(stat.totalScore);
-
 
     setAuDec((stat.au * 100) / 5)
     //setFirstName(stat.firstName);
@@ -336,15 +339,15 @@ export default function StatementEditPage() {
               <h4>Оценка уровня физической подготовки </h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Сила: </label>
-                <input value={checkS ? fpSDec : "!"} className={checkS ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Сила" />
-                <input value={fpS} placeholder="" className="form-control refField" />
+                <input type="number" value={checkS ? "" : fpS} className={checkS ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Сила" />
+                <input value={fpSDec} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "270px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Сила&quot;</label>
               <input type="checkbox" onChange={(event) => setCheckS(event.target.checked)} />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Быстрота: </label>
-                <input value={checkB ? fpBDec : "!"} className={checkB ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Быстрота" />
+                <input type="number" value={checkB ? fpB : "!"} className={checkB ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Быстрота" />
                 <input value={fpB} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "300px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Быстрота&quot;</label>
@@ -352,7 +355,7 @@ export default function StatementEditPage() {
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Выносливость: </label>
-                <input value={checkV ? fpVDec : "!"} className={checkV ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Выносливость" className="form-control w-100" />
+                <input type="number" value={checkV ? fpV : "!"} className={checkV ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Выносливость" />
                 <input value={fpV} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "350px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Выносливость&quot;</label>
@@ -368,7 +371,6 @@ export default function StatementEditPage() {
               </div>
 
               <button type="button" className="btn btn-primary mt-4 mb-2 btnSave" >Сохранить данные ОФП</button>
-
             </form>
           </div>
           <hr></hr>
