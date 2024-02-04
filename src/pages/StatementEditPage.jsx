@@ -4,6 +4,8 @@ import { Context } from "../App";
 import { Button } from 'react-bootstrap';
 import "../pages/StatementEditPageStyle.css"
 import { calcS } from "../operations/Score"
+import { calcB } from "../operations/Score"
+import { calcV } from "../operations/Score"
 
 export default function StatementEditPage() {
   // const isFitCategorySelect = document.getElementById('isFitCategory');
@@ -67,9 +69,9 @@ export default function StatementEditPage() {
     setFpB(stat.fpB);
     setFpV(stat.fpV);
 
-    setFpSDec(calcS(49, 1)); //stat.fpSDec
-    setFpBDec(stat.fpBDec);
-    setFpVDec(stat.fpVDec);
+    setFpSDec(calcS(49, stat.gender)); //stat.fpSDec
+    setFpBDec(calcB(12, stat.gender));
+    setFpVDec(calcV(12, stat.gender));
 
     setFpSum(stat.fpSum);
     setFpFinal(stat.fpFinal);
@@ -348,7 +350,7 @@ export default function StatementEditPage() {
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Быстрота: </label>
                 <input type="number" value={checkB ? fpB : "!"} className={checkB ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Быстрота" />
-                <input value={fpB} placeholder="" className="form-control refField" />
+                <input value={fpBDec} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "300px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Быстрота&quot;</label>
               <input type="checkbox" onChange={(event) => setCheckB(event.target.checked)} />
@@ -356,7 +358,7 @@ export default function StatementEditPage() {
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Выносливость: </label>
                 <input type="number" value={checkV ? fpV : "!"} className={checkV ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Выносливость" />
-                <input value={fpV} placeholder="" className="form-control refField" />
+                <input value={fpVDec} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "350px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Выносливость&quot;</label>
               <input type="checkbox" onChange={(event) => setCheckV(event.target.checked)} />
