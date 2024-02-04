@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
-const { globalShortcut } = require('electron');
+//const { globalShortcut } = require('electron');
 const path = require("path");
 const isDev = require("electron-is-dev");
 const campaign = require("./campaign");

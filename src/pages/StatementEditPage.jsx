@@ -246,8 +246,8 @@ export default function StatementEditPage() {
                   <option value="11">Д</option>
                 </select>
                 {moCat == "0" | moCat == null | moCat == "9" | moCat == "10" | moCat == "11"
-                  ? <input value="Не годен" className="form-control" style={{ width: "205px" }} />
-                  : <input value="Годен" className="form-control" style={{ width: "205px" }} />
+                  ? <input value="Не годен" className="form-control refField" />
+                  : <input value="Годен" className="form-control refField" />
                 }
               </div>
               <button type="button" onClick={updateMOInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные МО</button>
@@ -319,7 +319,7 @@ export default function StatementEditPage() {
                     ? { border: "2px solid red" }
                     : { border: "2px solid green" }
                   } />
-                <input className="form-control" value={auDec} style={{ width: "205px" }} />
+                <input className="form-control refField" value={auDec} />
               </div>
               <button type="button" onClick={updateAuInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные АУ</button>
 
@@ -336,48 +336,47 @@ export default function StatementEditPage() {
               <h4>Оценка уровня физической подготовки </h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Сила: </label>
-                <input id="" className={checkS ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Сила" />
-                <input id="" value={fpS} placeholder="" className="form-control" style={{ width: "205px" }} />
+                <input value={checkS ? fpSDec : "!"} className={checkS ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Сила" />
+                <input value={fpS} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "270px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Сила&quot;</label>
               <input type="checkbox" onChange={(event) => setCheckS(event.target.checked)} />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Быстрота: </label>
-                <input id="" placeholder="Введите значение показателя Быстрота" className="form-control w-100" />
-                <input id="" value={fpB} placeholder="" className="form-control" style={{ width: "205px" }} />
+                <input value={checkB ? fpBDec : "!"} className={checkB ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Быстрота" />
+                <input value={fpB} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "300px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Быстрота&quot;</label>
-              <input type="checkbox" id="scales" name="scales" />
+              <input type="checkbox" onChange={(event) => setCheckB(event.target.checked)} />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Выносливость: </label>
-                <input id="" placeholder="Введите значение показателя Выносливость" className="form-control w-100" />
-                <input id="" value={fpV} placeholder="" className="form-control" style={{ width: "205px" }} />
+                <input value={checkV ? fpVDec : "!"} className={checkV ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Выносливость" className="form-control w-100" />
+                <input value={fpV} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "350px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Выносливость&quot;</label>
-              <input type="checkbox" id="scales" name="scales" />
+              <input type="checkbox" onChange={(event) => setCheckV(event.target.checked)} />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-5">
-                <label style={{ width: "570px", whitespace: "nowrap", marginLeft: "150px" }}>Суммарный балл по физической подготовленности: </label>
-                <input id="" value={fpSum} placeholder="" className="form-control" style={{ width: "205px" }} />
+                <label className="labelSum">Суммарный балл по физической подготовленности: </label>
+                <input value={fpSum} placeholder="" className="form-control refField" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
-                <label style={{ width: "570px", whitespace: "nowrap", marginLeft: "150px" }}>Суммарный балл по физической подготовленности в 100-бальной шкале: </label>
-                <input id="" value={fpFinal} placeholder="" className="form-control" style={{ width: "205px" }} />
+                <label className="labelSum">Суммарный балл по физической подготовленности в 100-бальной шкале: </label>
+                <input value={fpFinal} placeholder="" className="form-control refField" />
               </div>
 
-              <button type="button" className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные ОФП</button>
+              <button type="button" className="btn btn-primary mt-4 mb-2 btnSave" >Сохранить данные ОФП</button>
 
             </form>
           </div>
           <hr></hr>
           <div>
-            <button type="button" className="btn btn-danger mt-4 mb-4" style={{ width: "205px", marginTop: "20px" }}>Удалить заявление</button>
+            <button type="button" className="btn btn-danger mt-4 mb-4 btnDel" >Удалить заявление</button>
           </div>
         </div>
       </div>
-
     </div >
   )
 }
