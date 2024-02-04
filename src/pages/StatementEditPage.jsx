@@ -69,9 +69,9 @@ export default function StatementEditPage() {
     setFpB(stat.fpB);
     setFpV(stat.fpV);
 
-    setFpSDec(calcS(49, stat.gender)); //stat.fpSDec
-    setFpBDec(calcB(12, stat.gender));
-    setFpVDec(calcV(12, stat.gender));
+    setFpSDec(calcS(stat.fpS.replace(/0*$/, ""), stat.gender));
+    setFpBDec(calcB(stat.fpB.replace(/0*$/, ""), stat.gender));
+    setFpVDec(calcV(stat.fpV.replace(/0*$/, ""), stat.gender));
 
     setFpSum(stat.fpSum);
     setFpFinal(stat.fpFinal);
@@ -151,9 +151,9 @@ export default function StatementEditPage() {
 
   const updateFpInfo = async () => {
     const stateInfoForEdit = {
-      fpB: fpB,
-      fpS: fpS,
-      fpV: fpV,
+      fpB: fpB.replace(/0*$/, ""),
+      fpS: fpS.replace(/0*$/, ""),
+      fpV: fpV.replace(/0*$/, ""),
       fpBDec: fpBDec,
       fpSDec: fpSDec,
       fpVDec: fpVDec,
@@ -163,6 +163,10 @@ export default function StatementEditPage() {
     };
     await window.electronAPI.updateCurrentState(id, stateInfoForEdit);
     statementsFromStore.updateStateInStore(id, stateInfoForEdit);
+
+    setFpSDec(calcS(fpS.replace(/0*$/, ""), gender));
+    setFpBDec(calcB(fpB.replace(/0*$/, ""), gender));
+    setFpVDec(calcV(fpV.replace(/0*$/, ""), gender));
   };
 
   return (
@@ -357,7 +361,12 @@ export default function StatementEditPage() {
               <h4>Оценка уровня физической подготовки </h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Сила: </label>
-                <input type="number" value={checkS ? "" : fpS} onChange={(event) => setFpS(event.target.value)} className={checkS ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Сила" />
+                <input type="number" value={checkS ? "" : fpS} onChange={(event) => setFpS(event.target.value)} className={checkS ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Сила"
+                  style={checkS != ""
+                    ? { border: "2px solid red" }
+                    : { border: "2px solid green" }
+                  }
+                />
                 <input value={fpSDec} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "270px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Сила&quot;</label>
@@ -365,7 +374,12 @@ export default function StatementEditPage() {
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Быстрота: </label>
-                <input type="number" value={checkB ? "" : fpB} onChange={(event) => setFpB(event.target.value)} className={checkB ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Быстрота" />
+                <input type="number" value={checkB ? "" : fpB} onChange={(event) => setFpB(event.target.value)} className={checkB ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Быстрота"
+                  style={checkB != ""
+                    ? { border: "2px solid red" }
+                    : { border: "2px solid green" }
+                  }
+                />
                 <input value={fpBDec} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "300px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Быстрота&quot;</label>
@@ -373,7 +387,12 @@ export default function StatementEditPage() {
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Выносливость: </label>
-                <input type="number" value={checkV ? "" : fpV} onChange={(event) => setFpV(event.target.value)} className={checkV ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Выносливость" />
+                <input type="number" value={checkV ? "" : fpV} onChange={(event) => setFpV(event.target.value)} className={checkV ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Выносливость"
+                  style={checkV != ""
+                    ? { border: "2px solid red" }
+                    : { border: "2px solid green" }
+                  }
+                />
                 <input value={fpVDec} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "350px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Выносливость&quot;</label>
