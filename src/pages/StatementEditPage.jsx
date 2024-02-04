@@ -149,6 +149,22 @@ export default function StatementEditPage() {
     setAuDec((au * 100) / 5)
   };
 
+  const updateFpInfo = async () => {
+    const stateInfoForEdit = {
+      fpB: fpB,
+      fpS: fpS,
+      fpV: fpV,
+      fpBDec: fpBDec,
+      fpSDec: fpSDec,
+      fpVDec: fpVDec,
+      fpSum: fpSum,
+      fpFinal: fpFinal,
+
+    };
+    await window.electronAPI.updateCurrentState(id, stateInfoForEdit);
+    statementsFromStore.updateStateInStore(id, stateInfoForEdit);
+  };
+
   return (
     <div style={{ width: "100%", background: "white" }}>
       <div className="container">
@@ -341,7 +357,7 @@ export default function StatementEditPage() {
               <h4>Оценка уровня физической подготовки </h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Сила: </label>
-                <input type="number" value={checkS ? "" : fpS} className={checkS ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Сила" />
+                <input type="number" value={checkS ? "" : fpS} onChange={(event) => setFpS(event.target.value)} className={checkS ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Сила" />
                 <input value={fpSDec} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "270px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Сила&quot;</label>
@@ -349,7 +365,7 @@ export default function StatementEditPage() {
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Быстрота: </label>
-                <input type="number" value={checkB ? fpB : "!"} className={checkB ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Быстрота" />
+                <input type="number" value={checkB ? "" : fpB} onChange={(event) => setFpB(event.target.value)} className={checkB ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Быстрота" />
                 <input value={fpBDec} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "300px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Быстрота&quot;</label>
@@ -357,7 +373,7 @@ export default function StatementEditPage() {
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Выносливость: </label>
-                <input type="number" value={checkV ? fpV : "!"} className={checkV ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Выносливость" />
+                <input type="number" value={checkV ? "" : fpV} onChange={(event) => setFpV(event.target.value)} className={checkV ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Выносливость" />
                 <input value={fpVDec} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "350px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Выносливость&quot;</label>
@@ -372,7 +388,7 @@ export default function StatementEditPage() {
                 <input value={fpFinal} placeholder="" className="form-control refField" />
               </div>
 
-              <button type="button" className="btn btn-primary mt-4 mb-2 btnSave" >Сохранить данные ОФП</button>
+              <button type="button" className="btn btn-primary mt-4 mb-2 btnSave" onClick={updateFpInfo} >Сохранить данные ОФП</button>
             </form>
           </div>
           <hr></hr>
