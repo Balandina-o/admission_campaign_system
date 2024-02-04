@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useParams, Link } from 'react-router-dom';
 import { Context } from "../App";
 import { Button } from 'react-bootstrap';
+import "../pages/StatementEditPageStyle.css"
 
 export default function StatementEditPage() {
   // const isFitCategorySelect = document.getElementById('isFitCategory');
@@ -33,7 +34,11 @@ export default function StatementEditPage() {
   const [fpVDec, setFpVDec] = useState("");
   const [fpSum, setFpSum] = useState("");
   const [fpFinal, setFpFinal] = useState("");
-  const [totalScore, setTotalScore] = useState("");
+  //const [totalScore, setTotalScore] = useState("");
+
+  const [checkS, setCheckS] = useState("");
+  const [checkB, setCheckB] = useState("");
+  const [checkV, setCheckV] = useState("");
 
 
   useEffect(() => void (async () => {
@@ -64,7 +69,7 @@ export default function StatementEditPage() {
     setFpVDec(stat.fpVDec);
     setFpSum(stat.fpSum);
     setFpFinal(stat.fpFinal);
-    setTotalScore(stat.totalScore);
+    //setTotalScore(stat.totalScore);
 
 
     setAuDec((stat.au * 100) / 5)
@@ -331,11 +336,11 @@ export default function StatementEditPage() {
               <h4>Оценка уровня физической подготовки </h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Сила: </label>
-                <input id="" placeholder="Введите значение показателя Сила" className="form-control w-100" />
+                <input id="" className={checkS ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Введите значение показателя Сила" />
                 <input id="" value={fpS} placeholder="" className="form-control" style={{ width: "205px" }} />
               </div>
               <label style={{ width: "270px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Сила&quot;</label>
-              <input type="checkbox" id="scales" name="scales" />
+              <input type="checkbox" onChange={(event) => setCheckS(event.target.checked)} />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Быстрота: </label>
