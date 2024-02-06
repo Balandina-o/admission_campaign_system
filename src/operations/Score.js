@@ -344,7 +344,7 @@ const operations = {
         }
     },
     sumDecValues: function (valS, valB, valV) {
-        return valS + valB + valV;
+        return parseInt(valS) + parseInt(valB) + parseInt(valV);
     }
 }
 

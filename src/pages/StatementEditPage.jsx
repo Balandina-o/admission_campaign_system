@@ -74,12 +74,23 @@ export default function StatementEditPage() {
     setFpBDec(stat.fpBDec);
     setFpVDec(stat.fpVDec);
 
-    setFpSum(stat.fpSum);
+    // setFpSum(stat.fpSum);
+    setFpSum(sumDecValues(stat.fpSDec, stat.fpBDec, stat.fpVDec));
     setFpFinal(stat.fpFinal);
     //setTotalScore(stat.totalScore);
 
     setAuDec((stat.au * 100) / 5)
     //setFirstName(stat.firstName);
+
+    stat.fpS != null ? setCheckS(true) : setCheckS(false)
+    stat.fpB != "" ? setCheckB(true) : setCheckB(false)
+    stat.fpV != "" ? setCheckV(true) : setCheckV(false)
+    stat.fpS != "" ? document.getElementById("checkboxS").checked = true :
+      document.getElementById("checkboxS").checked = false;
+    stat.fpB != "" ? document.getElementById("checkboxB").checked = true :
+      document.getElementById("checkboxB").checked = false;
+    stat.fpV != "" ? document.getElementById("checkboxV").checked = true :
+      document.getElementById("checkboxV").checked = false;
 
     const listOfSpec = specialitiesFromStore.specList;
     const listOfDir = directionsFromStore.dirList;
@@ -373,7 +384,7 @@ export default function StatementEditPage() {
                 <input value={fpSDec} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "270px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Сила&quot;</label>
-              <input type="checkbox" onChange={(event) => setCheckS(event.target.checked)} />
+              <input id="checkboxS" type="checkbox" onChange={(event) => setCheckS(event.target.checked)} />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Быстрота: </label>
@@ -383,10 +394,10 @@ export default function StatementEditPage() {
                     : { border: "2px solid green" }
                   }
                 />
-                <input value={fpBDec} placeholder="" className="form-control refField" />
+                <input value={fpBDec} className="form-control refField" />
               </div>
               <label style={{ width: "300px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Быстрота&quot;</label>
-              <input type="checkbox" onChange={(event) => setCheckB(event.target.checked)} />
+              <input id="checkboxB" type="checkbox" onChange={(event) => setCheckB(event.target.checked)} />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Выносливость: </label>
@@ -396,18 +407,18 @@ export default function StatementEditPage() {
                     : { border: "2px solid green" }
                   }
                 />
-                <input value={fpVDec} placeholder="" className="form-control refField" />
+                <input value={fpVDec} className="form-control refField" />
               </div>
               <label style={{ width: "350px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Выносливость&quot;</label>
-              <input type="checkbox" onChange={(event) => setCheckV(event.target.checked)} />
+              <input id="checkboxV" type="checkbox" onChange={(event) => setCheckV(event.target.checked)} />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-5">
                 <label className="labelSum">Суммарный балл по физической подготовленности: </label>
-                <input value={fpSum} placeholder="" className="form-control refField" />
+                <input value={fpSum} className="form-control refField" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label className="labelSum">Суммарный балл по физической подготовленности в 100-бальной шкале: </label>
-                <input value={fpFinal} placeholder="" className="form-control refField" />
+                <input value={fpFinal} className="form-control refField" />
               </div>
 
               <button type="button" className="btn btn-primary mt-4 mb-2 btnSave" onClick={updateFpInfo} >Сохранить данные ОФП</button>
