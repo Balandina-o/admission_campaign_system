@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Context } from "../App";
 import { Button } from 'react-bootstrap';
-import "../pages/StatementEditPageStyle.css"
-import { calcS } from "../operations/Score"
-import { calcB } from "../operations/Score"
-import { calcV } from "../operations/Score"
+import { calcS } from "../operations/Score";
+import { calcB } from "../operations/Score";
+import { calcV } from "../operations/Score";
+import { sumDecValues } from "../operations/Score";
+import "../pages/styles/StatementEditPageStyle.css";
 
 export default function StatementEditPage() {
   // const isFitCategorySelect = document.getElementById('isFitCategory');
@@ -69,9 +70,9 @@ export default function StatementEditPage() {
     setFpB(stat.fpB);
     setFpV(stat.fpV);
 
-    setFpSDec(calcS(stat.fpS.replace(/0*$/, ""), stat.gender));
-    setFpBDec(calcB(stat.fpB.replace(/0*$/, ""), stat.gender));
-    setFpVDec(calcV(stat.fpV.replace(/0*$/, ""), stat.gender));
+    setFpSDec(stat.fpSDec);
+    setFpBDec(stat.fpBDec);
+    setFpVDec(stat.fpVDec);
 
     setFpSum(stat.fpSum);
     setFpFinal(stat.fpFinal);
@@ -167,6 +168,8 @@ export default function StatementEditPage() {
     setFpSDec(calcS(fpS.replace(/0*$/, ""), gender));
     setFpBDec(calcB(fpB.replace(/0*$/, ""), gender));
     setFpVDec(calcV(fpV.replace(/0*$/, ""), gender));
+
+    setFpSum(sumDecValues(fpBDec, fpSDec, fpVDec));
   };
 
   return (

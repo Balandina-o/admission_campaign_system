@@ -342,9 +342,13 @@ const operations = {
                 }
             }
         }
+    },
+    sumDecValues: function (valS, valB, valV) {
+        return valS + valB + valV;
     }
 }
 
 export const calcS = operations.calcS;
 export const calcB = operations.calcB;
 export const calcV = operations.calcV;
+export const sumDecValues = operations.sumDecValues;
