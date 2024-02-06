@@ -48,7 +48,6 @@ export default function StatementEditPage() {
   useEffect(() => void (async () => {
     const selectDir = document.getElementById('selectDir');
     const selectSpec = document.getElementById('selectSpec');
-
     const stat = statementsFromStore.findStatement(id);
 
     setFirstName(stat.firstName);
@@ -162,9 +161,12 @@ export default function StatementEditPage() {
   };
 
   const updateFpInfo = async () => {
+    let newSCheck;
+    document.getElementById("checkboxS").checked ? newSCheck = "" : newSCheck = fpS.replace(/0*$/, "");
+
     const stateInfoForEdit = {
       fpB: fpB.replace(/0*$/, ""),
-      fpS: fpS.replace(/0*$/, ""),
+      fpS: newSCheck,
       fpV: fpV.replace(/0*$/, ""),
       fpBDec: fpBDec,
       fpSDec: fpSDec,
