@@ -82,15 +82,15 @@ export default function StatementEditPage() {
     setAuDec((stat.au * 100) / 5)
     //setFirstName(stat.firstName);
 
-    stat.fpS != null ? setCheckS(true) : setCheckS(false)
-    stat.fpB != "" ? setCheckB(true) : setCheckB(false)
-    stat.fpV != "" ? setCheckV(true) : setCheckV(false)
-    stat.fpS != "" ? document.getElementById("checkboxS").checked = true :
-      document.getElementById("checkboxS").checked = false;
-    stat.fpB != "" ? document.getElementById("checkboxB").checked = true :
-      document.getElementById("checkboxB").checked = false;
-    stat.fpV != "" ? document.getElementById("checkboxV").checked = true :
-      document.getElementById("checkboxV").checked = false;
+    stat.fpS != "" ? setCheckS(false) : setCheckS(true)
+    stat.fpB != "" ? setCheckB(false) : setCheckB(true)
+    stat.fpV != "" ? setCheckV(false) : setCheckV(true)
+    stat.fpS != "" ? document.getElementById("checkboxS").checked = false :
+      document.getElementById("checkboxS").checked = true;
+    stat.fpB != "" ? document.getElementById("checkboxB").checked = false :
+      document.getElementById("checkboxB").checked = true;
+    stat.fpV != "" ? document.getElementById("checkboxV").checked = false :
+      document.getElementById("checkboxV").checked = true;
 
     const listOfSpec = specialitiesFromStore.specList;
     const listOfDir = directionsFromStore.dirList;
