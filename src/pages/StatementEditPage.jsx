@@ -183,6 +183,16 @@ export default function StatementEditPage() {
     setFpVDec(calcV(fpV.replace(/0*$/, ""), gender));
 
     setFpSum(sumDecValues(fpBDec, fpSDec, fpVDec));
+
+    fpS != "" ? setCheckS(false) : setCheckS(true)
+    fpB != "" ? setCheckB(false) : setCheckB(true)
+    fpV != "" ? setCheckV(false) : setCheckV(true)
+    fpS != "" ? document.getElementById("checkboxS").checked = false :
+      document.getElementById("checkboxS").checked = true;
+    fpB != "" ? document.getElementById("checkboxB").checked = false :
+      document.getElementById("checkboxB").checked = true;
+    fpV != "" ? document.getElementById("checkboxV").checked = false :
+      document.getElementById("checkboxV").checked = true;
   };
 
   return (
