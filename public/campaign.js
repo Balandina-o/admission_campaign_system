@@ -44,6 +44,9 @@ const Speciality = sequelize.define('Speciality', {
   },
   type: {
     type: DataTypes.STRING
+  },
+  exam: {
+    type: DataTypes.STRING
   }
 });
 
@@ -77,6 +80,9 @@ const Statement = sequelize.define('Statement', {
     type: DataTypes.STRING
   },
   au: {
+    type: DataTypes.STRING
+  },
+  indPoints: {
     type: DataTypes.STRING
   },
   fpS: {

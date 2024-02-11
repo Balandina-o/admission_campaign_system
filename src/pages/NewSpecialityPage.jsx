@@ -5,6 +5,9 @@ const NewSpecialityPage = () => {
   const [name, setName] = useState("");
   const [cypher, setCypher] = useState("");
   const [type, setType] = useState("");
+
+  const [exam, setExam] = useState("0");
+
   const navigate = useNavigate();
 
   const createNewSpec = async () => {
@@ -12,6 +15,7 @@ const NewSpecialityPage = () => {
       name: name,
       cypher: cypher,
       type: type,
+      exam: exam,
     };
     const res = await window.electronAPI.createSpeciality(newSpec);
     console.log(res);
@@ -41,6 +45,10 @@ const NewSpecialityPage = () => {
                 <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                   <label style={{ width: "150px" }}>Подготовка: </label>
                   <input id="type" value={type} onChange={(event) => setType(event.target.value)} placeholder="Введите тип кандидатов" className="form-control w-100" />
+                </div>
+                <div>
+                  <label >Осуществлять прием по результатам баллов ЕГЭ:</label>
+                  <input style={{ width: "50px" }} id="checkboxExam" type="checkbox" onChange={(event) => setExam(event.target.checked)} />
                 </div>
                 <button type="button" onClick={createNewSpec} className="btn btn-primary mt-4 mb-2" >Сохранить данные</button>
               </form>

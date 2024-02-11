@@ -345,6 +345,12 @@ const operations = {
     },
     sumDecValues: function (valS, valB, valV) {
         return parseInt(valS) + parseInt(valB) + parseInt(valV);
+    },
+    countFinal: function (sum) {
+        return parseInt(sum) - 95;
+    },
+    countTotalScore: function (finalDecScore, auPoints, indPoints) {
+        return parseInt(finalDecScore) + parseInt(auPoints) + parseInt(indPoints);
     }
 }
 
@@ -352,3 +358,5 @@ export const calcS = operations.calcS;
 export const calcB = operations.calcB;
 export const calcV = operations.calcV;
 export const sumDecValues = operations.sumDecValues;
+export const countFinal = operations.countFinal;
+export const countTotalScore = operations.countTotalScore;

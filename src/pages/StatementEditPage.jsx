@@ -6,6 +6,8 @@ import { calcS } from "../operations/Score";
 import { calcB } from "../operations/Score";
 import { calcV } from "../operations/Score";
 import { sumDecValues } from "../operations/Score";
+import { countFinal } from "../operations/Score";
+import { countTotalScore } from "../operations/Score";
 import "../pages/styles/StatementEditPageStyle.css";
 
 export default function StatementEditPage() {
@@ -30,6 +32,9 @@ export default function StatementEditPage() {
   const [pp, setPp] = useState("0");
   const [au, setAu] = useState("");
   const [auDec, setAuDec] = useState("");
+
+  const [indPoints, setIndPoints] = useState("0");
+
   const [fpS, setFpS] = useState("");
   const [fpB, setFpB] = useState("");
   const [fpV, setFpV] = useState("");
@@ -38,12 +43,14 @@ export default function StatementEditPage() {
   const [fpVDec, setFpVDec] = useState("");
   const [fpSum, setFpSum] = useState("");
   const [fpFinal, setFpFinal] = useState("");
-  //const [totalScore, setTotalScore] = useState("");
+  const [totalScore, setTotalScore] = useState("");
 
   const [checkS, setCheckS] = useState("");
   const [checkB, setCheckB] = useState("");
   const [checkV, setCheckV] = useState("");
+  const [checkInd, setCheckInd] = useState("");
 
+  const [specType, setSpecType] = useState("1");
 
   useEffect(() => void (async () => {
     const selectDir = document.getElementById('selectDir');
@@ -58,7 +65,6 @@ export default function StatementEditPage() {
     setGroup(stat.group);
     setSpec(stat.SpecialityId);
     setDir(stat.DirectionId);
-
     setMoCat(stat.moCat);
     setPpo(stat.ppo);
     setPp(stat.pp);
@@ -73,24 +79,33 @@ export default function StatementEditPage() {
     setFpBDec(stat.fpBDec);
     setFpVDec(stat.fpVDec);
 
-    // setFpSum(stat.fpSum);
-    setFpSum(sumDecValues(stat.fpSDec, stat.fpBDec, stat.fpVDec));
+    setFpSum(sumDecValues(stat.fpSDec, stat.fpBDec, stat.fpVDec));  // setFpSum(stat.fpSum);
     setFpFinal(stat.fpFinal);
-    //setTotalScore(stat.totalScore);
+    setTotalScore(stat.totalScore);
 
     setAuDec((stat.au * 100) / 5)
-    //setFirstName(stat.firstName);
+    setIndPoints(stat.indPoints);
 
-    stat.fpS != "" ? setCheckS(false) : setCheckS(true)
-    stat.fpB != "" ? setCheckB(false) : setCheckB(true)
-    stat.fpV != "" ? setCheckV(false) : setCheckV(true)
-    stat.fpS != "" ? document.getElementById("checkboxS").checked = false :
+    const spec = specialitiesFromStore.findSpeciality(id).exam;
+    spec == "1" ? setSpecType(true) : setSpecType(false);
+
+    stat.fpS ? setCheckS(false) : setCheckS(true)
+    stat.fpB ? setCheckB(false) : setCheckB(true)
+    stat.fpV ? setCheckV(false) : setCheckV(true)
+    stat.indPoints ? setCheckInd(false) : setCheckInd(true)
+    stat.fpS ? document.getElementById("checkboxS").checked = false :
       document.getElementById("checkboxS").checked = true;
-    stat.fpB != "" ? document.getElementById("checkboxB").checked = false :
+    stat.fpB ? document.getElementById("checkboxB").checked = false :
       document.getElementById("checkboxB").checked = true;
-    stat.fpV != "" ? document.getElementById("checkboxV").checked = false :
+    stat.fpV ? document.getElementById("checkboxV").checked = false :
       document.getElementById("checkboxV").checked = true;
 
+    const checkboxIndConst = document.getElementById('checkboxInd');
+    // if (checkboxIndConst) {
+    console.log("ddd", Boolean(document.getElementById("checkboxInd")));
+    stat.indPoints ? checkboxIndConst.checked = false :
+      checkboxIndConst.checked = true;
+    // }
     const listOfSpec = specialitiesFromStore.specList;
     const listOfDir = directionsFromStore.dirList;
 
@@ -160,14 +175,18 @@ export default function StatementEditPage() {
     setAuDec((au * 100) / 5)
   };
 
-  const updateFpInfo = async () => {
+  const updateFpInfo = async () => {  //доделать готово?
     let newSCheck;
+    let newBCheck;
+    let newVCheck;
     document.getElementById("checkboxS").checked ? newSCheck = "" : newSCheck = fpS.replace(/0*$/, "");
+    document.getElementById("checkboxB").checked ? newBCheck = "" : newBCheck = fpB.replace(/0*$/, "");
+    document.getElementById("checkboxV").checked ? newVCheck = "" : newVCheck = fpV.replace(/0*$/, "");
 
     const stateInfoForEdit = {
-      fpB: fpB.replace(/0*$/, ""),
+      fpB: newBCheck,
       fpS: newSCheck,
-      fpV: fpV.replace(/0*$/, ""),
+      fpV: newVCheck,
       fpBDec: fpBDec,
       fpSDec: fpSDec,
       fpVDec: fpVDec,
@@ -178,22 +197,37 @@ export default function StatementEditPage() {
     await window.electronAPI.updateCurrentState(id, stateInfoForEdit);
     statementsFromStore.updateStateInStore(id, stateInfoForEdit);
 
-    setFpSDec(calcS(fpS.replace(/0*$/, ""), gender));
-    setFpBDec(calcB(fpB.replace(/0*$/, ""), gender));
-    setFpVDec(calcV(fpV.replace(/0*$/, ""), gender));
+    fpS && setFpSDec(calcS(fpS.replace(/0*$/, ""), gender));
+    fpB && setFpBDec(calcB(fpB.replace(/0*$/, ""), gender));
+    fpV && setFpVDec(calcV(fpV.replace(/0*$/, ""), gender));
 
     setFpSum(sumDecValues(fpBDec, fpSDec, fpVDec));
+    setFpFinal(countFinal(fpSum));
+    setTotalScore(countTotalScore(fpFinal, auDec,));
 
-    fpS != "" ? setCheckS(false) : setCheckS(true)
-    fpB != "" ? setCheckB(false) : setCheckB(true)
-    fpV != "" ? setCheckV(false) : setCheckV(true)
-    fpS != "" ? document.getElementById("checkboxS").checked = false :
+    fpS ? setCheckS(false) : setCheckS(true)
+    fpB ? setCheckB(false) : setCheckB(true)
+    fpV ? setCheckV(false) : setCheckV(true)
+    fpS ? document.getElementById("checkboxS").checked = false :
       document.getElementById("checkboxS").checked = true;
-    fpB != "" ? document.getElementById("checkboxB").checked = false :
+    fpB ? document.getElementById("checkboxB").checked = false :
       document.getElementById("checkboxB").checked = true;
-    fpV != "" ? document.getElementById("checkboxV").checked = false :
+    fpV ? document.getElementById("checkboxV").checked = false :
       document.getElementById("checkboxV").checked = true;
   };
+
+  const updateIndInfo = async () => {
+    const indPointInfoForEdit = {
+      indPoints: indPoints,
+    };
+
+    await window.electronAPI.updateCurrentState(id, indPointInfoForEdit);
+    statementsFromStore.updateStateInStoreOneParam(id, indPointInfoForEdit);
+
+    indPoints ? setCheckInd(false) : setCheckInd(true)
+    indPoints != "" ? document.getElementById("checkboxInd").checked = false :
+      document.getElementById("checkboxInd").checked = true;
+  }
 
   return (
     <div style={{ width: "100%", background: "white" }}>
@@ -216,7 +250,7 @@ export default function StatementEditPage() {
               <hr></hr>
               <div className="flex-fill mr-2 d-flex align-items-center mt-2 mb-2">
                 <label style={{ width: "170px" }}>Рейтинговый балл: </label>
-                <input id="" value="" placeholder="" className="form-control w-100" />
+                <input type="text" defaultValue={totalScore} className="form-control w-100" />
               </div>
             </form>
           </div>
@@ -230,26 +264,26 @@ export default function StatementEditPage() {
               <h4>Основная информация</h4>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Фамилия: </label>
-                <input id="" value={secondName} onChange={(event) => setSecondName(event.target.value)} placeholder="Введите фамилию кандидата" className="form-control w-100 " />
+                <input type="text" value={secondName} onChange={(event) => setSecondName(event.target.value)} placeholder="Введите фамилию кандидата" className="form-control w-100 " />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Имя: </label>
-                <input id="" value={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="Введите имя кандидата" className="form-control w-100" />
+                <input type="text" value={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="Введите имя кандидата" className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Отчество: </label>
-                <input id="" value={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Введите отчество кандидата" className="form-control w-100" />
+                <input type="text" value={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Введите отчество кандидата" className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Пол: </label>
-                <select id="" value={gender} onChange={(event) => setGender(event.target.value)} className="form-select w-100">
+                <select value={gender} onChange={(event) => setGender(event.target.value)} className="form-select w-100">
                   <option value="0">Мужской</option>
                   <option value="1">Женский</option>
                 </select>
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Дата рождения: </label>
-                <input type="date" id="" value={birthday} onChange={(event) => setBirthday(event.target.value)} className="form-control w-100" />
+                <input type="date" value={birthday} onChange={(event) => setBirthday(event.target.value)} className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Специальность: </label>
@@ -258,10 +292,10 @@ export default function StatementEditPage() {
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label style={{ width: "170px" }}>Учебная группа: </label>
-                <input id="" value={group} onChange={(event) => setGroup(event.target.value)} placeholder="Введите учебную группу кандидата" className="form-control w-100" />
+                <input type="text" value={group} onChange={(event) => setGroup(event.target.value)} placeholder="Введите учебную группу кандидата" className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
-                <label style={{ width: "170px" }}>ВУС: </label>
+                <label style={{ width: "170px" }}>Направление бывш ВУС: </label>
                 <select id="selectDir" value={dir} onChange={(event) => setDir(event.target.value)} className="form-select w-100">
                 </select>
               </div>
@@ -297,8 +331,8 @@ export default function StatementEditPage() {
                   <option value="11">Д</option>
                 </select>
                 {moCat == "0" | moCat == null | moCat == "9" | moCat == "10" | moCat == "11"
-                  ? <input value="Не годен" className="form-control refField" />
-                  : <input value="Годен" className="form-control refField" />
+                  ? <input type="text" value="Не годен" className="form-control refField" />
+                  : <input type="text" value="Годен" className="form-control refField" />
                 }
               </div>
               <button type="button" onClick={updateMOInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные МО</button>
@@ -363,15 +397,29 @@ export default function StatementEditPage() {
           <div className="col-md-12">
             <form className="form-inline" >
               <h4>Данные об академической успеваемости</h4>
-              <div className="flex-fill mr-2 d-flex align-items-center mt-1">
-                <label style={{ width: "170px" }}>Средний балл: </label>
-                <input value={au} onChange={(event) => setAu(event.target.value)} placeholder="Введите средний балл академической успеваемости" className="form-control w-100"
-                  style={au == "0" | au == null
-                    ? { border: "2px solid red" }
-                    : { border: "2px solid green" }
-                  } />
-                <input className="form-control refField" value={auDec} />
-              </div>
+              {specType ? (
+                <div className="flex-fill mr-2 d-flex align-items-center mt-1">
+                  <label style={{ width: "200px" }}><b>Балл ЕГЭ:</b> </label>
+                  <input type="number" value={au} onChange={(event) => setAu(event.target.value)} placeholder="Введите средний балл академической успеваемости" className="form-control w-100"
+                    style={au == "0" | au == null
+                      ? { border: "2px solid red" }
+                      : { border: "2px solid green" }
+                    } />
+                  <input type="text" className="form-control refField" defaultValue={Math.floor(auDec)} />
+                </div>
+              ) :
+                (
+                  <div className="flex-fill mr-2 d-flex align-items-center mt-1">
+                    <label style={{ width: "170px" }}><b>Средний балл:</b>  </label>
+                    <input type="number" value={au} onChange={(event) => setAu(event.target.value)} placeholder="Введите средний балл академической успеваемости" className="form-control w-100"
+                      style={au == "0" | au == null
+                        ? { border: "2px solid red" }
+                        : { border: "2px solid green" }
+                      } />
+                    <input type="text" className="form-control refField" value={Math.floor(auDec)} />
+                  </div>
+                )}
+
               <button type="button" onClick={updateAuInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные АУ</button>
 
             </form>
@@ -379,6 +427,34 @@ export default function StatementEditPage() {
         </div>
       </div>
 
+      {specType ? (
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <form className="form-inline" >
+                <h4>Индивидуальные достижения:</h4>
+                <div className="flex-fill mr-2 d-flex align-items-center mt-1">
+                  <label style={{ width: "200px" }}>Баллы за достижения: </label>
+                  <input type="number" value={checkInd ? "" : indPoints} onChange={(event) => setIndPoints(event.target.value)} className={checkInd ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Дополнительные баллы"
+                    style={checkInd != ""
+                      ? { border: "2px solid gray" }
+                      : { border: "2px solid green" }
+                    }
+                  />
+
+                </div>
+                <label style={{ width: "200px", whitespace: "nowrap", marginLeft: "145px" }}>Достижения отсутствуют</label>
+
+                <input id="checkboxInd" value={checkInd} type="checkbox" onChange={(event) => setCheckInd(event.target.checked)} />
+                <button type="button" onClick={updateIndInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные ИД</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div>
+        </div>
+      )}
 
       <div className="container">
         <div className="row">
@@ -393,7 +469,7 @@ export default function StatementEditPage() {
                     : { border: "2px solid green" }
                   }
                 />
-                <input value={fpSDec} placeholder="" className="form-control refField" />
+                <input type="text" value={fpSDec} placeholder="" className="form-control refField" />
               </div>
               <label style={{ width: "270px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Сила&quot;</label>
               <input id="checkboxS" type="checkbox" onChange={(event) => setCheckS(event.target.checked)} />
@@ -406,7 +482,7 @@ export default function StatementEditPage() {
                     : { border: "2px solid green" }
                   }
                 />
-                <input value={fpBDec} className="form-control refField" />
+                <input type="text" value={fpBDec} className="form-control refField" />
               </div>
               <label style={{ width: "300px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Быстрота&quot;</label>
               <input id="checkboxB" type="checkbox" onChange={(event) => setCheckB(event.target.checked)} />
@@ -419,18 +495,18 @@ export default function StatementEditPage() {
                     : { border: "2px solid green" }
                   }
                 />
-                <input value={fpVDec} className="form-control refField" />
+                <input type="text" value={fpVDec} className="form-control refField" />
               </div>
               <label style={{ width: "350px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Выносливость&quot;</label>
               <input id="checkboxV" type="checkbox" onChange={(event) => setCheckV(event.target.checked)} />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-5">
                 <label className="labelSum">Суммарный балл по физической подготовленности: </label>
-                <input value={fpSum} className="form-control refField" />
+                <input type="text" value={fpSum} className="form-control refField" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                 <label className="labelSum">Суммарный балл по физической подготовленности в 100-бальной шкале: </label>
-                <input value={fpFinal} className="form-control refField" />
+                <input type="text" value={fpFinal} className="form-control refField" />
               </div>
 
               <button type="button" className="btn btn-primary mt-4 mb-2 btnSave" onClick={updateFpInfo} >Сохранить данные ОФП</button>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { Context } from "../App";
-const writeLogIntoFile = require("../operations/Log");
+// const writeLogIntoFile = require("../operations/Log");
 
 const SpecialityEditPage = () => {
     const navigate = useNavigate();
@@ -12,15 +12,18 @@ const SpecialityEditPage = () => {
     const [cypher, setCypher] = useState("");
     const [type, setType] = useState("");
 
+    const [exam, setExam] = useState("");
+
     const updateExistingSpec = async () => {
         const specForEdit = {
             name: name,
             cypher: cypher,
             type: type,
+            exam: exam,
         };
         await window.electronAPI.updateCurrentSpec(id, specForEdit);
         specialitiesFromStore.updateSpecInStore(id, specForEdit);
-        writeLogIntoFile();
+        // writeLogIntoFile();
         navigate("/spec");
     };
 
@@ -30,6 +33,7 @@ const SpecialityEditPage = () => {
         setName(spec.name);
         setCypher(spec.cypher);
         setType(spec.type);
+        setExam(spec.exam);
     })(), [])
 
     return (
@@ -54,6 +58,10 @@ const SpecialityEditPage = () => {
                                 <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                                     <label style={{ width: "150px" }}>Подготовка: </label>
                                     <input id="type" value={type} onChange={(event) => setType(event.target.value)} placeholder="Введите тип кандидатов" className="form-control w-100" />
+                                </div>
+                                <div>
+                                    <label >Осуществлять прием по результатам баллов ЕГЭ:</label>
+                                    <input style={{ width: "50px" }} id="checkboxExam" type="checkbox" onChange={(event) => setExam(event.target.checked)} />
                                 </div>
                                 <button type="button" onClick={updateExistingSpec} className="btn btn-primary mt-4 mb-2" >Сохранить основные данные</button>
                             </form>

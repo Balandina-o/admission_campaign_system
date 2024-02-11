@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
 import { useNavigate } from "react-router-dom";
 
-const StatementCardUnit = ({ id, lastName, firstName, secondName, group }) => {
+const StatementCardUnit = ({ id, lastName, firstName, secondName, group, specialityId }) => {
   const navigate = useNavigate();
 
   return (
@@ -37,6 +37,7 @@ StatementCardUnit.propTypes = {
   firstName: PropTypes.string,
   secondName: PropTypes.string,
   group: PropTypes.string,
+  specialityId: PropTypes.number,
 }
 
 export default StatementCardUnit
