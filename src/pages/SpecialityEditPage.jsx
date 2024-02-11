@@ -28,12 +28,16 @@ const SpecialityEditPage = () => {
     };
 
     useEffect(() => void (async () => {
-        console.log(id);
         const spec = specialitiesFromStore.findSpeciality(id);
         setName(spec.name);
         setCypher(spec.cypher);
         setType(spec.type);
-        setExam(spec.exam);
+
+        if (spec.exam == "1") {
+            document.getElementById("checkboxExam").checked = true;
+        } else {
+            document.getElementById("checkboxExam").checked = false;
+        }
     })(), [])
 
     return (

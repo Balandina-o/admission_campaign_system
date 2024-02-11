@@ -344,7 +344,16 @@ const operations = {
         }
     },
     sumDecValues: function (valS, valB, valV) {
-        return parseInt(valS) + parseInt(valB) + parseInt(valV);
+        let intS = parseInt(valS);
+        let intB = parseInt(valB);
+        let intV = parseInt(valV);
+
+
+        if (intS != 0 & intB != 0 & intV != 0) {
+            return parseInt(valS) + parseInt(valB) + parseInt(valV);
+        } else {
+            return 0;
+        }
     },
     countFinal: function (sum) {
         return parseInt(sum) - 95;

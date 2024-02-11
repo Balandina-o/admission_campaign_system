@@ -42,6 +42,7 @@ export default function StatementEditPage() {
   const [fpBDec, setFpBDec] = useState("");
   const [fpVDec, setFpVDec] = useState("");
   const [fpSum, setFpSum] = useState("");
+
   const [fpFinal, setFpFinal] = useState("");
   const [totalScore, setTotalScore] = useState("");
 
@@ -86,8 +87,8 @@ export default function StatementEditPage() {
     setAuDec((stat.au * 100) / 5)
     setIndPoints(stat.indPoints);
 
-    const spec = specialitiesFromStore.findSpeciality(id).exam;
-    spec == "1" ? setSpecType(true) : setSpecType(false);
+    const spec = specialitiesFromStore.findSpeciality(stat.SpecialityId)
+    spec.exam == "1" ? setSpecType(true) : setSpecType(false);
 
     stat.fpS ? setCheckS(false) : setCheckS(true)
     stat.fpB ? setCheckB(false) : setCheckB(true)
@@ -197,13 +198,9 @@ export default function StatementEditPage() {
     await window.electronAPI.updateCurrentState(id, stateInfoForEdit);
     statementsFromStore.updateStateInStore(id, stateInfoForEdit);
 
-    setFpSDec(calcS(fpS.replace(/0*$/, ""), gender));
-    setFpBDec(calcB(fpB.replace(/0*$/, ""), gender));
-    setFpVDec(calcV(fpV.replace(/0*$/, ""), gender));
-
-    setFpSum(sumDecValues(fpBDec, fpSDec, fpVDec));
-    setFpFinal(countFinal(fpSum));
-    setTotalScore(countTotalScore(fpFinal, auDec,));
+    newSCheck && setFpSDec(calcS(fpS.replace(/0*$/, ""), gender));
+    newBCheck && setFpBDec(calcB(fpB.replace(/0*$/, ""), gender));
+    newSCheck && setFpVDec(calcV(fpV.replace(/0*$/, ""), gender));
 
     newSCheck ? setCheckS(false) : setCheckS(true)
     newBCheck ? setCheckB(false) : setCheckB(true)
@@ -214,6 +211,11 @@ export default function StatementEditPage() {
       document.getElementById("checkboxB").checked = true;
     newVCheck ? document.getElementById("checkboxV").checked = false :
       document.getElementById("checkboxV").checked = true;
+
+
+    setFpSum(sumDecValues(fpBDec, fpSDec, fpVDec));
+    setFpFinal(countFinal(fpSum));
+    setTotalScore(countTotalScore(fpFinal, auDec, indPoints));
   };
 
   const updateIndInfo = async () => {
