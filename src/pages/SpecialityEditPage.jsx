@@ -6,6 +6,7 @@ import { Context } from "../App";
 const SpecialityEditPage = () => {
     const navigate = useNavigate();
     const { specialitiesFromStore } = useContext(Context);
+    const { userFromStore } = useContext(Context);
     const { id } = useParams();
 
     const [name, setName] = useState("");
@@ -21,9 +22,9 @@ const SpecialityEditPage = () => {
             type: type,
             exam: exam,
         };
-        await window.electronAPI.updateCurrentSpec(id, specForEdit);
+
+        await window.electronAPI.updateCurrentSpec(id, specForEdit, userFromStore.user.login);
         specialitiesFromStore.updateSpecInStore(id, specForEdit);
-        // writeLogIntoFile();
         navigate("/spec");
     };
 

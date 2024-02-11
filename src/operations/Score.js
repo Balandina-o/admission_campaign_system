@@ -343,13 +343,13 @@ const operations = {
             }
         }
     },
-    sumDecValues: function (valS, valB, valV) {
+    sumDecValues: function (valB, valS, valV) {
         let intS = parseInt(valS);
         let intB = parseInt(valB);
         let intV = parseInt(valV);
+        console.log(intS, intB, intV, "valVvalVvalVvalVvalV");
 
-
-        if (intS != 0 & intB != 0 & intV != 0) {
+        if (Number.isFinite(intS) & Number.isFinite(intB) & Number.isFinite(intV) & (intS != 0 & intB != 0 & intV != 0)) {
             return parseInt(valS) + parseInt(valB) + parseInt(valV);
         } else {
             return 0;
@@ -359,7 +359,11 @@ const operations = {
         let result = parseInt(sum) - 95;
 
         if (result <= 100) {
-            return result;
+            if (result < 0) {
+                return 0
+            } else {
+                return result
+            }
         } else {
             return 100;
         }

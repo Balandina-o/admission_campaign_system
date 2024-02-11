@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 db.sqlite
-readme.log
+operations.log
 
 # testing
 /coverage

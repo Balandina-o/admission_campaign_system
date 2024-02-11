@@ -28,7 +28,7 @@ const createWindow = () => {
 app.whenReady().then(() => {
   ipcMain.handle("campaign:specialities:load", () => campaign.getSpecialities());
   ipcMain.handle("campaign:speciality:create", (event, data) => campaign.createSpeciality(data));
-  ipcMain.handle("campaign:speciality:update", (event, id, data) => campaign.updateCurrentSpec(id, data));
+  ipcMain.handle("campaign:speciality:update", (event, id, data, user) => campaign.updateCurrentSpec(id, data, user));
   ipcMain.handle("campaign:speciality:delete", (event, id) => campaign.deleteExistingSpec(id));
   ipcMain.handle("campaign:directions:load", () => campaign.getDirections());
   ipcMain.handle("campaign:direction:create", (event, data) => campaign.createDirection(data));

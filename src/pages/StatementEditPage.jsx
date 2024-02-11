@@ -41,9 +41,9 @@ export default function StatementEditPage() {
   const [fpSDec, setFpSDec] = useState("");
   const [fpBDec, setFpBDec] = useState("");
   const [fpVDec, setFpVDec] = useState("");
-  const [fpSum, setFpSum] = useState("");
 
-  const [fpFinal, setFpFinal] = useState("");
+  const [fpSum, setFpSum] = useState("0");
+  const [fpFinal, setFpFinal] = useState("0");
   const [totalScore, setTotalScore] = useState("");
 
   const [checkS, setCheckS] = useState("");
@@ -167,6 +167,7 @@ export default function StatementEditPage() {
   };
 
   const updateAuInfo = async () => {
+    // alert(document.getElementById('inputAu').validity.valid); //ЗДОРОВО!
     const paramForEdit = {
       au: au,
       auDec: (au * 100) / 5,
@@ -175,16 +176,6 @@ export default function StatementEditPage() {
     statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
 
     setAuDec((au * 100) / 5)
-
-    // let countFinalResult;
-    // let countTotalScoreValuesResult;
-    // countFinalResult = countFinal(fpSum);
-    // console.log("auDec", auDec);
-    // console.log("indPoints", indPoints);
-    // countTotalScoreValuesResult = countTotalScore(countFinalResult, auDec, indPoints);
-    // setFpFinal(countFinalResult);
-    // setTotalScore(countTotalScoreValuesResult);
-
   };
 
   const updateFpInfo = async () => {  //доделать готово?
@@ -202,10 +193,10 @@ export default function StatementEditPage() {
     if (newBCheck) { newBDec = calcB(newBCheck, gender) } else { newBDec = "" }
     if (newVCheck) { newVDec = calcV(newVCheck, gender) } else { newVDec = "" }
 
-    console.log(newSDec, newBDec, newVDec);
+    // console.log(newSDec, newBDec, newVDec);
 
     setFpBDec(newBDec);
-    setFpSDec(newSCheck);
+    setFpSDec(newSDec);
     setFpVDec(newVDec);
 
     newSCheck ? setCheckS(false) : setCheckS(true)
@@ -222,10 +213,8 @@ export default function StatementEditPage() {
     let countFinalResult;
     let countTotalScoreValuesResult;
 
-    sumDecValuesResult = sumDecValues(newBDec, newSCheck, newVDec)
+    sumDecValuesResult = sumDecValues(newBDec, newSDec, newVDec)
     countFinalResult = countFinal(sumDecValuesResult);
-    console.log("auDec", auDec);
-    console.log("indPoints", indPoints);
     countTotalScoreValuesResult = countTotalScore(countFinalResult, auDec, indPoints);
     setFpSum(sumDecValuesResult);
     setFpFinal(countFinalResult);
@@ -240,6 +229,7 @@ export default function StatementEditPage() {
       fpVDec: newVDec,
       fpSum: fpSum,
       fpFinal: fpFinal,
+      totalScore: totalScore,
 
     };
     await window.electronAPI.updateCurrentState(id, stateInfoForEdit);
@@ -430,7 +420,7 @@ export default function StatementEditPage() {
               {specType ? (
                 <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                   <label style={{ width: "200px" }}><b>Балл ЕГЭ:</b> </label>
-                  <input type="number" value={au} onChange={(event) => setAu(event.target.value)} placeholder="Введите средний балл академической успеваемости" className="form-control w-100"
+                  <input id="inputAu" min="2" type="number" value={au} onChange={(event) => setAu(event.target.value)} placeholder="Введите средний балл академической успеваемости" className="form-control w-100"
                     style={au == "0" | au == null
                       ? { border: "2px solid red" }
                       : { border: "2px solid green" }

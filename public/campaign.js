@@ -1,5 +1,6 @@
 const path = require('path');
 const { Sequelize, DataTypes } = require('sequelize');
+const fs = require('fs')
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
@@ -166,7 +167,13 @@ module.exports = {
     const statement = await Statement.create(newState);
     return statement.toJSON();
   },
-  async updateCurrentSpec(spec_id, specForEdit) {
+  async updateCurrentSpec(spec_id, specForEdit, user) {
+    console.log(user);
+    fs.writeFile('operations.log', new Date() + " Cообщение: Специальность " + specForEdit.name +
+      " была обновлена пользователем " + user + "\n", { flag: "a+" }, (err) => {
+        if (err) throw err;
+      })
+
     console.log(specForEdit);
     const speciality = await Speciality.update(specForEdit, {
       where: { id: spec_id }
