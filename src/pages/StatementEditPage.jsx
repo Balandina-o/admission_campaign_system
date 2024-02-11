@@ -80,11 +80,11 @@ export default function StatementEditPage() {
     setFpBDec(stat.fpBDec);
     setFpVDec(stat.fpVDec);
 
-    setFpSum(sumDecValues(stat.fpSDec, stat.fpBDec, stat.fpVDec));  // setFpSum(stat.fpSum);
+    //setFpSum(sumDecValues(stat.fpSDec, stat.fpBDec, stat.fpVDec));  // setFpSum(stat.fpSum);
+    setFpSum(stat.fpSum);
     setFpFinal(stat.fpFinal);
     setTotalScore(stat.totalScore);
 
-    setAuDec((stat.au * 100) / 5)
     setIndPoints(stat.indPoints);
 
     const spec = specialitiesFromStore.findSpeciality(stat.SpecialityId)
@@ -168,12 +168,23 @@ export default function StatementEditPage() {
 
   const updateAuInfo = async () => {
     const paramForEdit = {
-      au: au
+      au: au,
+      auDec: (au * 100) / 5,
     };
     await window.electronAPI.updateCurrentState(id, paramForEdit);
     statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
 
     setAuDec((au * 100) / 5)
+
+    // let countFinalResult;
+    // let countTotalScoreValuesResult;
+    // countFinalResult = countFinal(fpSum);
+    // console.log("auDec", auDec);
+    // console.log("indPoints", indPoints);
+    // countTotalScoreValuesResult = countTotalScore(countFinalResult, auDec, indPoints);
+    // setFpFinal(countFinalResult);
+    // setTotalScore(countTotalScoreValuesResult);
+
   };
 
   const updateFpInfo = async () => {  //доделать готово?
@@ -183,24 +194,19 @@ export default function StatementEditPage() {
     document.getElementById("checkboxS").checked ? newSCheck = "" : newSCheck = fpS.replace(/0*$/, "");
     document.getElementById("checkboxB").checked ? newBCheck = "" : newBCheck = fpB.replace(/0*$/, "");
     document.getElementById("checkboxV").checked ? newVCheck = "" : newVCheck = fpV.replace(/0*$/, "");
-    console.log(newSCheck, newBCheck, newVCheck);
-    const stateInfoForEdit = {
-      fpB: newBCheck,
-      fpS: newSCheck,
-      fpV: newVCheck,
-      fpBDec: fpBDec,
-      fpSDec: fpSDec,
-      fpVDec: fpVDec,
-      fpSum: fpSum,
-      fpFinal: fpFinal,
+    // console.log(newSCheck, newBCheck, newVCheck);
+    let newSDec;
+    let newBDec;
+    let newVDec;
+    if (newSCheck) { newSDec = calcS(newSCheck, gender) } else { newSDec = "" }
+    if (newBCheck) { newBDec = calcB(newBCheck, gender) } else { newBDec = "" }
+    if (newVCheck) { newVDec = calcV(newVCheck, gender) } else { newVDec = "" }
 
-    };
-    await window.electronAPI.updateCurrentState(id, stateInfoForEdit);
-    statementsFromStore.updateStateInStore(id, stateInfoForEdit);
+    console.log(newSDec, newBDec, newVDec);
 
-    newSCheck && setFpSDec(calcS(fpS.replace(/0*$/, ""), gender));
-    newBCheck && setFpBDec(calcB(fpB.replace(/0*$/, ""), gender));
-    newSCheck && setFpVDec(calcV(fpV.replace(/0*$/, ""), gender));
+    setFpBDec(newBDec);
+    setFpSDec(newSCheck);
+    setFpVDec(newVDec);
 
     newSCheck ? setCheckS(false) : setCheckS(true)
     newBCheck ? setCheckB(false) : setCheckB(true)
@@ -212,10 +218,32 @@ export default function StatementEditPage() {
     newVCheck ? document.getElementById("checkboxV").checked = false :
       document.getElementById("checkboxV").checked = true;
 
+    let sumDecValuesResult;
+    let countFinalResult;
+    let countTotalScoreValuesResult;
 
-    setFpSum(sumDecValues(fpBDec, fpSDec, fpVDec));
-    setFpFinal(countFinal(fpSum));
-    setTotalScore(countTotalScore(fpFinal, auDec, indPoints));
+    sumDecValuesResult = sumDecValues(newBDec, newSCheck, newVDec)
+    countFinalResult = countFinal(sumDecValuesResult);
+    console.log("auDec", auDec);
+    console.log("indPoints", indPoints);
+    countTotalScoreValuesResult = countTotalScore(countFinalResult, auDec, indPoints);
+    setFpSum(sumDecValuesResult);
+    setFpFinal(countFinalResult);
+    setTotalScore(countTotalScoreValuesResult);
+
+    const stateInfoForEdit = {
+      fpB: newBCheck,
+      fpS: newSCheck,
+      fpV: newVCheck,
+      fpBDec: newBDec,
+      fpSDec: newSDec,
+      fpVDec: newVDec,
+      fpSum: fpSum,
+      fpFinal: fpFinal,
+
+    };
+    await window.electronAPI.updateCurrentState(id, stateInfoForEdit);
+    statementsFromStore.updateStateInStore(id, stateInfoForEdit);
   };
 
   const updateIndInfo = async () => {
@@ -252,7 +280,7 @@ export default function StatementEditPage() {
               <hr></hr>
               <div className="flex-fill mr-2 d-flex align-items-center mt-2 mb-2">
                 <label style={{ width: "170px" }}>Рейтинговый балл: </label>
-                <input type="text" defaultValue={totalScore} className="form-control w-100" />
+                <input type="text" value={totalScore} className="form-control w-100" />
               </div>
             </form>
           </div>
@@ -407,7 +435,7 @@ export default function StatementEditPage() {
                       ? { border: "2px solid red" }
                       : { border: "2px solid green" }
                     } />
-                  <input type="text" className="form-control refField" defaultValue={Math.floor(auDec)} />
+                  <input className="form-control refField" value={Math.floor(auDec)} />
                 </div>
               ) :
                 (
@@ -418,7 +446,7 @@ export default function StatementEditPage() {
                         ? { border: "2px solid red" }
                         : { border: "2px solid green" }
                       } />
-                    <input type="text" className="form-control refField" value={Math.floor(auDec)} />
+                    <input className="form-control refField" value={Math.floor(auDec)} />
                   </div>
                 )}
 
@@ -436,7 +464,7 @@ export default function StatementEditPage() {
               <form className="form-inline" >
                 <h4>Индивидуальные достижения:</h4>
                 <div className="flex-fill mr-2 d-flex align-items-center mt-1">
-                  <label style={{ width: "200px" }}>Баллы за достижения: </label>
+                  <label style={{ width: "170px" }}>Баллы за достижения: </label>
                   <input type="number" value={checkInd ? "" : indPoints} onChange={(event) => setIndPoints(event.target.value)} className={checkInd ? "form-control w-100 noAble" : "form-control w-100"} placeholder="Дополнительные баллы"
                     style={checkInd != ""
                       ? { border: "2px solid gray" }

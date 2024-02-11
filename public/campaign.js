@@ -82,6 +82,9 @@ const Statement = sequelize.define('Statement', {
   au: {
     type: DataTypes.STRING
   },
+  auDec: {
+    type: DataTypes.STRING
+  },
   indPoints: {
     type: DataTypes.STRING
   },

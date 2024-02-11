@@ -356,7 +356,13 @@ const operations = {
         }
     },
     countFinal: function (sum) {
-        return parseInt(sum) - 95;
+        let result = parseInt(sum) - 95;
+
+        if (result <= 100) {
+            return result;
+        } else {
+            return 100;
+        }
     },
     countTotalScore: function (finalDecScore, auPoints, indPoints) {
         return parseInt(finalDecScore) + parseInt(auPoints) + parseInt(indPoints);

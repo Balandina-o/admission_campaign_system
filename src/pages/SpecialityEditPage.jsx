@@ -63,7 +63,7 @@ const SpecialityEditPage = () => {
                                     <label style={{ width: "150px" }}>Подготовка: </label>
                                     <input id="type" value={type} onChange={(event) => setType(event.target.value)} placeholder="Введите тип кандидатов" className="form-control w-100" />
                                 </div>
-                                <div>
+                                <div className='mt-3'>
                                     <label >Осуществлять прием по результатам баллов ЕГЭ:</label>
                                     <input style={{ width: "50px" }} id="checkboxExam" type="checkbox" onChange={(event) => setExam(event.target.checked)} />
                                 </div>
