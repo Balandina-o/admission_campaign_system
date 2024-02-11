@@ -347,7 +347,7 @@ const operations = {
         let intS = parseInt(valS);
         let intB = parseInt(valB);
         let intV = parseInt(valV);
-        console.log(intS, intB, intV, "valVvalVvalVvalVvalV");
+        //  console.log(intS, intB, intV, "valVvalVvalVvalVvalV");
 
         if (Number.isFinite(intS) & Number.isFinite(intB) & Number.isFinite(intV) & (intS != 0 & intB != 0 & intV != 0)) {
             return parseInt(valS) + parseInt(valB) + parseInt(valV);
@@ -369,7 +369,9 @@ const operations = {
         }
     },
     countTotalScore: function (finalDecScore, auPoints, indPoints) {
-        return parseInt(finalDecScore) + parseInt(auPoints) + parseInt(indPoints);
+        console.log(indPoints);
+        return parseInt(finalDecScore) + parseInt(auPoints);
+        // + parseInt(indPoints); ДОБАВИТЬ ПРОВЕРКУ НА ДОП БАЛЛЫ
     }
 }
 
