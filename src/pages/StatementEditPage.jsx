@@ -182,7 +182,7 @@ export default function StatementEditPage() {
     document.getElementById("checkboxS").checked ? newSCheck = "" : newSCheck = fpS.replace(/0*$/, "");
     document.getElementById("checkboxB").checked ? newBCheck = "" : newBCheck = fpB.replace(/0*$/, "");
     document.getElementById("checkboxV").checked ? newVCheck = "" : newVCheck = fpV.replace(/0*$/, "");
-
+    console.log(newSCheck, newBCheck, newVCheck);
     const stateInfoForEdit = {
       fpB: newBCheck,
       fpS: newSCheck,
@@ -197,22 +197,22 @@ export default function StatementEditPage() {
     await window.electronAPI.updateCurrentState(id, stateInfoForEdit);
     statementsFromStore.updateStateInStore(id, stateInfoForEdit);
 
-    fpS && setFpSDec(calcS(fpS.replace(/0*$/, ""), gender));
-    fpB && setFpBDec(calcB(fpB.replace(/0*$/, ""), gender));
-    fpV && setFpVDec(calcV(fpV.replace(/0*$/, ""), gender));
+    setFpSDec(calcS(fpS.replace(/0*$/, ""), gender));
+    setFpBDec(calcB(fpB.replace(/0*$/, ""), gender));
+    setFpVDec(calcV(fpV.replace(/0*$/, ""), gender));
 
     setFpSum(sumDecValues(fpBDec, fpSDec, fpVDec));
     setFpFinal(countFinal(fpSum));
     setTotalScore(countTotalScore(fpFinal, auDec,));
 
-    fpS ? setCheckS(false) : setCheckS(true)
-    fpB ? setCheckB(false) : setCheckB(true)
-    fpV ? setCheckV(false) : setCheckV(true)
-    fpS ? document.getElementById("checkboxS").checked = false :
+    newSCheck ? setCheckS(false) : setCheckS(true)
+    newBCheck ? setCheckB(false) : setCheckB(true)
+    newVCheck ? setCheckV(false) : setCheckV(true)
+    newSCheck ? document.getElementById("checkboxS").checked = false :
       document.getElementById("checkboxS").checked = true;
-    fpB ? document.getElementById("checkboxB").checked = false :
+    newBCheck ? document.getElementById("checkboxB").checked = false :
       document.getElementById("checkboxB").checked = true;
-    fpV ? document.getElementById("checkboxV").checked = false :
+    newVCheck ? document.getElementById("checkboxV").checked = false :
       document.getElementById("checkboxV").checked = true;
   };
 
