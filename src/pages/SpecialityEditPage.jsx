@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { Context } from "../App";
-// const writeLogIntoFile = require("../operations/Log");
 
 const SpecialityEditPage = () => {
     const navigate = useNavigate();
