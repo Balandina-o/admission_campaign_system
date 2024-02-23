@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../App";
+import PropTypes from 'prop-types'
 
 import {
   CDBSidebar,
@@ -14,7 +15,7 @@ import {
 
 import ExitConfirmModal from "./ExitConfirmModal";
 
-const SideBar = () => {
+const SideBar = ({ sideBarVisibility }) => {
   const navigate = useNavigate();
   const { userFromStore } = useContext(Context);
   const [showCreateExitConfirmModal, setShowCreateExitConfirmModal] = useState();
@@ -24,6 +25,7 @@ const SideBar = () => {
     if (x == "yesImRedyToExit") {
       userFromStore.setLoggedIn(false);
       userFromStore.setIsAdmin(false);
+      sideBarVisibility(false);
       navigate(`/`)
     }
   }
@@ -99,5 +101,9 @@ const SideBar = () => {
 
   );
 };
+
+SideBar.propTypes = {
+  sideBarVisibility: PropTypes.func,
+}
 
 export default SideBar;

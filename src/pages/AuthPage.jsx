@@ -3,8 +3,9 @@ import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import WrongAuthModal from "../components/WrongAuthModal";
 import { Context } from "../App";
+import PropTypes from 'prop-types'
 
-const AuthPage = () => {
+const AuthPage = ({ sideBarVisibility }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [showCreateWrongAuthModal, setShowCreateWrongAuthModal] = useState();
@@ -22,7 +23,7 @@ const AuthPage = () => {
       if (user.role == "admin") {
         userFromStore.setIsAdmin(true);
       }
-
+      sideBarVisibility(true);
       navigate("/statements");
 
     } else {
@@ -78,5 +79,9 @@ const AuthPage = () => {
     </Container>
   );
 };
+
+AuthPage.propTypes = {
+  sideBarVisibility: PropTypes.func,
+}
 
 export default AuthPage;

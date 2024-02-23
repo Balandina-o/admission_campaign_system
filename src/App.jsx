@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 import "./App.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import StatementsPage from "./pages/StatementsPage";
@@ -23,30 +23,37 @@ import Protocol from "./pages/Protocol";
 
 export const Context = createContext(null);
 function App() {
+  const sFromStore = new StatementsStore();
+  const uFromStore = new UsersStore();
+  const [isSideBarVisible, setIsSideBarVisible] = useState(false);
+
+  function sideBarVisibility(parameter) {
+    setIsSideBarVisible(parameter);
+  }
 
   return (
     <Context.Provider
       value={{
-        statementsFromStore: new StatementsStore(),
+        statementsFromStore: sFromStore,
         specialitiesFromStore: new SpecialitiesStore(),
         directionsFromStore: new DirectionsStore(),
-        userFromStore: new UsersStore(),
+        userFromStore: uFromStore,
       }}
     >
       <div className="app">
         <HashRouter>
           <LogoBar />
           <div className="two_great_elements">
-            {/* {UsersStore.loggedIn && ( */}
-            <div className="sidebar">
-              <Sidebar />
-            </div>
-            {/* )} */}
+            {isSideBarVisible && (
+              <div className="sidebar">
+                <Sidebar sideBarVisibility={sideBarVisibility} />
+              </div>
+            )}
             <div className="content">
               <div>
                 <Routes>
                   <Route path="/statements" element={<StatementsPage />}></Route>
-                  <Route path="/" element={<AuthPage />} />
+                  <Route path="/" element={<AuthPage sideBarVisibility={sideBarVisibility} />} />
                   <Route path="/user" element={<UsersPage />} />
                   <Route path="/newStatement" element={<NewStatementPage />} />
                   <Route path="/newSpeciality" element={<NewSpecialityPage />} />

@@ -167,15 +167,27 @@ export default function StatementEditPage() {
   };
 
   const updateAuInfo = async () => {
-    // alert(document.getElementById('inputAu').validity.valid); //ЗДОРОВО!
-    const paramForEdit = {
-      au: au,
-      auDec: (au * 100) / 5,
-    };
-    await window.electronAPI.updateCurrentState(id, paramForEdit);
-    statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
+    if (specType) {
+      // alert(document.getElementById('inputAu').validity.valid); //ЗДОРОВО! ЕСЛИ ЕГЭ
+      const paramForEdit = {
+        au: au,
+        auDec: au,
+      };
+      await window.electronAPI.updateCurrentState(id, paramForEdit);
+      statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
 
-    setAuDec((au * 100) / 5)
+      setAuDec(au)
+    } else {
+      // alert(document.getElementById('inputAu').validity.valid); //ЗДОРОВО!
+      const paramForEdit = {
+        au: au,
+        auDec: (au * 100) / 5,
+      };
+      await window.electronAPI.updateCurrentState(id, paramForEdit);
+      statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
+
+      setAuDec((au * 100) / 5)
+    }
   };
 
   const updateFpInfo = async () => {  //доделать готово?
@@ -306,7 +318,7 @@ export default function StatementEditPage() {
                 <input type="date" value={birthday} onChange={(event) => setBirthday(event.target.value)} className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
-                <label style={{ width: "170px" }}>Специальность: </label>
+                <label style={{ width: "170px" }}>ВУС: </label>
                 <select id="selectSpec" value={spec} onChange={(event) => setSpec(event.target.value)} className="form-select w-100">
                 </select>
               </div>
@@ -315,7 +327,7 @@ export default function StatementEditPage() {
                 <input type="text" value={group} onChange={(event) => setGroup(event.target.value)} placeholder="Введите учебную группу кандидата" className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
-                <label style={{ width: "170px" }}>Направление бывш ВУС: </label>
+                <label style={{ width: "170px" }}>Направление: </label>
                 <select id="selectDir" value={dir} onChange={(event) => setDir(event.target.value)} className="form-select w-100">
                 </select>
               </div>

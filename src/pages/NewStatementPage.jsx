@@ -41,7 +41,7 @@ const NewStatementPage = () => {
     const listOfSpec = specialitiesFromStore.specList;
     const listOfDir = directionsFromStore.dirList;
 
-    selectSpec.innerHTML = "";
+    //selectSpec.innerHTML = "";
     for (let i = 0; i < listOfSpec.length; i++) {
       let opt = document.createElement('option');
       opt.value = listOfSpec[i].id;
@@ -49,7 +49,7 @@ const NewStatementPage = () => {
       selectSpec.appendChild(opt);
     }
 
-    selectDir.innerHTML = "";
+    //selectDir.innerHTML = "";
     for (let i = 0; i < listOfDir.length; i++) {
       let opt = document.createElement('option');
       opt.value = listOfDir[i].id;
@@ -104,8 +104,9 @@ const NewStatementPage = () => {
                 <input type="date" id="birthday" value={birthday} onChange={(event) => setBirthday(event.target.value)} className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
-                <label style={{ width: "150px" }}>Специальность: </label>
+                <label style={{ width: "150px" }}>ВУС: </label>
                 <select id="selectSpec" onChange={(event) => setSpec(event.target.value)} className="form-select w-100">
+                  <option disabled selected>--Выберите специальность--</option>
                 </select>
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
@@ -113,8 +114,9 @@ const NewStatementPage = () => {
                 <input id="group" value={group} onChange={(event) => setGroup(event.target.value)} placeholder="Введите учебную группу кандидата" className="form-control w-100" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
-                <label style={{ width: "150px" }}>ВУС: </label>
+                <label style={{ width: "150px" }}>Направление: </label>
                 <select id="selectDir" onChange={(event) => setDir(event.target.value)} className="form-select w-100">
+                  <option disabled selected>--Выберите направление--</option>
                 </select>
               </div>
 
