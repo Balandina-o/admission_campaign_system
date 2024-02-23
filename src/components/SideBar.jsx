@@ -33,7 +33,7 @@ const SideBar = ({ sideBarVisibility }) => {
   return (
     <CDBSidebar breakpoint={720} style={{ height: "100vh" }}>
       <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
-        {/* действия в системе */}
+        {/* Приветствуем, admin! */}
       </CDBSidebarHeader>
       <CDBSidebarContent>
         <CDBSidebarMenu >

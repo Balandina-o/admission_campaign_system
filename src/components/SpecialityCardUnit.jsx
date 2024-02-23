@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import { useNavigate } from "react-router-dom";
+import "../components/css_components/SpecialityCardUnitStyle.css";
 
 const SpecialityCardUnit = ({ id, name, cypher, type, onDelete }) => {
     const navigate = useNavigate();
@@ -10,7 +11,7 @@ const SpecialityCardUnit = ({ id, name, cypher, type, onDelete }) => {
         <div className="p-2 card">
             <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center">
-                    <div style={{ width: "70px", background: "rgb(180,182,186)", textAlign: "center" }}>
+                    <div className="acr" >
                         {cypher}
                     </div>
                     <div style={{ marginLeft: "10px" }}>
