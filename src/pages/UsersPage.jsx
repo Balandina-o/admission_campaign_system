@@ -72,8 +72,7 @@ const UsersPage = () => {
 
                 />
                 <br />
-                Прикрепите файл для аватара:
-                <Form.Control type="file" className="mt-3" />
+
                 <div className="d-flex justify-content-end align-items-start mt-3">
                   <Button variant="success" className="mt-1" >
                     {" "}

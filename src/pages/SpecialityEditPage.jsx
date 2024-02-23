@@ -68,6 +68,7 @@ const SpecialityEditPage = () => {
                                     <input style={{ width: "50px" }} id="checkboxExam" type="checkbox" onChange={(event) => setExam(event.target.checked)} />
                                 </div>
                                 <button type="button" onClick={updateExistingSpec} className="btn btn-primary mt-4 mb-2" >Сохранить основные данные</button>
+
                             </form>
                         </div>
                     </div>

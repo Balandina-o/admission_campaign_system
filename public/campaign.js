@@ -139,7 +139,6 @@ module.exports = class Campaign {
 
   async getSpecialities() {
     await this.connect();
-
     const specialities = await Speciality.findAll({
       include: [{ model: Statement }]
     });
@@ -157,7 +156,7 @@ module.exports = class Campaign {
     try {
       await this.connect();
       const directions = await Direction.findAll();
-      return directions;
+      return directions.map(x => x.toJSON());
     } catch (err) {
       this.logger.error(err);
       throw err;

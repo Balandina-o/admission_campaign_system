@@ -58,7 +58,7 @@ const SideBar = () => {
           </CDBSidebarMenuItem>
 
           <CDBSidebarMenuItem icon="sticky-note" iconType="solid">
-            <Link to={'/protocol'}>
+            <Link to={'/protocolWindow'}>
               <CDBBtn color="light" style={{ width: "150px" }}>
                 Протокол
               </CDBBtn>
