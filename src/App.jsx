@@ -20,11 +20,10 @@ import UsersStore from "./store/UsersStore";
 import StatementsStore from "./store/StatementsStore";
 import ProtocolWindow from "./pages/ProtocolWindow";
 import Protocol from "./pages/Protocol";
+import ProtocolStore from "./store/ProtocolStore";
 
 export const Context = createContext(null);
 function App() {
-  const sFromStore = new StatementsStore();
-  const uFromStore = new UsersStore();
   const [isSideBarVisible, setIsSideBarVisible] = useState(false);
 
   function sideBarVisibility(parameter) {
@@ -34,10 +33,11 @@ function App() {
   return (
     <Context.Provider
       value={{
-        statementsFromStore: sFromStore,
+        statementsFromStore: new StatementsStore(),
         specialitiesFromStore: new SpecialitiesStore(),
         directionsFromStore: new DirectionsStore(),
-        userFromStore: uFromStore,
+        userFromStore: new UsersStore(),
+        protocolParametersFromStore: new ProtocolStore(),
       }}
     >
       <div className="app">

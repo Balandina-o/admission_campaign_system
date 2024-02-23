@@ -1,8 +1,8 @@
 import { makeAutoObservable } from "mobx";
 
 class ProtocolStore {
-    _speciality = false;
-    _number = false;
+    _speciality = "";
+    _number = "";
 
     constructor() {
         makeAutoObservable(this);
@@ -16,11 +16,11 @@ class ProtocolStore {
         return this._number;
     }
 
-    setSpec(spec) {
+    setSpecInStore(spec) {
         this._speciality = spec;
     }
 
-    setNumber(number) {
+    setNumberInStore(number) {
         this._number = number;
     }
 }

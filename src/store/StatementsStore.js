@@ -20,6 +20,13 @@ class StatementsStore {
         return stat;
     }
 
+    findStatementsBySpec(spec_id) {
+        // //console.log(spec_id);
+        // this.statementsList.map((x) => console.log(x.SpecialityId))
+        const filteredStates = this.statementsList.filter((x) => x.SpecialityId == spec_id)
+        return filteredStates;
+    }
+
     updateStateInStore(stat_id, statForEdit) {
         const stat = this.statementsList.find(x => x.id == stat_id);
         stat == statForEdit;

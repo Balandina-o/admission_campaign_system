@@ -3,25 +3,26 @@ import { Link } from 'react-router-dom';
 import { Context } from "../App";
 
 const ProtocolWindow = () => {
+    const { specialitiesFromStore } = useContext(Context);
+    const { protocolParametersFromStore } = useContext(Context);
+
     const [spec, setSpec] = useState("");
     const [nummber, setNumber] = useState("");
-    const { directionsFromStore } = useContext(Context);
-    const { protocolParameters } = useContext(Context);
 
     function writeProtocolParametersIntoStore() {
-        protocolParameters.setSpec(spec);
-        protocolParameters.setNumber(nummber);
+        protocolParametersFromStore.setSpecInStore(spec);
+        protocolParametersFromStore.setNumberInStore(nummber);
     }
 
     useEffect(() => void (async () => {
-        const selectDir = document.getElementById('selectDir');
-        const listOfDir = directionsFromStore.dirList;
+        const selectSpec = document.getElementById('selectSpec');
+        const listOfSpec = specialitiesFromStore.specList;
         // selectDir.innerHTML = "";
-        for (let i = 0; i < listOfDir.length; i++) {
+        for (let i = 0; i < listOfSpec.length; i++) {
             let opt = document.createElement('option');
-            opt.value = listOfDir[i].id;
-            opt.innerHTML = listOfDir[i].name;
-            selectDir.appendChild(opt);
+            opt.value = listOfSpec[i].id;
+            opt.innerHTML = listOfSpec[i].name;
+            selectSpec.appendChild(opt);
         }
     })(), [])
 
@@ -38,7 +39,7 @@ const ProtocolWindow = () => {
                                 <hr></hr>
                                 <div className="flex-fill mr-2 d-flex align-items-center mt-1">
                                     <label style={{ width: "150px" }}>ВУС: </label>
-                                    <select id="selectDir" onChange={(event) => setSpec(event.target.value)} className="form-select w-100">
+                                    <select id="selectSpec" onChange={(event) => setSpec(event.target.value)} className="form-select w-100">
                                         <option disabled selected>--Выберите специальность--</option>
                                     </select>
                                 </div>

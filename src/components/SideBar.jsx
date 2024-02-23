@@ -25,7 +25,7 @@ const SideBar = ({ sideBarVisibility }) => {
     if (x == "yesImRedyToExit") {
       userFromStore.setLoggedIn(false);
       userFromStore.setIsAdmin(false);
-      sideBarVisibility(false);
+      sideBarVisibility(true); //ПОМЕНЯТЬ НА FALSE
       navigate(`/`)
     }
   }
@@ -33,7 +33,9 @@ const SideBar = ({ sideBarVisibility }) => {
   return (
     <CDBSidebar breakpoint={720} style={{ height: "100vh" }}>
       <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
-        {/* Приветствуем, admin! */}
+        <div style={{ display: "flex", fontSize: "10px" }} className="mt-2">
+          {/* Добро пожаловать, admin! */}
+        </div>
       </CDBSidebarHeader>
       <CDBSidebarContent>
         <CDBSidebarMenu >
@@ -97,7 +99,7 @@ const SideBar = ({ sideBarVisibility }) => {
         show={showCreateExitConfirmModal}
         onClose={(x) => { closeExitConfirmModal(x) }}>
       </ExitConfirmModal>
-    </CDBSidebar>
+    </CDBSidebar >
 
   );
 };
