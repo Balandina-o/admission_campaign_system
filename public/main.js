@@ -2,7 +2,23 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 //const { globalShortcut } = require('electron');
 const path = require("path");
 const isDev = require("electron-is-dev");
-const campaign = require("./campaign");
+const mkdirp = require('mkdirp');
+const winston = require('winston');
+const Campaign = require("./campaign");
+
+const dbPath = path.resolve(path.parse(__dirname).root, 'Database')
+mkdirp.sync(dbPath)
+
+const logger = winston.createLogger({
+  level: 'info',
+  defaultMeta: { service: 'user-service' },
+  transports: [
+    new winston.transports.File({ filename: path.resolve(dbPath, 'error.log'), level: 'error' }),
+    new winston.transports.File({ filename: path.resolve(dbPath, 'output.log') }),
+  ],
+});
+
+const campaign = new Campaign(logger);
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -20,7 +36,7 @@ const createWindow = () => {
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"
-      : path.join(process.cwd(), "build", "index.html")
+      : path.join(__dirname, "index.html")
   );
   mainWindow.maximize();
 };

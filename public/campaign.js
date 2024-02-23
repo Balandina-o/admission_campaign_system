@@ -1,10 +1,14 @@
-const path = require('path');
-const { Sequelize, DataTypes } = require('sequelize');
 const fs = require('fs')
+const path = require('path');
+const mkdirp = require('mkdirp');
+const { Sequelize, DataTypes } = require('sequelize');
+
+const dbPath = path.resolve(path.parse(__dirname).root, 'Database')
+mkdirp.sync(dbPath)
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: path.resolve(process.cwd(), 'db.sqlite'),
+  storage: path.resolve(dbPath, 'db.sqlite')
 });
 
 const User = sequelize.define('User', {
@@ -123,50 +127,67 @@ Direction.hasMany(Statement);
 Statement.belongsTo(Speciality);
 Speciality.hasMany(Statement);
 
-const connect = async () => {
-  await sequelize.authenticate();
-  await sequelize.sync();
-}
+module.exports = class Campaign {
+  constructor(logger) {
+    this.logger = logger
+  }
 
-module.exports = {
+  async connect() {
+    await sequelize.authenticate();
+    await sequelize.sync();
+  }
+
   async getSpecialities() {
-    await connect();
+    await this.connect();
 
     const specialities = await Speciality.findAll({
       include: [{ model: Statement }]
     });
     return specialities.map(x => x.toJSON());
-  },
+  }
+
+  async getSpeciality(id) {
+    await this.connect();
+    this.logger.info(`Загружена специальность Id=${id}`)
+    const speciality = await Speciality.findByPk(id);
+    return speciality.toJSON();
+  }
+
   async getDirections() {
-    await connect();
-    const directions = await Direction.findAll();
-    return directions.map(x => x.toJSON());
-  },
+    try {
+      await this.connect();
+      const directions = await Direction.findAll();
+      return directions;
+    } catch (err) {
+      this.logger.error(err);
+      throw err;
+    }
+  }
   async getStatements() {
-    await connect();
+    await this.connect();
     const statements = await Statement.findAll();
     return statements.map(x => x.toJSON());
-  },
+  }
   async getUsersForAuth() {
-    await connect();
+    await this.connect();
     const users = await User.findAll();
     return users.map(x => x.toJSON());
-  },
+  }
   async createSpeciality(newSpec) {
-    await connect();
+    await this.connect();
     const speciality = await Speciality.create(newSpec);
     return speciality.toJSON();
-  },
+  }
   async createDirection(newDir) {
-    await connect();
+    await this.connect();
     const direction = await Direction.create(newDir);
     return direction.toJSON();
-  },
+  }
   async createStatement(newState) {
-    await connect();
+    await this.connect();
     const statement = await Statement.create(newState);
     return statement.toJSON();
-  },
+  }
   async updateCurrentSpec(spec_id, specForEdit, user) {
     console.log(user);
     fs.writeFile('operations.log', new Date() + " Cообщение: Специальность " + specForEdit.name +
@@ -179,31 +200,31 @@ module.exports = {
       where: { id: spec_id }
     });
     return speciality;
-  },
+  }
   async updateCurrentDir(dir_id, dirForEdit) {
     console.log(dirForEdit);
     const direction = await Direction.update(dirForEdit, {
       where: { id: dir_id }
     });
     return direction;
-  },
+  }
   async updateCurrentState(state_id, stateForEdit) {
     console.log(stateForEdit);
     const statement = await Statement.update(stateForEdit, {
       where: { id: state_id }
     });
     return statement;
-  },
+  }
   async deleteExistingSpec(spec_id) {
     const speciality = await Speciality.destroy({
       where: { id: spec_id }
     })
     return speciality;
-  },
+  }
   async deleteExistingDir(dir_id) {
     const direction = await Direction.destroy({
       where: { id: dir_id }
     })
     return direction;
-  },
+  }
 }
