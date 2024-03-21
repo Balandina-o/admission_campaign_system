@@ -1,4 +1,4 @@
-const fs = require('fs')
+// const fs = require('fs')
 const path = require('path');
 const mkdirp = require('mkdirp');
 const { Sequelize, DataTypes } = require('sequelize');
@@ -128,6 +128,7 @@ Statement.belongsTo(Speciality);
 Speciality.hasMany(Statement);
 
 module.exports = class Campaign {
+
   constructor(logger) {
     this.logger = logger
   }
@@ -187,12 +188,14 @@ module.exports = class Campaign {
     const statement = await Statement.create(newState);
     return statement.toJSON();
   }
+
   async updateCurrentSpec(spec_id, specForEdit, user) {
     console.log(user);
-    fs.writeFile('operations.log', new Date() + " Cообщение: Специальность " + specForEdit.name +
-      " была обновлена пользователем " + user + "\n", { flag: "a+" }, (err) => {
-        if (err) throw err;
-      })
+    this.logger.info(`Специальность Id=${spec_id} ` + specForEdit.name + `была обновлена пользователем`)
+    // fs.writeFile('operations.log', new Date() + " Cообщение: Специальность " + specForEdit.name +
+    //   " была обновлена пользователем " + user + "\n", { flag: "a+" }, (err) => {
+    //     if (err) throw err;
+    //   })
 
     console.log(specForEdit);
     const speciality = await Speciality.update(specForEdit, {
