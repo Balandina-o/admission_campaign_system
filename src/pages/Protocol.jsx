@@ -7,8 +7,11 @@ const Protocol = () => {
     const { protocolParametersFromStore } = useContext(Context);
     const { statementsFromStore } = useContext(Context);
     const { specialitiesFromStore } = useContext(Context);
-    const [specNameFromId, setSpecNameFromId] = useState("");
+    const [specCypherFromId, setSpecCypherFromId] = useState("");
+    const [specTypeFromId, setSpecTypeFromId] = useState("");
     const [currentSpecId, setCurrentSpecId] = useState("");
+    const [totalNumberOfStatements, setTotalNumberOfStatements] = useState("");
+    const [admitted, setAdmitted] = useState("");
 
     const columns = [ //Массив объектов с заголовками столбцов таблицы
         { heading: "ФИО" },
@@ -19,18 +22,54 @@ const Protocol = () => {
     ]
 
     useEffect(() => void (async () => {
+
+        // let currentId = protocolParametersFromStore.speciality;
+        // let currentNumber = protocolParametersFromStore.number;
+        // let totNumState = statementsFromStore.findStatementsBySpec(currentSpecId).length;
+        // let minus = totNumState - Number(currentNumber);
+
+        // setCurrentSpecId(currentId);
+        // setTotalNumberOfStatements(totNumState);
+        // setSpecCypherFromId(specialitiesFromStore.findSpeciality(currentId).cypher)
+        // setSpecTypeFromId(specialitiesFromStore.findSpeciality(currentId).type)
+        // console.log("currentNumber", currentNumber);
+        // console.log("totalNumberOfStatements", totNumState);
+        // console.log('minus', minus);
+        // if (minus < 0) {
+
+        //     setAdmitted(currentNumber)
+        // } else {
+        //     setAdmitted(totalNumberOfStatements)
+        // }
+
         let currentId = protocolParametersFromStore.speciality;
+        let currentNumber = protocolParametersFromStore.number;
+
         setCurrentSpecId(currentId);
-        setSpecNameFromId(specialitiesFromStore.findSpeciality(currentId).name)
-        // console.log(specialitiesFromStore.findSpeciality(protocolParametersFromStore.speciality).name);
-        // console.log(statementsFromStore.getNumberOfStatements());
+        setTotalNumberOfStatements(statementsFromStore.findStatementsBySpec(currentSpecId).length);
+        setSpecCypherFromId(specialitiesFromStore.findSpeciality(currentId).cypher)
+        setSpecTypeFromId(specialitiesFromStore.findSpeciality(currentId).type)
+
+
+        console.log("currentNumber", currentNumber);
+        console.log("totalNumberOfStatements", totalNumberOfStatements);
+
+
+        totalNumberOfStatements > currentNumber ? (setAdmitted(currentNumber)) : (setAdmitted(totalNumberOfStatements))
 
     })(), [])
 
     return (
         <div style={{ background: "white" }}>
             <div className='protocol_header'>
-                Протокол конкурсного отбора {specNameFromId}
+                ПРОТОКОЛ<br></br>
+                конкурсного отбора граждан, изъявивших желание пройти обучение по программе военной подготовки<br></br>
+                {specTypeFromId} в военном учебном центре при<br></br>
+                ______________________________________________________________________<br></br>
+                (наименование федеральной государственной образовательной организации высшего образования)<br></br>
+                по военно-учетной специальности _________________<u>{specCypherFromId}</u>____________<br></br>
+                (код военно-учетной специальности)<br></br>
+
             </div>
             <div className='protocol_table_div'>
                 <table className="table">
@@ -55,9 +94,13 @@ const Protocol = () => {
                         </>
                     </tbody>
                 </table>
-                Число специальностей - {statementsFromStore.findStatementsBySpec(currentSpecId).length}
-            </div>
 
+
+            </div>
+            <div className='statistics'>
+                Изъявили желание пройти обучение по программе военной подготовки – __<u>{totalNumberOfStatements}</u>__ чел.<br></br>
+                Допущены к военной подготовке – __{admitted}__ чел.
+            </div>
         </div>
 
     )

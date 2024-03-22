@@ -10,6 +10,8 @@ const ReportPage = () => {
     const [numberStatementsTotal, setNumberStatementsTotal] = useState([]);
     const [numberOfCadr, setNumberOfCadr] = useState([]);
 
+
+
     useEffect(() => void (async () => {
         let numberStateT = statementsFromStore.getNumberOfStatements();
         setNumberStatementsTotal(numberStateT);
@@ -22,6 +24,7 @@ const ReportPage = () => {
             <div className='report_header'>
                 <b>ОТЧЕТ</b><br></br>
                 по приемной кампании на {getCurrentDate()}
+                <hr></hr>
             </div>
             <div className='report_body'>
                 Так, на момент генерации отчета в системе насчитывается:<br></br>
@@ -33,7 +36,7 @@ const ReportPage = () => {
                     Заявлений кандидатов офицеров запаса - {numberOfCadr}<br></br>
                     Заявлений кандидатов кадровых офицеров - {numberStatementsTotal - numberOfCadr}<br></br>
                 </div>
-
+                <button required type="button" className="btn btn-primary mt-4 mb-2" >Скачать отчет</button>
             </div>
         </div>
     )
