@@ -5,7 +5,7 @@ import "../pages/styles/ProtocolStyle.css";
 
 const Protocol = () => {
     const { protocolParametersFromStore } = useContext(Context);
-    // const { statementsFromStore } = useContext(Context);
+    const { statementsFromStore } = useContext(Context);
     const { specialitiesFromStore } = useContext(Context);
     const [specNameFromId, setSpecNameFromId] = useState("");
     const [currentSpecId, setCurrentSpecId] = useState("");
@@ -26,6 +26,7 @@ const Protocol = () => {
         console.log(specialitiesFromStore.findSpeciality(protocolParametersFromStore.speciality).name);
         console.log(currentSpecId);
 
+
     })(), [])
 
     return (
@@ -40,23 +41,21 @@ const Protocol = () => {
                             {columns.map((item, index) => <th key={index}>{item.heading}</th>)}
                         </tr>
                     </thead>
-                    {/* <tbody>
-                <>
-                    {users.usersList1.map((user) => {
-                        return (
-                            <React.Fragment key={user.id}>
-                                <tr>
-                                    <td>{user.lastName} {user.firstName} {user.maidenName}</td>
-                                    <td>{user.age}</td>
-                                    <td>{user.gender}</td>
-                                    <td>{user.phone}</td>
-                                    <td>{user.address.city}</td>
-                                </tr>
-                            </React.Fragment>
-                        )
-                    })}
-                </>
-            </tbody> */}
+                    <tbody>
+                        <>
+                            {statementsFromStore.findStatementsBySpec(currentSpecId).map((state) => {
+                                return (
+                                    <React.Fragment key={state.id}>
+                                        <tr>
+                                            <td>{state.lastName}</td>
+                                            <td>{state.firstName}</td>
+                                            <td>{state.gender}</td>
+                                        </tr>
+                                    </React.Fragment>
+                                )
+                            })}
+                        </>
+                    </tbody>
                 </table>
             </div>
 

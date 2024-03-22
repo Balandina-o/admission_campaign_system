@@ -68,13 +68,13 @@ const SideBar = ({ sideBarVisibility }) => {
               </CDBBtn>
             </Link>
           </CDBSidebarMenuItem>
-          <CDBSidebarMenuItem icon="sticky-note" iconType="solid">
+          {/* <CDBSidebarMenuItem icon="sticky-note" iconType="solid">
             <Link to={'/report'}>
               <CDBBtn color="light" style={{ width: "150px" }}>
                 Отчет
               </CDBBtn>
             </Link>
-          </CDBSidebarMenuItem>
+          </CDBSidebarMenuItem> */}
 
 
         </CDBSidebarMenu>
