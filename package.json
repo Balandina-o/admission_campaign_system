@@ -16,7 +16,7 @@
   },
   "build": {
     "extends": null,
-    "icon": "build/icon_uust.png",
+    "icon": "build/icon_uust.jpg",
     "appId": "com.admissioncampaignsystem",
     "files": [
       "build/**/*",
