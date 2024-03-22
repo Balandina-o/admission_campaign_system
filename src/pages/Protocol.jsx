@@ -10,7 +10,6 @@ const Protocol = () => {
     const [specNameFromId, setSpecNameFromId] = useState("");
     const [currentSpecId, setCurrentSpecId] = useState("");
 
-
     const columns = [ //Массив объектов с заголовками столбцов таблицы
         { heading: "ФИО" },
         { heading: "Возраст" },
@@ -23,9 +22,8 @@ const Protocol = () => {
         let currentId = protocolParametersFromStore.speciality;
         setCurrentSpecId(currentId);
         setSpecNameFromId(specialitiesFromStore.findSpeciality(currentId).name)
-        console.log(specialitiesFromStore.findSpeciality(protocolParametersFromStore.speciality).name);
-        console.log(currentSpecId);
-
+        // console.log(specialitiesFromStore.findSpeciality(protocolParametersFromStore.speciality).name);
+        // console.log(statementsFromStore.getNumberOfStatements());
 
     })(), [])
 
@@ -57,6 +55,7 @@ const Protocol = () => {
                         </>
                     </tbody>
                 </table>
+                Число специальностей - {statementsFromStore.findStatementsBySpec(currentSpecId).length}
             </div>
 
         </div>

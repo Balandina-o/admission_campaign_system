@@ -30,6 +30,16 @@ class SpecialitiesStore {
         this.specialitiesList = this.specialitiesList.filter((spec) => spec.id !== spec_id);
         return this.specialitiesList;
     }
+
+    getNumberOfSpec() {
+        return this.specialitiesList.length;
+    }
+
+    getListOfSpecForCadr() {
+        let examValue = 1;
+        const filteredSpec = this.specialitiesList.filter((spec) => spec.exam == examValue);
+        return filteredSpec;
+    }
 }
 
 export default SpecialitiesStore;

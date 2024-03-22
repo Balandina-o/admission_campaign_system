@@ -21,6 +21,7 @@ import StatementsStore from "./store/StatementsStore";
 import ProtocolWindow from "./pages/ProtocolWindow";
 import Protocol from "./pages/Protocol";
 import ProtocolStore from "./store/ProtocolStore";
+import ReportPage from "./pages/ReportPage";
 
 export const Context = createContext(null);
 function App() {
@@ -59,6 +60,7 @@ function App() {
                   <Route path="/newSpeciality" element={<NewSpecialityPage />} />
                   <Route path="/newDirection" element={<NewDirectionPage />} />
                   <Route path="/protocol" element={<Protocol />} />
+                  <Route path="/report" element={<ReportPage />} />
                   <Route path="/protocolWindow" element={<ProtocolWindow />} />
                   <Route path="/editSpeciality/:id" element={<SpecialityEditPage />} />
                   <Route path="/editDirection/:id" element={<DirectionEditPage />} />

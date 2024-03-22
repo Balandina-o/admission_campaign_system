@@ -30,6 +30,10 @@ class DirectionsStore {
         this.directionsList = this.directionsList.filter((dir) => dir.id !== dir_id);
         return this.directionsList;
     }
+
+    getNumberOfDir() {
+        return this.directionsList.length;
+    }
 }
 
 export default DirectionsStore;
