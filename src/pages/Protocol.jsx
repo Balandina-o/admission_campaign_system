@@ -23,39 +23,39 @@ const Protocol = () => {
 
     useEffect(() => void (async () => {
 
-        // let currentId = protocolParametersFromStore.speciality;
-        // let currentNumber = protocolParametersFromStore.number;
-        // let totNumState = statementsFromStore.findStatementsBySpec(currentSpecId).length;
-        // let minus = totNumState - Number(currentNumber);
-
-        // setCurrentSpecId(currentId);
-        // setTotalNumberOfStatements(totNumState);
-        // setSpecCypherFromId(specialitiesFromStore.findSpeciality(currentId).cypher)
-        // setSpecTypeFromId(specialitiesFromStore.findSpeciality(currentId).type)
-        // console.log("currentNumber", currentNumber);
-        // console.log("totalNumberOfStatements", totNumState);
-        // console.log('minus', minus);
-        // if (minus < 0) {
-
-        //     setAdmitted(currentNumber)
-        // } else {
-        //     setAdmitted(totalNumberOfStatements)
-        // }
-
         let currentId = protocolParametersFromStore.speciality;
         let currentNumber = protocolParametersFromStore.number;
+        let totNumState = statementsFromStore.findStatementsBySpec(currentId).length;
+        let minus = totNumState - Number(currentNumber);
 
         setCurrentSpecId(currentId);
-        setTotalNumberOfStatements(statementsFromStore.findStatementsBySpec(currentSpecId).length);
+        setTotalNumberOfStatements(totNumState);
         setSpecCypherFromId(specialitiesFromStore.findSpeciality(currentId).cypher)
         setSpecTypeFromId(specialitiesFromStore.findSpeciality(currentId).type)
-
-
         console.log("currentNumber", currentNumber);
-        console.log("totalNumberOfStatements", totalNumberOfStatements);
+        console.log("totalNumberOfStatements", totNumState);
+        console.log('minus', minus);
+        if (minus < 0) {
+            setAdmitted(totNumState)
+        } else {
+            setAdmitted(currentNumber)
+        }
+
+        // let currentId = protocolParametersFromStore.speciality;
+        // let currentNumber = protocolParametersFromStore.number;
+        // let totNumOfState = statementsFromStore.findStatementsBySpec(currentSpecId).length;
+
+        // setCurrentSpecId(currentId);
+        // setTotalNumberOfStatements(totNumOfState);
+        // setSpecCypherFromId(specialitiesFromStore.findSpeciality(currentId).cypher)
+        // setSpecTypeFromId(specialitiesFromStore.findSpeciality(currentId).type)
 
 
-        totalNumberOfStatements > currentNumber ? (setAdmitted(currentNumber)) : (setAdmitted(totalNumberOfStatements))
+        // console.log("currentNumber", currentNumber);
+        // console.log("totalNumberOfStatements", statementsFromStore.findStatementsBySpec(currentSpecId).length);
+
+
+        // totalNumberOfStatements > currentNumber ? (setAdmitted(currentNumber)) : (setAdmitted(totalNumberOfStatements))
 
     })(), [])
 
