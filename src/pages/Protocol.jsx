@@ -22,7 +22,6 @@ const Protocol = () => {
     ]
 
     useEffect(() => void (async () => {
-
         let currentId = protocolParametersFromStore.speciality;
         let currentNumber = protocolParametersFromStore.number;
         let totNumState = statementsFromStore.findStatementsBySpec(currentId).length;
@@ -40,23 +39,6 @@ const Protocol = () => {
         } else {
             setAdmitted(currentNumber)
         }
-
-        // let currentId = protocolParametersFromStore.speciality;
-        // let currentNumber = protocolParametersFromStore.number;
-        // let totNumOfState = statementsFromStore.findStatementsBySpec(currentSpecId).length;
-
-        // setCurrentSpecId(currentId);
-        // setTotalNumberOfStatements(totNumOfState);
-        // setSpecCypherFromId(specialitiesFromStore.findSpeciality(currentId).cypher)
-        // setSpecTypeFromId(specialitiesFromStore.findSpeciality(currentId).type)
-
-
-        // console.log("currentNumber", currentNumber);
-        // console.log("totalNumberOfStatements", statementsFromStore.findStatementsBySpec(currentSpecId).length);
-
-
-        // totalNumberOfStatements > currentNumber ? (setAdmitted(currentNumber)) : (setAdmitted(totalNumberOfStatements))
-
     })(), [])
 
     return (
