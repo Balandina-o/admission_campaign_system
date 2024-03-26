@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Context } from "../App";
 import CommonWarningModal from '../components/CommonWarningModal';
+import "../pages/styles/ProtocolWindowStyle.css";
 
 const ProtocolWindow = () => {
     const navigate = useNavigate();
@@ -38,7 +39,7 @@ const ProtocolWindow = () => {
 
     return (
         <div>
-            <div style={{ width: "100%", background: "white", padding: "10px" }}>
+            <div className='main_container'>
                 <div className="container ">
                     <div className="row">
                         <div className="col-md-12">

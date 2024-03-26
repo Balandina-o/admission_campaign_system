@@ -13,14 +13,6 @@ const Protocol = () => {
     const [totalNumberOfStatements, setTotalNumberOfStatements] = useState("");
     const [admitted, setAdmitted] = useState("");
 
-    const columns = [ //Массив объектов с заголовками столбцов таблицы
-        { heading: "ФИО" },
-        { heading: "Возраст" },
-        { heading: "Пол" },
-        { heading: "Номер телефона" },
-        { heading: "Адрес" }
-    ]
-
     useEffect(() => void (async () => {
         let currentId = protocolParametersFromStore.speciality;
         let currentNumber = protocolParametersFromStore.number;
@@ -57,7 +49,36 @@ const Protocol = () => {
                 <table className="table">
                     <thead>
                         <tr>
-                            {columns.map((item, index) => <th key={index}>{item.heading}</th>)}
+
+                            <th>№ п/п</th>
+                            <th>Фамилия, имя, отчество (при наличии), дата рождения</th>
+                            <th>Код специальности (направление подготовки)</th>
+                            <th>Результат медицинского освидетельствования</th>
+                            <th>Результаты профессионального психологического отбора</th>
+                            <th>Преимущественное право</th>
+                            <tr>
+                                <td colSpan="4">
+                                    Оценка уровня физической подготовленности
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    ddd
+                                </td>
+                                <td>
+                                    ddd
+                                </td>
+                                <td>
+                                    ddd
+                                </td>
+                                <td>
+                                    s
+                                </td>
+                            </tr>
+                            <th>Оценка текущей успеваемости (по 100 бальной шкале)</th>
+                            <th>Итоговый результат</th>
+                            <th>Решение о допуске к военной подготовке (причина недопуска к конкурсному отбору)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,6 +87,29 @@ const Protocol = () => {
                                 return (
                                     <React.Fragment key={state.id}>
                                         <tr>
+                                            <td>{state.lastName}</td>
+                                            <td>{state.firstName}</td>
+                                            <td>{state.gender}</td>
+                                            <td>{state.lastName}</td>
+                                            <td>{state.firstName}</td>
+                                            <td>{state.gender}</td>
+                                            <td>{state.lastName}</td>
+                                            <td>{state.firstName}</td>
+                                            <td>{state.gender}</td>
+                                            <tr>
+                                                <td>
+                                                    ddd
+                                                </td>
+                                                <td>
+                                                    s
+                                                </td>
+                                            </tr>
+                                            <td>{state.lastName}</td>
+                                            <td>{state.firstName}</td>
+                                            <td>{state.gender}</td>
+                                            <td>{state.lastName}</td>
+                                            <td>{state.firstName}</td>
+                                            <td>{state.gender}</td>
                                             <td>{state.lastName}</td>
                                             <td>{state.firstName}</td>
                                             <td>{state.gender}</td>
