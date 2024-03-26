@@ -34,7 +34,7 @@ const Protocol = () => {
     })(), [])
 
     return (
-        <div style={{ background: "white" }}>
+        <div style={{ background: "white" }} >
             <div className='protocol_header'>
                 ПРОТОКОЛ<br></br>
                 конкурсного отбора граждан, изъявивших желание пройти обучение по программе военной подготовки<br></br>
@@ -64,21 +64,39 @@ const Protocol = () => {
 
                             <tr>
                                 <td>
-                                    ddd
+                                    Сила
                                 </td>
                                 <td>
-                                    ddd
+                                    Быстрота
                                 </td>
                                 <td>
-                                    ddd
+                                    Выносливость
                                 </td>
-                                <td>
-                                    s
+                                <td style={{ width: "250px" }}>
+                                    Результат (по 100 бальной шкале)
                                 </td>
                             </tr>
+
                             <th>Оценка текущей успеваемости (по 100 бальной шкале)</th>
                             <th>Итоговый результат</th>
                             <th>Решение о допуске к военной подготовке (причина недопуска к конкурсному отбору)</th>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <tr>
+                                <td>7</td>
+                                <td>8</td>
+                                <td>9</td>
+                                <td>10</td>
+                            </tr>
+                            <th>11</th>
+                            <th>12</th>
+                            <th>13</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,32 +105,23 @@ const Protocol = () => {
                                 return (
                                     <React.Fragment key={state.id}>
                                         <tr>
-                                            <td>{state.lastName}</td>
-                                            <td>{state.firstName}</td>
-                                            <td>{state.gender}</td>
-                                            <td>{state.lastName}</td>
-                                            <td>{state.firstName}</td>
-                                            <td>{state.gender}</td>
-                                            <td>{state.lastName}</td>
-                                            <td>{state.firstName}</td>
-                                            <td>{state.gender}</td>
+                                            <td>1</td>
+                                            <td>{state.secondName} {state.firstName} {state.lastName}, {state.birthday}</td>
+                                            <td>{specCypherFromId}</td>
+                                            <td>{state.moCat}</td>
+                                            <td>{state.ppo}</td>
+                                            <td>{state.pp}</td>
                                             <tr>
-                                                <td>
-                                                    ddd
+                                                <td style={{ width: "39px" }}>
+                                                    {state.fpS}
                                                 </td>
-                                                <td>
-                                                    s
-                                                </td>
+                                                <td>{state.fpB}</td>
+                                                <td>{state.fpV}</td>
+                                                <td>{state.fpFinal}</td>
                                             </tr>
-                                            <td>{state.lastName}</td>
-                                            <td>{state.firstName}</td>
-                                            <td>{state.gender}</td>
-                                            <td>{state.lastName}</td>
-                                            <td>{state.firstName}</td>
-                                            <td>{state.gender}</td>
-                                            <td>{state.lastName}</td>
-                                            <td>{state.firstName}</td>
-                                            <td>{state.gender}</td>
+                                            <td>{state.auDec}</td>
+                                            <td>{state.totalScore}</td>
+                                            <td>Годен</td>
                                         </tr>
                                     </React.Fragment>
                                 )
