@@ -43,7 +43,9 @@ function App() {
     >
       <div className="app">
         <HashRouter>
-          <LogoBar />
+          <div className="logo">
+            <LogoBar />
+          </div>
           <div className="two_great_elements">
             {isSideBarVisible && (
               <div className="sidebar">
@@ -51,24 +53,22 @@ function App() {
               </div>
             )}
             <div className="contentMain">
-              <div>
-                <Routes>
-                  <Route path="/statements" element={<StatementsPage />}></Route>
-                  <Route path="/" element={<AuthPage sideBarVisibility={sideBarVisibility} />} />
-                  <Route path="/user" element={<UsersPage />} />
-                  <Route path="/newStatement" element={<NewStatementPage />} />
-                  <Route path="/newSpeciality" element={<NewSpecialityPage />} />
-                  <Route path="/newDirection" element={<NewDirectionPage />} />
-                  <Route path="/protocol" element={<Protocol />} />
-                  <Route path="/report" element={<ReportPage />} />
-                  <Route path="/protocolWindow" element={<ProtocolWindow />} />
-                  <Route path="/editSpeciality/:id" element={<SpecialityEditPage />} />
-                  <Route path="/editDirection/:id" element={<DirectionEditPage />} />
-                  <Route path="/editStatement/:id" element={<StatementEditPage />} />
-                  <Route path="/spec" element={<SpecialtiesPage />} />
-                  <Route path="/directions" element={<DirectionsPage />} />
-                </Routes>
-              </div>
+              <Routes>
+                <Route path="/statements" element={<StatementsPage />}></Route>
+                <Route path="/" element={<AuthPage sideBarVisibility={sideBarVisibility} />} />
+                <Route path="/user" element={<UsersPage />} />
+                <Route path="/newStatement" element={<NewStatementPage />} />
+                <Route path="/newSpeciality" element={<NewSpecialityPage />} />
+                <Route path="/newDirection" element={<NewDirectionPage />} />
+                <Route path="/protocol" element={<Protocol />} />
+                <Route path="/report" element={<ReportPage />} />
+                <Route path="/protocolWindow" element={<ProtocolWindow />} />
+                <Route path="/editSpeciality/:id" element={<SpecialityEditPage />} />
+                <Route path="/editDirection/:id" element={<DirectionEditPage />} />
+                <Route path="/editStatement/:id" element={<StatementEditPage />} />
+                <Route path="/spec" element={<SpecialtiesPage />} />
+                <Route path="/directions" element={<DirectionsPage />} />
+              </Routes>
             </div>
 
           </div>

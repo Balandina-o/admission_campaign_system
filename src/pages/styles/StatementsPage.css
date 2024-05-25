@@ -1,6 +1,7 @@
 .content {
     box-shadow: 0 0 2px gray;
     overflow: scroll; 
+    padding-bottom: 5%;
     /* overflow-x: hidden; */
   }
   
