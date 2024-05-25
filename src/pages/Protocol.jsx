@@ -34,7 +34,7 @@ const Protocol = () => {
     })(), [])
 
     return (
-        <div style={{ background: "white" }}>
+        <div style={{ background: "white" }} >
             <div className='protocol_header'>
                 ПРОТОКОЛ<br></br>
                 конкурсного отбора граждан, изъявивших желание пройти обучение по программе военной подготовки<br></br>
@@ -49,36 +49,38 @@ const Protocol = () => {
                 <table className="table">
                     <thead>
                         <tr>
+                            <td rowSpan="2" width="4%"><b>№ п/п</b></td>
+                            <td rowSpan="2" width="25%"><b>Фамилия, имя, отчество (при наличии), дата рождения</b></td>
+                            <td rowSpan="2" width="7%"><b>Код специальности (направление подготовки)</b></td>
+                            <td rowSpan="2" width="6%"><b>Результат медицинского освидетельствования</b></td>
+                            <td rowSpan="2" width="7%"><b>Результаты профессионального психологического отбора</b></td>
+                            <td rowSpan="2" width="5%"><b className="vertical-text">Преимущественное право</b></td>
+                            <td colSpan="4" width="16%"><b>Оценка уровня физической подготовленности</b></td>
+                            <td rowSpan="2" width="7%"><b>Оценка текущей успеваемости (по 100 бальной шкале)</b></td>
+                            <td rowSpan="2" width="7%"><b>Итоговый результат</b></td>
+                            <td rowSpan="2" width="15%"><b>Решение о допуске к военной подготовке</b> (причина недопуска к конкурсному отбору)</td>
+                        </tr>
+                        <tr>
+                            <td>Сила</td>
+                            <td>Быстрота</td>
+                            <td>Выносливость</td>
+                            <td>Результат (по 100 бальной шкале)</td>
+                        </tr>
 
-                            <th>№ п/п</th>
-                            <th>Фамилия, имя, отчество (при наличии), дата рождения</th>
-                            <th>Код специальности (направление подготовки)</th>
-                            <th>Результат медицинского освидетельствования</th>
-                            <th>Результаты профессионального психологического отбора</th>
-                            <th>Преимущественное право</th>
-                            <tr>
-                                <td colSpan="4">
-                                    Оценка уровня физической подготовленности
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    ddd
-                                </td>
-                                <td>
-                                    ddd
-                                </td>
-                                <td>
-                                    ddd
-                                </td>
-                                <td>
-                                    s
-                                </td>
-                            </tr>
-                            <th>Оценка текущей успеваемости (по 100 бальной шкале)</th>
-                            <th>Итоговый результат</th>
-                            <th>Решение о допуске к военной подготовке (причина недопуска к конкурсному отбору)</th>
+                        <tr>
+                            <td className="center">1</td>
+                            <td className="center">2</td>
+                            <td className="center">3</td>
+                            <td className="center">4</td>
+                            <td className="center">5</td>
+                            <td className="center">6</td>
+                            <td className="center">7</td>
+                            <td className="center">8</td>
+                            <td className="center">9</td>
+                            <td className="center">10</td>
+                            <td className="center">11</td>
+                            <td className="center">12</td>
+                            <td className="center">13</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,32 +89,23 @@ const Protocol = () => {
                                 return (
                                     <React.Fragment key={state.id}>
                                         <tr>
-                                            <td>{state.lastName}</td>
-                                            <td>{state.firstName}</td>
-                                            <td>{state.gender}</td>
-                                            <td>{state.lastName}</td>
-                                            <td>{state.firstName}</td>
-                                            <td>{state.gender}</td>
-                                            <td>{state.lastName}</td>
-                                            <td>{state.firstName}</td>
-                                            <td>{state.gender}</td>
-                                            <tr>
-                                                <td>
-                                                    ddd
-                                                </td>
-                                                <td>
-                                                    s
-                                                </td>
-                                            </tr>
-                                            <td>{state.lastName}</td>
-                                            <td>{state.firstName}</td>
-                                            <td>{state.gender}</td>
-                                            <td>{state.lastName}</td>
-                                            <td>{state.firstName}</td>
-                                            <td>{state.gender}</td>
-                                            <td>{state.lastName}</td>
-                                            <td>{state.firstName}</td>
-                                            <td>{state.gender}</td>
+                                            <td>1</td>
+                                            <td>{state.secondName} {state.firstName} {state.lastName}, {state.birthday}</td>
+                                            <td>{specCypherFromId}</td>
+                                            <td>{state.moCat}</td>
+                                            <td>{state.ppo}</td>
+                                            <td>{state.pp}</td>
+
+                                            <td style={{ width: "39px" }}>
+                                                {state.fpS}
+                                            </td>
+                                            <td>{state.fpB}</td>
+                                            <td>{state.fpV}</td>
+                                            <td>{state.fpFinal}</td>
+
+                                            <td>{state.auDec}</td>
+                                            <td>{state.totalScore}</td>
+                                            <td>Годен</td>
                                         </tr>
                                     </React.Fragment>
                                 )

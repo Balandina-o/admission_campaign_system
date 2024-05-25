@@ -10,7 +10,7 @@ const SpecUnit = ({ name, cypher, type, clicked }) => {
           <b> {name}</b>
         </div>
         <div >
-          <div style={{ background: "rgb(180,182,186)" }}>
+          <div style={{ background: "#CFCFCF", borderRadius: '5px' }}>
             {cypher}
           </div>
 

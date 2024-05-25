@@ -16,13 +16,16 @@ const UsersPage = () => {
   // };
 
   return (
-    <div style={{ background: "white" }}>
+    <div style={{ background: "white", padding: ' 0px 0px 50px 0px' }}>
       <AdminBar
         login={userFromStore.user.login}
         role={userFromStore.user.role}
       />
       <div>
-        В личном кабинете Вам доступна возможность управления пользователями системы.<br />Вы можете просмотреть всех существующих в системе пользователей, а также добавить новую учетную запись
+        <div style={{ padding: '10px 10px 30px 60px' }}>
+          В личном кабинете Вам доступна возможность управления пользователями системы.<br />Вы можете просмотреть всех существующих в системе пользователей, а также добавить новую учетную запись
+
+        </div>
         <div className='d-flex align-items-baseline justify-content-xxl-around'>
           <div className="p-2 card" style={{ width: "40%" }}>
             {userFromStore.usersList.map(user => (
@@ -76,7 +79,7 @@ const UsersPage = () => {
                 <div className="d-flex justify-content-end align-items-start mt-3">
                   <Button variant="success" className="mt-1" >
                     {" "}
-                    Зарегистрироваться
+                    Зарегистрировать пользователя
                   </Button>
                 </div>
               </Form>

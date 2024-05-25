@@ -50,7 +50,7 @@ function App() {
                 <Sidebar sideBarVisibility={sideBarVisibility} />
               </div>
             )}
-            <div className="content">
+            <div className="contentMain">
               <div>
                 <Routes>
                   <Route path="/statements" element={<StatementsPage />}></Route>

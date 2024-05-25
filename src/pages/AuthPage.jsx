@@ -43,7 +43,9 @@ const AuthPage = ({ sideBarVisibility }) => {
         className="bg-light p-4 rounded"
         style={{ minWidth: "500px ", marginTop: "150px" }}
       >
-        <h2>Авторизация</h2>
+        <div style={{ textAlign: 'center' }}>
+          <h2 style={{ background: '#CFCFCF', borderRadius: 6, padding: '7px 0px' }} >Авторизация</h2>
+        </div>
         Для работы в системе необходимо пройти процедуру авторизации
         <div className="d-flex align-items-baseline">
           <label style={{ width: "70px" }}>Логин </label>

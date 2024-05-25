@@ -1,5 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
-//const { globalShortcut } = require('electron');
+const { app, BrowserWindow, ipcMain, globalShortcut } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 const mkdirp = require('mkdirp');
@@ -54,13 +53,15 @@ app.whenReady().then(() => {
   ipcMain.handle("campaign:statement:create", (event, data) => campaign.createStatement(data));
   ipcMain.handle("campaign:statement:update", (event, id, data) => campaign.updateCurrentState(id, data));
   ipcMain.handle("campaign:usersForAuth:load", () => campaign.getUsersForAuth());
+  ipcMain.handle("campaign:report:write", (event, data) => campaign.whiteReport(data));
+  ipcMain.handle("campaign:report:zip", () => campaign.getReportZip());
   createWindow();
 });
 
-// app.on('browser-window-focus', function () {
-//   globalShortcut.register("CommandOrControl+Shift+R", () => {
-//     console.log("CommandOrControl+R is pressed: Shortcut Disabled!");
-//   });
-// });
+app.on('browser-window-focus', function () {
+  globalShortcut.register("CommandOrControl+Shift+R", () => {
+    console.log("CommandOrControl+R is pressed: Shortcut Disabled!");
+  });
+});
 
 app.on("window-all-closed", () => app.quit());

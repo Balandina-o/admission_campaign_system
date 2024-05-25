@@ -5,6 +5,8 @@ import SpecialityCardUnit from '../components/SpecialityCardUnit'
 import SpecialityBar from '../components/SpecialityBar'
 import DeleteSpecConfirmModal from '../components/DeleteSpecConfirmModal';
 
+import "../pages/styles/SpecialtiesPage.css";
+
 const SpecialtiesPage = () => {
   const navigate = useNavigate();
   const { specialitiesFromStore } = useContext(Context);
@@ -27,7 +29,7 @@ const SpecialtiesPage = () => {
   })(), [])
 
   return (
-    <div>
+    <div className='mainContSpec'>
       <SpecialityBar></SpecialityBar>
 
       <div>

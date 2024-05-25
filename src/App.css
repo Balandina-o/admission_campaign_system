@@ -1,10 +1,13 @@
 .two_great_elements {
-  padding-top: 76px; 
+  /* margin-top: 76px;  */
 /* чтобы лого не наползало на контент */
   display: flex;
 }
 
 .sidebar{
+  font-family: "Roboto", sans-serif;
+  font-size: large;
+  /* position: 'fixed'!important; */
 }
 
 .content{
@@ -13,16 +16,43 @@
   flex-grow: 1;
   min-width: 0;
   padding-bottom: 5%;
+  /* overflow-y: hidden; */
   /* чтобы не терялся контент снизу */
+  font-family: "Roboto", sans-serif;
+}
+
+.contentMain{
+  overflow-y: scroll;
+  height: 100vh;
+  flex-grow: 1;
+  min-width: 0;
+  padding-bottom: 5%;
+  /* overflow-y: hidden; */
+  font-family: "Roboto", sans-serif;
 }
 
 .app{
-  background-image: url("/public/back.png");
-  
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background:linear-gradient(to bottom, rgba(47, 83, 215, 0) 40%, rgb(20, 20, 20)), url("/public/aaa3.png");
 }
+
+
+.art.first { grid-area: a1; }
+.art.second { grid-area: a2; }
+.art.third { grid-area: a3; }
 
 body {
   height: 100%;
-  overflow-y: hidden;
   margin: 0;
+  font-family: "Roboto", sans-serif;
+  overflow-y: hidden;
+  background-repeat: repeat;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url(http://fonts.gstatic.com/s/roboto/v15/mErvLBYg_cXG3rLvUsKT_fesZW2xOQ-xsNqO47m55DA.woff2);
 }
