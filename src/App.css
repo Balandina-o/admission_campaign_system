@@ -15,7 +15,7 @@
   height: 100vh;
   flex-grow: 1;
   min-width: 0;
-  padding-bottom: 5%;
+  /* padding-bottom: 5%; */
   /* overflow-y: hidden; */
   /* чтобы не терялся контент снизу */
   font-family: "Roboto", sans-serif;
@@ -26,7 +26,8 @@
   height: 100vh;
   flex-grow: 1;
   min-width: 0;
-  padding-bottom: 5%;
+  width: 100%;
+  /* padding-bottom: 5%; */
   /* overflow-y: hidden; */
   font-family: "Roboto", sans-serif;
 }
@@ -40,9 +41,9 @@
 }
 
 
-.art.first { grid-area: a1; }
+/* .art.first { grid-area: a1; }
 .art.second { grid-area: a2; }
-.art.third { grid-area: a3; }
+.art.third { grid-area: a3; } */
 
 body {
   height: 100%;
@@ -55,4 +56,40 @@ body {
 @font-face {
   font-family: 'Roboto';
   src: url(http://fonts.gstatic.com/s/roboto/v15/mErvLBYg_cXG3rLvUsKT_fesZW2xOQ-xsNqO47m55DA.woff2);
+}
+
+.content {
+  box-shadow: 0 0 2px gray;
+  overflow: scroll; 
+  padding-bottom: 5%;
+  /* overflow-x: hidden; */
+}
+
+/* Define the scrollbar style */
+.contentMain::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Define the thumb style */
+.contentMain::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom right, #4d7fff 0%, #1a56ff 100%);
+  /* border-radius: 5px; */
+}
+
+/* Define the track style */
+.contentMain::-webkit-scrollbar-track {
+  background-color: #ddd;
+  border: 1px solid #ccc;
+}
+
+/* Define the button style */
+.contentMain::-webkit-scrollbar-button {
+  background-color: #4d7fff;
+  /* border-radius: 5px; */
+}
+
+/* Define the button style when being hovered over */
+.contentMain::-webkit-scrollbar-button:hover {
+  background-color: #999999;
 }
