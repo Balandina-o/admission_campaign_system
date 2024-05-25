@@ -15,7 +15,7 @@ const LogoBar = () => {
             loading="lazy"
           />
         </a>
-        <div style={{ color: "aliceblue" }}>
+        <div style={{ color: "aliceblue", fontWeight: '500', letterSpacing: '1px' }}>
           ИС приемной кампании УУНиТ | Admission Campaign System
         </div>
       </div>

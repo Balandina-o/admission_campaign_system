@@ -3,29 +3,36 @@ import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
 import { useNavigate } from "react-router-dom";
 
-const StatementCardUnit = ({ id, lastName, firstName, secondName, group }) => {
+const StatementCardUnit = ({ id, lastName, firstName, secondName, group, totalScore }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="p-2 card">
+    <div className="p-3 card">
       <div className="d-flex justify-content-between align-items-center">
         <div>
           <div>
-            <b>{lastName} {firstName} {secondName}</b>
+            <b>{secondName} {firstName} {lastName} </b>
           </div>
           <div>
             Учебная группа: {group}
           </div>
 
         </div>
-        <Button
-          variant="primary"
-          style={{ width: "35px", height: "35px", fontSize: "16px" }}
-          className="bottom-0 end-0 me-3 pt-0"
-          onClick={() => navigate(`/editStatement/${id}`)}
-        >
-          &#62;
-        </Button>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ paddingRight: 8 }}>
+            <b>
+              {totalScore}
+            </b>
+          </div>
+          <Button
+            variant="primary"
+            style={{ width: "35px", height: "35px", fontSize: "16px" }}
+            className="bottom-0 end-0 me-3 pt-0"
+            onClick={() => navigate(`/editStatement/${id}`)}
+          >
+            &#62;
+          </Button>
+        </div>
       </div>
     </div>
   )
@@ -38,6 +45,7 @@ StatementCardUnit.propTypes = {
   secondName: PropTypes.string,
   group: PropTypes.string,
   specialityId: PropTypes.number,
+  totalScore: PropTypes.number,
 }
 
 export default StatementCardUnit
