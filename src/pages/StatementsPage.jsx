@@ -4,6 +4,7 @@ import SpecBar from "../components/SpecBar";
 import SpecUnit from "../components/SpecUnit";
 import StatementCardUnit from "../components/StatementCardUnit";
 import { Context } from "../App";
+import "../pages/styles/StatementsPage.css";
 
 const StatementsPage = () => {
   const { specialitiesFromStore } = useContext(Context);
@@ -11,6 +12,7 @@ const StatementsPage = () => {
   const { statementsFromStore } = useContext(Context);
 
   const [specialities, setSpecialities] = useState([])
+  const [states, setStates] = useState([])
   const [selectedSpec, setSelectedSpec] = useState(null)
 
   function selectSpec(id) {
@@ -28,13 +30,14 @@ const StatementsPage = () => {
     statementsFromStore.setStatements(listOfState);
 
     setSpecialities(listOfSpec);
+    setStates(listOfState);
   })(), [])
 
   return (
-    <div className="big_div">
+    <>
       <div className="main_content" style={{ display: "flex" }}>
         <div className="content" style={{ background: "white", width: "30%", display: "block" }}>
-          <SpecBar></SpecBar>
+          <SpecBar totalScore={specialities.length} ></SpecBar>
           <div>
             {specialities.map(item => (
               <SpecUnit
@@ -51,7 +54,7 @@ const StatementsPage = () => {
           </div>
         </div>
         <div className="content" style={{ background: "white", width: "70%" }}>
-          <StatementsBar style={{ flexgrow: "1" }}></StatementsBar>
+          <StatementsBar totalScore={states.length} style={{ flexgrow: "1" }}></StatementsBar>
           <div >
             {selectedSpec && selectedSpec.Statements.map(item => (
               <StatementCardUnit
@@ -73,7 +76,7 @@ const StatementsPage = () => {
 
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

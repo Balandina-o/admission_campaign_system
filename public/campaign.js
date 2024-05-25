@@ -1,4 +1,4 @@
-// const fs = require('fs')
+const fs = require('fs')
 const path = require('path');
 const mkdirp = require('mkdirp');
 const { Sequelize, DataTypes } = require('sequelize');
@@ -133,6 +133,10 @@ module.exports = class Campaign {
     this.logger = logger
   }
 
+  getReportZip() {
+    return content;
+  }
+
   async connect() {
     await sequelize.authenticate();
     await sequelize.sync();
@@ -189,6 +193,10 @@ module.exports = class Campaign {
     return statement.toJSON();
   }
 
+  async whiteReport(report) {
+    fs.writeFileSync(path.resolve(__dirname, "output.docx"), report);
+  }
+
   async updateCurrentSpec(spec_id, specForEdit, user) {
     console.log(user);
     this.logger.info(`Специальность Id=${spec_id} ` + specForEdit.name + `была обновлена пользователем`)
@@ -196,7 +204,6 @@ module.exports = class Campaign {
     //   " была обновлена пользователем " + user + "\n", { flag: "a+" }, (err) => {
     //     if (err) throw err;
     //   })
-
     console.log(specForEdit);
     const speciality = await Speciality.update(specForEdit, {
       where: { id: spec_id }

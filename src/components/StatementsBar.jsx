@@ -1,16 +1,17 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { propTypes } from "react-bootstrap/esm/Image";
 import { Link } from "react-router-dom";
 
-const StatementsBar = () => {
+const StatementsBar = ({ totalScore }) => {
   return (
     <nav
       className="navbar"
-      style={{ position: "sticky", top: "0", zIndex: "1", flexgrow: "1", background: "#4d18cb" }}
+      style={{ position: "sticky", top: "0", zIndex: "1", flexgrow: "1", background: "#4d18cb", fontWeight: '600', letterSpacing: '1px' }}
     >
       <div className="custom-container d-flex align-items-center ps-3">
         <div style={{ color: "aliceblue" }}>
-          Прикрепленные заявления
+          Прикрепленные заявления | Всего: {totalScore}
         </div>
       </div>
       <Link to={'/newStatement'}>
@@ -25,5 +26,9 @@ const StatementsBar = () => {
     </nav>
   );
 };
+
+StatementsBar.propTypes = {
+  totalScore: propTypes.number,
+}
 
 export default StatementsBar;

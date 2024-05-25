@@ -1,0 +1,34 @@
+.content {
+    box-shadow: 0 0 2px gray;
+    overflow: scroll; 
+    /* overflow-x: hidden; */
+  }
+  
+  /* Define the scrollbar style */
+  .content::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  /* Define the thumb style */
+  .content::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom right, #4d7fff 0%, #1a56ff 100%);
+    /* border-radius: 5px; */
+  }
+  
+  /* Define the track style */
+  .content::-webkit-scrollbar-track {
+    background-color: #ddd;
+    border: 1px solid #ccc;
+  }
+  
+  /* Define the button style */
+  .content::-webkit-scrollbar-button {
+    background-color: #4d7fff;
+    /* border-radius: 5px; */
+  }
+  
+  /* Define the button style when being hovered over */
+  .content::-webkit-scrollbar-button:hover {
+    background-color: #999999;
+  }

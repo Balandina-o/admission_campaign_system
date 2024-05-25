@@ -13,4 +13,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     createStatement: (data) => ipcRenderer.invoke('campaign:statement:create', data),
     updateCurrentState: (id, data) => ipcRenderer.invoke('campaign:statement:update', id, data),
     getUsersForAuth: () => ipcRenderer.invoke('campaign:usersForAuth:load'),
+    whiteReport: (data) => ipcRenderer.invoke('campaign:report:write', data),
+    getReportZip: () => ipcRenderer.invoke('campaign:report:zip'),
 })

@@ -8,8 +8,8 @@ const AdminBar = ({ login, role }) => {
             style={{ position: "sticky", top: "0", zIndex: "1", display: "block", flexgrow: "1", background: "#4d18cb" }}
         >
             <div className="custom-container d-flex align-items-center ps-3" style={{ paddingBottom: "6px", paddingTop: "6px" }}>
-                <div style={{ color: "aliceblue" }}>
-                    Добро пожаловать, {login} the {role}!
+                <div style={{ color: "aliceblue", fontSize: 20, letterSpacing: 1 }}>
+                    <b> Личный кабинет | Добро пожаловать, {login} the {role}! </b>
                 </div>
             </div>
         </nav>

@@ -262,7 +262,7 @@ export default function StatementEditPage() {
   }
 
   return (
-    <div style={{ width: "100%", background: "white" }}>
+    <div style={{ width: "100%", background: "white", padding: '10px 440px 10px 40px' }}>
       <div className="container">
         <div className="row">
           <div className="col-md-12">
@@ -331,7 +331,7 @@ export default function StatementEditPage() {
                 <select id="selectDir" value={dir} onChange={(event) => setDir(event.target.value)} className="form-select w-100">
                 </select>
               </div>
-              <button type="button" onClick={updateMainInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right" }}>Сохранить основные данные</button>
+              <button type="button" onClick={updateMainInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right" }}>Сохранить данные</button>
             </form>
           </div>
         </div>
@@ -393,7 +393,7 @@ export default function StatementEditPage() {
                   <option value="4">VI категория </option>
                 </select>
               </div>
-              <button type="button" onClick={updatePPOInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные ППО</button>
+              <button type="button" onClick={updatePPOInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить ППО</button>
 
             </form>
           </div>
@@ -516,7 +516,7 @@ export default function StatementEditPage() {
                 />
                 <input type="text" value={fpBDec} className="form-control refField" />
               </div>
-              <label style={{ width: "300px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Быстрота&quot;</label>
+              <label style={{ width: "270px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Быстрота&quot;</label>
               <input id="checkboxB" type="checkbox" onChange={(event) => setCheckB(event.target.checked)} />
 
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
@@ -529,19 +529,19 @@ export default function StatementEditPage() {
                 />
                 <input type="text" value={fpVDec} className="form-control refField" />
               </div>
-              <label style={{ width: "350px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель &quot;Выносливость&quot;</label>
+              <label style={{ width: "270px", whitespace: "nowrap", marginLeft: "125px" }}>Не предоставлен показатель <br></br> &quot;Выносливость&quot;</label>
               <input id="checkboxV" type="checkbox" onChange={(event) => setCheckV(event.target.checked)} />
 
-              <div className="flex-fill mr-2 d-flex align-items-center mt-5">
+              <div className="flex-fill d-flex align-items-center mt-5">
                 <label className="labelSum">Суммарный балл по физической подготовленности: </label>
                 <input type="text" value={fpSum} className="form-control refField" />
               </div>
               <div className="flex-fill mr-2 d-flex align-items-center mt-1">
-                <label className="labelSum">Суммарный балл по физической подготовленности в 100-бальной шкале: </label>
+                <label className="labelSum">Суммарный балл по физической подготовленности <br></br> в 100-бальной шкале: </label>
                 <input type="text" value={fpFinal} className="form-control refField" />
               </div>
 
-              <button type="button" className="btn btn-primary mt-4 mb-2 btnSave" onClick={updateFpInfo} >Сохранить данные ОФП</button>
+              <button type="button" className="btn btn-primary mt-4 mb-2 btnSave" onClick={updateFpInfo} >Сохранить ОФП</button>
             </form>
           </div>
           <hr></hr>
