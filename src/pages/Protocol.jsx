@@ -7,6 +7,8 @@ const Protocol = () => {
     const { protocolParametersFromStore } = useContext(Context);
     const { statementsFromStore } = useContext(Context);
     const { specialitiesFromStore } = useContext(Context);
+    const { directionsFromStore } = useContext(Context);
+
     const [specCypherFromId, setSpecCypherFromId] = useState("");
     const [specTypeFromId, setSpecTypeFromId] = useState("");
     const [currentSpecId, setCurrentSpecId] = useState("");
@@ -21,6 +23,7 @@ const Protocol = () => {
 
         setCurrentSpecId(currentId);
         setTotalNumberOfStatements(totNumState);
+        // setSpecCypherFromId(directionsFromStore.findDirection(currentId).cypher)
         setSpecCypherFromId(specialitiesFromStore.findSpeciality(currentId).cypher)
         setSpecTypeFromId(specialitiesFromStore.findSpeciality(currentId).type)
         console.log("currentNumber", currentNumber);
@@ -84,17 +87,20 @@ const Protocol = () => {
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td colSpan="13" className="center"><b>1. Список граждан, допущенных к конкурсному отбору</b></td>
+                        </tr>
                         <>
-                            {statementsFromStore.findStatementsBySpec(currentSpecId).map((state) => {
+                            {statementsFromStore.findStatementsBySpec(currentSpecId).map((state, index) => {
                                 return (
                                     <React.Fragment key={state.id}>
                                         <tr>
-                                            <td>1</td>
-                                            <td>{state.secondName} {state.firstName} {state.lastName}, {state.birthday}</td>
-                                            <td>{specCypherFromId}</td>
-                                            <td>{state.moCat}</td>
-                                            <td>{state.ppo}</td>
-                                            <td>{state.pp}</td>
+                                            <td>{index + 1}</td>
+                                            <td>{state.secondName} {state.firstName} {state.lastName}, {(state.birthday).replaceAll("-", '.')}</td>
+                                            <td>{directionsFromStore.findDirection(state.DirectionId).cypher}</td>
+                                            <td>годен</td>
+                                            <td>{state.ppo === "1" ? "II" : "I"}</td>
+                                            <td>нет</td>
 
                                             <td style={{ width: "39px" }}>
                                                 {state.fpS}
@@ -105,7 +111,7 @@ const Protocol = () => {
 
                                             <td>{state.auDec}</td>
                                             <td>{state.totalScore}</td>
-                                            <td>Годен</td>
+                                            <td>допустить</td>
                                         </tr>
                                     </React.Fragment>
                                 )

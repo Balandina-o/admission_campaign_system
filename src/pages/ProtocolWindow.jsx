@@ -44,7 +44,7 @@ const ProtocolWindow = () => {
                     <div className="row">
                         <div className="col-md-12">
                             <form className="form-inline" acceptCharset="UTF-8" method="get">
-                                <div className="d-flex justify-content-between" style={{ paddingTop: "10px" }}>
+                                <div className="d-flex justify-content-between pt-4" style={{ paddingTop: "10px" }}>
                                     <h3>Формирование протокола</h3>
                                 </div>
                                 <hr></hr>

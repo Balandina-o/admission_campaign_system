@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types'
 
-const AdminBar = ({ login, role }) => {
+const AdminBar = ({ name, role }) => {
     return (
         <nav
             className="navbar"
@@ -9,7 +9,7 @@ const AdminBar = ({ login, role }) => {
         >
             <div className="custom-container d-flex align-items-center ps-3" style={{ paddingBottom: "6px", paddingTop: "6px" }}>
                 <div style={{ color: "aliceblue", fontSize: 20, letterSpacing: 1 }}>
-                    <b> Личный кабинет | Добро пожаловать, {login} the {role}! </b>
+                    <b> Личный кабинет | Добро пожаловать, {name} Agafonoff the {role}! </b>
                 </div>
             </div>
         </nav>
@@ -17,7 +17,7 @@ const AdminBar = ({ login, role }) => {
 };
 
 AdminBar.propTypes = {
-    login: PropTypes.string,
+    name: PropTypes.string,
     role: PropTypes.string,
 }
 

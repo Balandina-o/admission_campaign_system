@@ -2,20 +2,20 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
-const UsersCardsOnProfilePage = ({ id, login, password, role }) => {
+const UsersCardsOnProfilePage = ({ id, nameUser, lastNameUser, secondNameUser, email, name, role }) => {
     return (
         <div className="p-2 card">
             <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center">
-                    <div>
+                    <div style={{ padding: 10 }}>
                         {id}
                     </div>
                     <div>
                         <div>
-                            {login}
+                            {nameUser} {secondNameUser} {lastNameUser} {email}
                         </div>
                         <div>
-                            {password} {role}
+                            {name} <b>{role}</b>
                         </div>
                     </div>
                 </div>
@@ -44,8 +44,11 @@ const UsersCardsOnProfilePage = ({ id, login, password, role }) => {
 
 UsersCardsOnProfilePage.propTypes = {
     id: PropTypes.number,
-    login: PropTypes.string,
-    password: PropTypes.string,
+    nameUser: PropTypes.string,
+    lastNameUser: PropTypes.string,
+    secondNameUser: PropTypes.string,
+    email: PropTypes.string,
+    name: PropTypes.string,
     role: PropTypes.string,
 }
 

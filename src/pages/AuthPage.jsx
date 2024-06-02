@@ -16,13 +16,15 @@ const AuthPage = ({ sideBarVisibility }) => {
   // const [currentUser, setCurrentUser] = useState(null)
 
   function checkUser() {
-    const user = users.find(x => x.login == login & x.password == password)
+    console.log(new Date())
+    const user = users.find(x => x.name == login & x.password == password)
     if (user != null) {
       userFromStore.setUser(user);
       userFromStore.setLoggedIn(true);
       if (user.role == "admin") {
         userFromStore.setIsAdmin(true);
       }
+      console.log("user != null", userFromStore.user);
       sideBarVisibility(true);
       navigate("/statements");
 
