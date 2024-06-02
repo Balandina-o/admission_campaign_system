@@ -18,7 +18,7 @@ const UsersPage = () => {
   return (
     <div style={{ background: "white", padding: ' 0px 0px 50px 0px' }}>
       <AdminBar
-        login={userFromStore.user.login}
+        login={userFromStore.user.name}
         role={userFromStore.user.role}
       />
       <div>
@@ -27,12 +27,16 @@ const UsersPage = () => {
 
         </div>
         <div className='d-flex align-items-baseline justify-content-xxl-around'>
-          <div className="p-2 card" style={{ width: "40%" }}>
+          <div className="p-2 card" style={{ width: "50%" }}>
             {userFromStore.usersList.map(user => (
               <UsersCardsOnProfilePage
                 key={user.id}
                 id={user.id}
-                login={user.login}
+                nameUser={user.nameUser}
+                lastNameUser={user.lastNameUser}
+                secondNameUser={user.secondNameUser}
+                email={user.email}
+                name={user.name}
                 password={user.password}
                 role={user.role}
               />

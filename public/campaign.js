@@ -12,7 +12,23 @@ const sequelize = new Sequelize({
 });
 
 const User = sequelize.define('User', {
-  login: {
+  nameUser: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  secondNameUser: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  lastNameUser: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  name: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -133,9 +149,9 @@ module.exports = class Campaign {
     this.logger = logger
   }
 
-  getReportZip() {
-    return content;
-  }
+  // getReportZip() {
+  //   return content;
+  // }
 
   async connect() {
     await sequelize.authenticate();

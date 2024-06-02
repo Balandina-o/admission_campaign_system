@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../App";
 import PropTypes from 'prop-types'
 
+// import "../components/css_components/SideBar.css";
+
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -29,6 +31,13 @@ const SideBar = ({ sideBarVisibility }) => {
       navigate(`/`)
     }
   }
+
+  // function openPage() {
+  //   var link = document.createElement("a")
+  //   link.href = "https://uust.ru/vuc/"
+  //   link.target = "_blank"
+  //   link.click()
+  // }
 
   return (
     <CDBSidebar breakpoint={720} style={{ height: "100vh" }}>
@@ -93,6 +102,10 @@ const SideBar = ({ sideBarVisibility }) => {
             </CDBBtn>
           </CDBSidebarMenuItem>
         </CDBSidebarFooter>
+        {/*<hr></hr>
+         <div className="div-bottom">
+          <a onClick={openPage}>Просмотреть страницу ВУЦ</a>
+        </div> */}
       </CDBSidebarContent>
 
       <ExitConfirmModal
