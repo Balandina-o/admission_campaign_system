@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
+import CommonWarningModal from '../components/CommonWarningModal';
 
 const NewSpecialityPage = () => {
   const [name, setName] = useState("");
@@ -10,17 +11,26 @@ const NewSpecialityPage = () => {
 
   const navigate = useNavigate();
 
+  const [showCommonModal, setShowCommonModal] = useState();
+
   const createNewSpec = async () => {
-    const newSpec = {
-      name: name,
-      cypher: cypher,
-      type: type,
-      exam: exam,
-    };
-    const res = await window.electronAPI.createSpeciality(newSpec);
-    console.log(res);
-    navigate("/spec");
-  };
+    if (
+      document.getElementById('name').value == "" ||
+      document.getElementById('cypher').value == "" ||
+      document.getElementById('type').value == "") {
+      setShowCommonModal(true);
+    } else {
+      const newSpec = {
+        name: name,
+        cypher: cypher,
+        type: type,
+        exam: exam,
+      };
+      const res = await window.electronAPI.createSpeciality(newSpec);
+      console.log(res);
+      navigate("/spec");
+    }
+  }
 
   return (
     <div>
@@ -56,6 +66,12 @@ const NewSpecialityPage = () => {
           </div>
         </div>
       </div>
+      <CommonWarningModal
+        show={showCommonModal}
+        onClose={() => setShowCommonModal(false)}
+        text='Убедитесь в том, что заполнены все поля'
+      >
+      </CommonWarningModal>
     </div>
   )
 }

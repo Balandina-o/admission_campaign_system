@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../App";
 import SpecialityCardUnit from '../components/SpecialityCardUnit'
 import SpecialityBar from '../components/SpecialityBar'
-import DeleteSpecConfirmModal from '../components/DeleteSpecConfirmModal';
+import DeletConfirmModal from '../components/DeleteConfirmModal';
 
 import "../pages/styles/SpecialtiesPage.css";
 
@@ -11,12 +11,12 @@ const SpecialtiesPage = () => {
   const navigate = useNavigate();
   const { specialitiesFromStore } = useContext(Context);
   const [specialities, setSpecialities] = useState([]);
-  const [showCreateDeleteSpecConfirmModal, setShowCreateDeleteSpecConfirmModal] = useState();
+  const [showCreateDeleteConfirmModal, setShowCreateDeleteConfirmModal] = useState();
   const [selectedSpecName, setSelectedSpecName] = useState([]);
 
   const deleteSpec = async (id_spec, name) => {
     setSelectedSpecName(name);
-    setShowCreateDeleteSpecConfirmModal(true);
+    setShowCreateDeleteConfirmModal(true);
     await window.electronAPI.deleteExistingSpec(id_spec);
     setSpecialities(specialitiesFromStore.removeSpecInStore(id_spec));
     navigate("/spec");
@@ -47,11 +47,13 @@ const SpecialtiesPage = () => {
           ))}
         </div>
       </div>
-      <DeleteSpecConfirmModal
-        show={showCreateDeleteSpecConfirmModal}
-        onClose={() => setShowCreateDeleteSpecConfirmModal(false)}
-        selectedSpecName={selectedSpecName}>
-      </DeleteSpecConfirmModal>
+      <DeletConfirmModal
+        show={showCreateDeleteConfirmModal}
+        onClose={() => setShowCreateDeleteConfirmModal(false)}
+        selectedSpecName={selectedSpecName}
+        text={'Вы действительно хотите удалить ВУС '}
+      >
+      </DeletConfirmModal>
     </div>
   )
 }

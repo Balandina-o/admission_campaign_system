@@ -142,6 +142,7 @@ export default function StatementEditPage() {
     statementsFromStore.updateStateInStore(id, stateInfoForEdit);
   };
 
+
   const updateMOInfo = async () => {
     const paramForEdit = {
       moCat: moCat

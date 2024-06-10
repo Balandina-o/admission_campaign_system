@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { Context } from "../App";
+import CommonWarningModal from '../components/CommonWarningModal';
 
 const NewStatementPage = () => {
   const { specialitiesFromStore } = useContext(Context);
@@ -18,20 +19,37 @@ const NewStatementPage = () => {
 
   const navigate = useNavigate();
 
+  const [showCommonModal, setShowCommonModal] = useState();
+
   const createNewState = async () => {
-    const newState = {
-      secondName: secondName,
-      firstName: firstName,
-      lastName: lastName,
-      gender: gender,
-      birthday: birthday,
-      group: group,
-      SpecialityId: spec,
-      DirectionId: dir,
-    };
-    const res = await window.electronAPI.createStatement(newState);
-    console.log(res);
-    navigate("/statements");
+
+    if (
+      document.getElementById('secondName').value == "" ||
+      document.getElementById('firstName').value == "" ||
+      document.getElementById('lastName').value == "" ||
+      document.getElementById('gender').value == "" ||
+      document.getElementById('birthday').value == "" ||
+      document.getElementById('selectSpec').value == "" ||
+      document.getElementById('group').value == "" ||
+      document.getElementById('selectDir').value == "") {
+      console.log('dddd1')
+      setShowCommonModal(true);
+    } else {
+      console.log('dddd')
+      const newState = {
+        secondName: secondName,
+        firstName: firstName,
+        lastName: lastName,
+        gender: gender,
+        birthday: birthday,
+        group: group,
+        SpecialityId: spec,
+        DirectionId: dir,
+      };
+      const res = await window.electronAPI.createStatement(newState);
+      console.log(res);
+      navigate("/statements");
+    }
   };
 
   useEffect(() => void (async () => {
@@ -119,15 +137,17 @@ const NewStatementPage = () => {
                   <option disabled selected>--Выберите направление--</option>
                 </select>
               </div>
-
-              <Link to={'/existingStatement'}>
-                <button type="button" className="btn btn-primary mt-4 mb-2" onClick={createNewState} style={{ float: "right" }}>Сохранить основные данные</button>
-              </Link>
-
+              <button type="button" className="btn btn-primary mt-4 mb-2" onClick={createNewState} style={{ float: "right" }}>Сохранить основные данные</button>
             </form>
           </div>
         </div>
       </div>
+      <CommonWarningModal
+        show={showCommonModal}
+        onClose={() => setShowCommonModal(false)}
+        text='Убедитесь в том, что заполнены все поля'
+      >
+      </CommonWarningModal>
     </div>
   )
 }

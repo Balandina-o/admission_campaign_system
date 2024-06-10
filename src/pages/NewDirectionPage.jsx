@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
+import CommonWarningModal from '../components/CommonWarningModal';
 
 const NewDirectionPage = () => {
     const [name, setName] = useState("");
@@ -7,16 +8,26 @@ const NewDirectionPage = () => {
     const [acronym, setAcronym] = useState("");
     const navigate = useNavigate();
 
+    const [showCommonModal, setShowCommonModal] = useState();
+
     const createNewDir = async () => {
-        const newDir = {
-            name: name,
-            cypher: cypher,
-            acronym: acronym,
-        };
-        const res = await window.electronAPI.createDirection(newDir);
-        console.log(res);
-        navigate("/directions");
-    };
+
+        if (
+            document.getElementById('name').value == "" ||
+            document.getElementById('cypher').value == "" ||
+            document.getElementById('acronym').value == "") {
+            setShowCommonModal(true);
+        } else {
+            const newDir = {
+                name: name,
+                cypher: cypher,
+                acronym: acronym,
+            };
+            const res = await window.electronAPI.createDirection(newDir);
+            console.log(res);
+            navigate("/directions");
+        }
+    }
 
     return (
         <div>
@@ -47,6 +58,12 @@ const NewDirectionPage = () => {
                     </div>
                 </div>
             </div>
+            <CommonWarningModal
+                show={showCommonModal}
+                onClose={() => setShowCommonModal(false)}
+                text='Убедитесь в том, что заполнены все поля'
+            >
+            </CommonWarningModal>
         </div>
     )
 }
