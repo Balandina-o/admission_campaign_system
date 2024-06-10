@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
-const CommonWarningModal = ({ show, onClose }) => {
+const CommonWarningModal = ({ show, onClose, text }) => {
     return (
         <div>
             <div>
@@ -16,7 +16,7 @@ const CommonWarningModal = ({ show, onClose }) => {
                         <Modal.Title>Внимание! Ошибка заполнения</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        Проверьте корректность введенных данных и повторите попытку
+                        {text}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={() => onClose()}>
@@ -32,6 +32,7 @@ const CommonWarningModal = ({ show, onClose }) => {
 CommonWarningModal.propTypes = {
     onClose: PropTypes.func,
     show: PropTypes.bool,
+    text: PropTypes.text,
 }
 
 export default CommonWarningModal

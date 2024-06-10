@@ -1,0 +1,5 @@
+.cardSpec :hover {
+    transition: 0.1s;
+    background-color: rgb(224, 224, 238);
+    cursor: pointer;
+  }

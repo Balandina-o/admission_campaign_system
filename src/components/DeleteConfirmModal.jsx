@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
-const DeleteSpecConfirmModal = ({ show, onClose, selectedSpecName }) => {
+const DeleteConfirmModal = ({ show, onClose, selectedName, text }) => {
     return (
         <div>
             <div>
@@ -13,14 +13,17 @@ const DeleteSpecConfirmModal = ({ show, onClose, selectedSpecName }) => {
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title>Вы действительно хотите удалить ВУС &quot;{selectedSpecName}&quot;?</Modal.Title>
+                        <Modal.Title> {text} &quot;{selectedName}&quot;?</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         Подтвердите удаление нажатием на кнопку
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" onClick={() => onClose()}>
-                            Да, я хочу удалить данную ВУС
+                        <Button variant="primary" onClick={() => onClose("yesDelete")}>
+                            Удалить
+                        </Button>
+                        <Button variant="secondary" onClick={() => onClose("no")}>
+                            Отмена
                         </Button>
                     </Modal.Footer>
                 </Modal>
@@ -29,10 +32,11 @@ const DeleteSpecConfirmModal = ({ show, onClose, selectedSpecName }) => {
     )
 }
 
-DeleteSpecConfirmModal.propTypes = {
+DeleteConfirmModal.propTypes = {
     onClose: PropTypes.func,
     show: PropTypes.bool,
-    selectedSpecName: PropTypes.array,
+    selectedName: PropTypes.array,
+    text: PropTypes.string,
 }
 
-export default DeleteSpecConfirmModal
+export default DeleteConfirmModal

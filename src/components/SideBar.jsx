@@ -18,6 +18,9 @@ import {
 import ExitConfirmModal from "./ExitConfirmModal";
 
 const SideBar = ({ sideBarVisibility }) => {
+  const notYet = false;
+
+
   const navigate = useNavigate();
   const { userFromStore } = useContext(Context);
   const [showCreateExitConfirmModal, setShowCreateExitConfirmModal] = useState();
@@ -89,13 +92,15 @@ const SideBar = ({ sideBarVisibility }) => {
         </CDBSidebarMenu>
         <CDBSidebarFooter style={{ textAlign: "center" }}>
 
-          <CDBSidebarMenuItem icon="user" iconType="solid">
-            <Link to={'/user'}>
-              <CDBBtn color="light" style={{ width: "150px" }}>
-                Личный кабинет
-              </CDBBtn>
-            </Link>
-          </CDBSidebarMenuItem>
+          {notYet &&
+            <CDBSidebarMenuItem icon="user" iconType="solid">
+              <Link to={'/user'}>
+                <CDBBtn color="light" style={{ width: "150px" }}>
+                  Личный кабинет
+                </CDBBtn>
+              </Link>
+            </CDBSidebarMenuItem>
+          }
           <CDBSidebarMenuItem icon="exit" iconType="solid">
             <CDBBtn color="light" onClick={() => setShowCreateExitConfirmModal(true)} style={{ width: "150px" }}>
               Выйти из аккаунта

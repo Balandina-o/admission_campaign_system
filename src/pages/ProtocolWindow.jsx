@@ -67,6 +67,7 @@ const ProtocolWindow = () => {
             <CommonWarningModal
                 show={showCommonModal}
                 onClose={() => setShowCommonModal(false)}
+                text='Проверьте корректность введенных данных и повторите попытку'
             >
             </CommonWarningModal>
         </div>

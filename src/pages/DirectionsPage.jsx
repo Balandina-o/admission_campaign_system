@@ -3,7 +3,7 @@ import DirectionBar from '../components/DirectionBar';
 import { useNavigate } from "react-router-dom";
 import DirecrionsCardUnit from '../components/DirecrionsCardUnit';
 import { Context } from "../App";
-import DeleteSpecConfirmModal from '../components/DeleteSpecConfirmModal';
+import DeleteConfirmModal from '../components/DeleteConfirmModal';
 
 const DirectionsPage = () => {
   const navigate = useNavigate();
@@ -11,13 +11,21 @@ const DirectionsPage = () => {
   const [directions, setDirections] = useState([]);
   const [showCreateDeleteDirConfirmModal, setShowCreateDeleteDirConfirmModal] = useState();
   const [selectedDirName, setSelectedDirName] = useState([]);
+  const [selectedIdState, setSelectedIdStatee] = useState('');
+
+  async function closeExitConfirmModal(x) {
+    setShowCreateDeleteDirConfirmModal(false)
+    if (x == "yesDelete") {
+      await window.electronAPI.deleteExistingDir(selectedIdState);
+      setDirections(directionsFromStore.removeDirInStore(selectedIdState));
+      navigate("/directions");
+    }
+  }
 
   const deleteDir = async (id_dir, name) => {
-    setSelectedDirName(name);
     setShowCreateDeleteDirConfirmModal(true);
-    await window.electronAPI.deleteExistingDir(id_dir);
-    setDirections(directionsFromStore.removeDirInStore(id_dir));
-    navigate("/directions");
+    setSelectedIdStatee(id_dir);
+    setSelectedDirName(name);
   };
 
   useEffect(() => void (async () => {
@@ -43,11 +51,13 @@ const DirectionsPage = () => {
           ))}
         </div>
       </div>
-      <DeleteSpecConfirmModal
+      <DeleteConfirmModal
         show={showCreateDeleteDirConfirmModal}
-        onClose={() => setShowCreateDeleteDirConfirmModal(false)}
-        selectedSpecName={selectedDirName}>
-      </DeleteSpecConfirmModal>
+        onClose={(x) => closeExitConfirmModal(x)}
+        selectedName={selectedDirName}
+        text={'Вы действительно хотите удалить направление '}
+      >
+      </DeleteConfirmModal>
     </div>
 
   )
