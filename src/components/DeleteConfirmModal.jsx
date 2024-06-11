@@ -13,7 +13,7 @@ const DeleteConfirmModal = ({ show, onClose, selectedName, text }) => {
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> {text} &quot;{selectedName}&quot;?</Modal.Title>
+                        <Modal.Title> {text}<i>&quot;{selectedName}&quot;?</i></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         Подтвердите удаление нажатием на кнопку

@@ -8,42 +8,44 @@ const DirecrionsCardUnit = ({ id, name, cypher, acronym, onDelete }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="p-2 card">
-            <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex align-items-center">
-                    <div className="acr">
-                        {acronym}
+        <div>
+            <div className="p-2 card">
+                <div className="d-flex justify-content-between align-items-center">
+                    <div className="d-flex align-items-center">
+                        <div className="acr">
+                            {acronym}
+                        </div>
+                        <div style={{ marginLeft: "10px" }}>
+                            <div>
+                                <b>{name}</b>
+                            </div>
+                            <div>
+                                {cypher}
+                            </div>
+                        </div>
                     </div>
-                    <div style={{ marginLeft: "10px" }}>
-                        <div>
-                            <b>{name}</b>
-                        </div>
-                        <div>
-                            {cypher}
-                        </div>
+                    <div>
+                        <Button
+                            variant="primary"
+                            style={{ width: "35px", height: "35px", fontSize: "11px" }}
+                            className="bottom-0 end-0 me-3 fa fa-trash"
+                            onClick={() => onDelete(id, name)}
+                        >
+                        </Button>
+
+                        <Button
+                            variant="primary"
+                            style={{ width: "35px", height: "35px", fontSize: "13px" }}
+                            className="bottom-0 end-0 me-3 fa fa-pencil"
+                            onClick={() => { navigate(`/editDirection/${id}`), console.log(`${id}`) }}
+                        >
+                            &#9998;
+                        </Button>
+
                     </div>
                 </div>
-                <div>
-                    <Button
-                        variant="primary"
-                        style={{ width: "35px", height: "35px", fontSize: "11px" }}
-                        className="bottom-0 end-0 me-3 fa fa-trash"
-                        onClick={() => onDelete(id, name)}
-                    >
-                    </Button>
-
-                    <Button
-                        variant="primary"
-                        style={{ width: "35px", height: "35px", fontSize: "13px" }}
-                        className="bottom-0 end-0 me-3 fa fa-pencil"
-                        onClick={() => { navigate(`/editDirection/${id}`), console.log(`${id}`) }}
-                    >
-                        &#9998;
-                    </Button>
-
-                </div>
-            </div>
-        </div >
+            </div >
+        </div>
     )
 }
 

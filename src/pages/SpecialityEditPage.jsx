@@ -11,8 +11,9 @@ const SpecialityEditPage = () => {
     const [name, setName] = useState("");
     const [cypher, setCypher] = useState("");
     const [type, setType] = useState("");
-
     const [exam, setExam] = useState("");
+
+    const [spanShower, setSpanShower] = useState(false);
 
     const updateExistingSpec = async () => {
         const specForEdit = {
@@ -28,6 +29,12 @@ const SpecialityEditPage = () => {
     };
 
     useEffect(() => void (async () => {
+        const listOfState = await window.electronAPI.getStatements();
+        if (listOfState.some((x) => x.SpecialityId == id)) {
+            document.getElementById("checkboxExam").disabled = true;
+            setSpanShower(true);
+        }
+
         const spec = specialitiesFromStore.findSpeciality(id);
         setName(spec.name);
         setCypher(spec.cypher);
@@ -63,10 +70,16 @@ const SpecialityEditPage = () => {
                                     <label style={{ width: "150px" }}>Подготовка: </label>
                                     <input id="type" value={type} onChange={(event) => setType(event.target.value)} placeholder="Введите тип кандидатов" className="form-control w-100" />
                                 </div>
-                                <div className='mt-3'>
+                                <div className='mt-3' style={{ marginBottom: '7px' }}>
                                     <label >Осуществлять прием по результатам баллов ЕГЭ:</label>
                                     <input style={{ width: "50px" }} id="checkboxExam" type="checkbox" onChange={(event) => setExam(event.target.checked)} />
+
                                 </div>
+                                {spanShower &&
+                                    <div>
+                                        <span style={{ background: '#CFCFCF', padding: '8px', borderRadius: '7px' }} id='myspan'>Нельзя изменить тип специальности, пока существуют заявления, прикрепленные к ней</span>
+                                    </div>
+                                }
                                 <button type="button" onClick={updateExistingSpec} className="btn btn-primary mt-4 mb-2" >Сохранить основные данные</button>
 
                             </form>
