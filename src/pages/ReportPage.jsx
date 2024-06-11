@@ -11,8 +11,8 @@ const ReportPage = () => {
     const [numberOfCadr, setNumberOfCadr] = useState([]);
 
 
-    function writeIntoFile() {
-    }
+    // function writeIntoFile() {
+    // }
 
     useEffect(() => void (async () => {
         let numberStateT = statementsFromStore.getNumberOfStatements();
@@ -24,7 +24,7 @@ const ReportPage = () => {
 
     const reportComp = () => {
         return (
-            <div style={{ background: "white" }}>
+            <div style={{ background: "white", paddingBottom: '40px' }}>
                 <div className='report_header'>
                     <b>ОТЧЕТ</b><br></br>
                     по приемной кампании на {getCurrentDate()}
@@ -40,7 +40,7 @@ const ReportPage = () => {
                         Заявлений кандидатов офицеров запаса - {numberOfCadr}<br></br>
                         Заявлений кандидатов кадровых офицеров - {numberStatementsTotal - numberOfCadr}<br></br>
                     </div>
-                    <button required type="button" className="btn btn-primary mt-4 mb-2" onClick={writeIntoFile}>Скачать отчет</button>
+                    {/* <button required type="button" className="btn btn-primary mt-4 mb-2" onClick={writeIntoFile}>Скачать отчет</button> */}
                 </div>
             </div>
         )

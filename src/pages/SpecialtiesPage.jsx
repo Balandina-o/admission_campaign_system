@@ -13,13 +13,21 @@ const SpecialtiesPage = () => {
   const [specialities, setSpecialities] = useState([]);
   const [showCreateDeleteConfirmModal, setShowCreateDeleteConfirmModal] = useState();
   const [selectedSpecName, setSelectedSpecName] = useState([]);
+  const [selectedIdState, setSelectedIdStatee] = useState('');
+
+  async function closeExitConfirmModal(x) {
+    setShowCreateDeleteConfirmModal(false)
+    if (x == "yesDelete") {
+      await window.electronAPI.deleteExistingSpec(selectedIdState);
+      setSpecialities(specialitiesFromStore.removeSpecInStore(selectedIdState));
+      navigate("/spec");
+    }
+  }
 
   const deleteSpec = async (id_spec, name) => {
-    setSelectedSpecName(name);
     setShowCreateDeleteConfirmModal(true);
-    await window.electronAPI.deleteExistingSpec(id_spec);
-    setSpecialities(specialitiesFromStore.removeSpecInStore(id_spec));
-    navigate("/spec");
+    setSelectedSpecName(name);
+    setSelectedIdStatee(id_spec);
   };
 
   useEffect(() => void (async () => {
@@ -49,8 +57,8 @@ const SpecialtiesPage = () => {
       </div>
       <DeletConfirmModal
         show={showCreateDeleteConfirmModal}
-        onClose={() => setShowCreateDeleteConfirmModal(false)}
-        selectedSpecName={selectedSpecName}
+        onClose={(x) => closeExitConfirmModal(x)}
+        selectedName={selectedSpecName}
         text={'Вы действительно хотите удалить ВУС '}
       >
       </DeletConfirmModal>

@@ -16,7 +16,7 @@ const DirectionBar = () => {
             <Link to={'/newDirection'}>
                 <Button
                     variant="primary"
-                    style={{ width: "35px", height: "35px", fontSize: "16px" }}
+                    style={{ width: "35px", height: "35px", fontSize: "22px", marginRight: "18px", paddingLeft: '11px' }}
                     className="bottom-0 end-0 me-3 pt-0"
                 >
                     +

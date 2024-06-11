@@ -16,7 +16,7 @@ const SpecialityBar = () => {
       <Link to={'/newSpeciality'}>
         <Button
           variant="primary"
-          style={{ width: "35px", height: "35px", fontSize: "16px", marginRight: "18px" }} //не работает марджин, решить
+          style={{ width: "35px", height: "35px", fontSize: "22px", marginRight: "18px", paddingLeft: '11px' }}
           className="bottom-0 end-0 pt-0"
         >
           +

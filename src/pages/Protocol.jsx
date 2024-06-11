@@ -11,9 +11,12 @@ const Protocol = () => {
 
     const [specCypherFromId, setSpecCypherFromId] = useState("");
     const [specTypeFromId, setSpecTypeFromId] = useState("");
-    const [currentSpecId, setCurrentSpecId] = useState("");
+    // const [currentSpecId, setCurrentSpecId] = useState("");
     const [totalNumberOfStatements, setTotalNumberOfStatements] = useState("");
     const [admitted, setAdmitted] = useState("");
+
+    const [slicedArray, setSlicedArray] = useState([]);
+
 
     useEffect(() => void (async () => {
         let currentId = protocolParametersFromStore.speciality;
@@ -21,20 +24,25 @@ const Protocol = () => {
         let totNumState = statementsFromStore.findStatementsBySpec(currentId).length;
         let minus = totNumState - Number(currentNumber);
 
-        setCurrentSpecId(currentId);
+        //setCurrentSpecId(currentId);
         setTotalNumberOfStatements(totNumState);
-        // setSpecCypherFromId(directionsFromStore.findDirection(currentId).cypher)
         setSpecCypherFromId(specialitiesFromStore.findSpeciality(currentId).cypher)
         setSpecTypeFromId(specialitiesFromStore.findSpeciality(currentId).type)
         console.log("currentNumber", currentNumber);
         console.log("totalNumberOfStatements", totNumState);
         console.log('minus', minus);
+        console.log('currentSpecId', currentId);
+
         if (minus < 0) {
             setAdmitted(totNumState)
         } else {
             setAdmitted(currentNumber)
         }
-    })(), [])
+        //................................................................................................
+        setSlicedArray(statementsFromStore.findStatementsBySpec(currentId).slice(0, admitted));
+
+
+    })(), [slicedArray])
 
     return (
         <div style={{ background: "white" }} >
@@ -61,13 +69,13 @@ const Protocol = () => {
                             <td colSpan="4" width="16%"><b>Оценка уровня физической подготовленности</b></td>
                             <td rowSpan="2" width="7%"><b>Оценка текущей успеваемости (по 100 бальной шкале)</b></td>
                             <td rowSpan="2" width="7%"><b>Итоговый результат</b></td>
-                            <td rowSpan="2" width="15%"><b>Решение о допуске к военной подготовке</b> (причина недопуска к конкурсному отбору)</td>
+                            <td rowSpan="2" width="15%"><b>Решение о допуске к военной подготовке(причина недопуска к конкурсному отбору)</b> </td>
                         </tr>
                         <tr>
-                            <td>Сила</td>
-                            <td>Быстрота</td>
-                            <td>Выносливость</td>
-                            <td>Результат (по 100 бальной шкале)</td>
+                            <td><b>Сила</b></td>
+                            <td><b>Быстрота</b></td>
+                            <td><b>Выносливость</b></td>
+                            <td><b>Результат (по 100 бальной шкале)</b></td>
                         </tr>
 
                         <tr>
@@ -91,7 +99,7 @@ const Protocol = () => {
                             <td colSpan="13" className="center"><b>1. Список граждан, допущенных к конкурсному отбору</b></td>
                         </tr>
                         <>
-                            {statementsFromStore.findStatementsBySpec(currentSpecId).map((state, index) => {
+                            {slicedArray.map((state, index) => {
                                 return (
                                     <React.Fragment key={state.id}>
                                         <tr>
@@ -117,14 +125,24 @@ const Protocol = () => {
                                 )
                             })}
                         </>
+                        <tr>
+                            <td colSpan="13" className="center"><b>2. Список граждан, не допущенных к конкурсному отбору</b></td>
+                        </tr>
+                        <>
+                            fggf
+                        </>
                     </tbody>
                 </table>
 
 
             </div>
-            <div className='statistics'>
+            <div className='statistics' style={{ paddingBottom: '100px' }}>
                 Изъявили желание пройти обучение по программе военной подготовки – __<u>{totalNumberOfStatements}</u>__ чел.<br></br>
-                Допущены к военной подготовке – __{admitted}__ чел.
+                Допущены к военной подготовке – __{admitted}__ чел.<br></br>
+                Допущены к военной подготовке – __{admitted}__ чел.<br></br>
+                Допущены к военной подготовке – __{admitted}__ чел.<br></br>
+                Члены комиссии<br></br>
+                Секретарь<br></br>
             </div>
         </div>
 
