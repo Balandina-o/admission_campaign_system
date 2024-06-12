@@ -11,38 +11,52 @@ const Protocol = () => {
 
     const [specCypherFromId, setSpecCypherFromId] = useState("");
     const [specTypeFromId, setSpecTypeFromId] = useState("");
-    // const [currentSpecId, setCurrentSpecId] = useState("");
+
     const [totalNumberOfStatements, setTotalNumberOfStatements] = useState("");
     const [admitted, setAdmitted] = useState("");
 
-    const [slicedArray, setSlicedArray] = useState([]);
+    const [sortedArrayPassed, setSortedArrayPassed] = useState([]);
+    const [sortedArrayOther, setSortedArrayOther] = useState([]);
 
 
-    useEffect(() => void (async () => {
+    let passedDudes = [];
+    let otherDudes = [];
+
+    useEffect(() => {
         let currentId = protocolParametersFromStore.speciality;
         let currentNumber = protocolParametersFromStore.number;
         let totNumState = statementsFromStore.findStatementsBySpec(currentId).length;
         let minus = totNumState - Number(currentNumber);
 
-        //setCurrentSpecId(currentId);
         setTotalNumberOfStatements(totNumState);
         setSpecCypherFromId(specialitiesFromStore.findSpeciality(currentId).cypher)
         setSpecTypeFromId(specialitiesFromStore.findSpeciality(currentId).type)
-        console.log("currentNumber", currentNumber);
-        console.log("totalNumberOfStatements", totNumState);
-        console.log('minus', minus);
-        console.log('currentSpecId', currentId);
-
         if (minus < 0) {
             setAdmitted(totNumState)
         } else {
             setAdmitted(currentNumber)
         }
         //................................................................................................
-        setSlicedArray(statementsFromStore.findStatementsBySpec(currentId).slice(0, admitted));
+        const copyArr = [...statementsFromStore.findStatementsBySpec(currentId)];
 
+        for (let i = 0; i < copyArr.length; i++) {
+            if (copyArr[i].moCat == '9' || copyArr[i].moCat == '10' || copyArr[i].moCat == '11' || copyArr[i].moCat === null ||
+                copyArr[i].ppo == '4' || copyArr.fpFinal == '0' || copyArr.fpFinal === null || copyArr.totalScore == '0' || copyArr.totalScore === null
+            ) {
+                otherDudes.push(copyArr[i]);
+            }
+            else {
+                passedDudes.push(copyArr[i]);
+            }
+        }
+        // setPassedDudesState(passedDudes);
+        // setOtherDudesState(otherDudes);
 
-    })(), [slicedArray])
+        setSortedArrayPassed(passedDudes.sort((a, b) => parseFloat(b.totalScore) - parseFloat(a.totalScore)));
+        setSortedArrayOther(otherDudes.sort((a, b) => parseFloat(b.totalScore) - parseFloat(a.totalScore)));
+
+        console.log('sortedArrayPassed', sortedArrayPassed);
+    }, [])
 
     return (
         <div style={{ background: "white" }} >
@@ -99,27 +113,33 @@ const Protocol = () => {
                             <td colSpan="13" className="center"><b>1. Список граждан, допущенных к конкурсному отбору</b></td>
                         </tr>
                         <>
-                            {slicedArray.map((state, index) => {
+                            {sortedArrayPassed.map((state, index) => {
                                 return (
                                     <React.Fragment key={state.id}>
                                         <tr>
                                             <td>{index + 1}</td>
-                                            <td>{state.secondName} {state.firstName} {state.lastName}, {(state.birthday).replaceAll("-", '.')}</td>
+                                            <td>{state.secondName} {state.firstName} {state.lastName}, {(state.birthday).split("-").reverse().join(".")}</td>
                                             <td>{directionsFromStore.findDirection(state.DirectionId).cypher}</td>
-                                            <td>годен</td>
-                                            <td>{state.ppo === "1" ? "II" : "I"}</td>
-                                            <td>нет</td>
-
+                                            <td>{(state.moCat == '9' || state.moCat == '10' || state.moCat == '11') ? 'не годен'
+                                                : 'годен'}</td>
+                                            <td>{state.ppo === "1" ? "I" :
+                                                state.ppo === "2" ? "II" :
+                                                    state.ppo === "3" ? "III" :
+                                                        state.ppo === "4" ? "IV" : '-'}</td>
+                                            <td>{state.pp == '2' ? 'нет' : 'есть'}</td>
                                             <td style={{ width: "39px" }}>
-                                                {state.fpS}
+                                                {state.fpS != null || state.fpS != "" ? state.fpS : '-'}
                                             </td>
-                                            <td>{state.fpB}</td>
-                                            <td>{state.fpV}</td>
-                                            <td>{state.fpFinal}</td>
+                                            <td>{state.fpV != null || state.fpV != "" ? state.fpV : '-'}</td>
+                                            <td>{state.fpB != null || state.fpB != "" ? state.fpB : '-'}</td>
+                                            <td>{state.fpFinal != null || state.fpFinal != "" ? state.fpFinal : '-'}</td>
 
-                                            <td>{state.auDec}</td>
-                                            <td>{state.totalScore}</td>
-                                            <td>допустить</td>
+                                            <td>{state.auDec != null ? state.auDec : '-'}</td>
+                                            <td>{state.totalScore != null ? state.totalScore : '-'}</td>
+                                            {
+                                                index < admitted ?
+                                                    <td>допустить</td> : <td>отказать</td>
+                                            }
                                         </tr>
                                     </React.Fragment>
                                 )
@@ -129,18 +149,50 @@ const Protocol = () => {
                             <td colSpan="13" className="center"><b>2. Список граждан, не допущенных к конкурсному отбору</b></td>
                         </tr>
                         <>
-                            fggf
+                            {sortedArrayOther.map((state, index) => {
+                                return (
+                                    <React.Fragment key={state.id}>
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td>{state.secondName} {state.firstName} {state.lastName}, {(state.birthday).split("-").reverse().join(".")}</td>
+                                            <td>{directionsFromStore.findDirection(state.DirectionId).cypher}</td>
+                                            <td>{(state.moCat == '9' || state.moCat == '10' || state.moCat == '11') ? 'не годен'
+                                                : 'годен'}</td>
+                                            <td>{state.ppo === "1" ? "I" :
+                                                state.ppo === "2" ? "II" :
+                                                    state.ppo === "3" ? "III" :
+                                                        state.ppo === "4" ? "IV" : '-'}</td>
+                                            <td>{state.pp == '2' ? 'нет' : 'есть'}</td>
+                                            <td style={{ width: "39px" }}>
+                                                {(state.fpS === null) ? '-' : state.fpS}
+                                            </td>
+                                            <td>{(state.fpV != null || state.fpV != undefined) ? state.fpV : '-'}</td>
+                                            <td>{(state.fpB != null || state.fpB != undefined) ? state.fpB : '-'}</td>
+                                            <td>{(state.fpFinal != null || state.fpFinal != undefined) ? state.fpFinal : '-'}</td>
+
+                                            <td>{state.auDec != null ? state.auDec : '-'}</td>
+                                            <td>{state.totalScore != null ? state.totalScore : '-'}</td>
+                                            <td>{state.moCat == '9' ||
+                                                state.moCat == '10' ||
+                                                state.moCat == '11' ? 'не годен; ' : ""}
+                                                {state.fpFinal == '0' ? 'не сдал ФП; ' : ""}
+                                                {state.ppo == '4' ? `${state.ppo} категория ППО; ` : ""}
+                                                отказать</td>
+                                        </tr>
+                                    </React.Fragment>
+                                )
+                            })}
                         </>
                     </tbody>
                 </table>
 
 
             </div>
-            <div className='statistics' style={{ paddingBottom: '100px' }}>
+            <div className='statistics' style={{ paddingBottom: '100px', paddingLeft: '5%' }}>
                 Изъявили желание пройти обучение по программе военной подготовки – __<u>{totalNumberOfStatements}</u>__ чел.<br></br>
                 Допущены к военной подготовке – __{admitted}__ чел.<br></br>
-                Допущены к военной подготовке – __{admitted}__ чел.<br></br>
-                Допущены к военной подготовке – __{admitted}__ чел.<br></br>
+                Не допущены к военной подготовке (не прошли по конкурсу) – __{sortedArrayPassed.length - admitted}__ чел.<br></br>
+                Не допущены к конкурсному отбору – __{sortedArrayOther.length}__ чел.<br></br>
                 Члены комиссии<br></br>
                 Секретарь<br></br>
             </div>
