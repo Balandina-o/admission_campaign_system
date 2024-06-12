@@ -167,38 +167,44 @@ export default function StatementEditPage() {
     statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
   };
 
-  const updateAuInfo = async () => {
-    if (specType) {
-      // alert(document.getElementById('inputAu').validity.valid); //ЗДОРОВО! ЕСЛИ ЕГЭ
+  const updateAuInfo = async () => {//////////////////////////////////
+    if (specType) {//ЗДОРОВО! ЕСЛИ ЕГЭ
+      // alert(document.getElementById('inputAu').validity.valid);
+      setAuDec(au);
       const paramForEdit = {
         au: au,
         auDec: au,
+        totalScore: totalScore
       };
-      await window.electronAPI.updateCurrentState(id, paramForEdit);
+      await window.electronAPI.updateCurrentState(id, paramForEdit), setAuDec(au);
       statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
 
-      setAuDec(au)
+      document.getElementById('updateFpInfoBtn').click();
     } else {
       // alert(document.getElementById('inputAu').validity.valid); //ЗДОРОВО!
+      console.log(au, 'auauauauau');
+      console.log(totalScore, 'totalScore');
+      setAuDec((au * 100) / 5);
       const paramForEdit = {
         au: au,
         auDec: (au * 100) / 5,
+        totalScore: totalScore
       };
       await window.electronAPI.updateCurrentState(id, paramForEdit);
       statementsFromStore.updateStateInStoreOneParam(id, paramForEdit);
-
-      setAuDec((au * 100) / 5)
+      document.getElementById('updateFpInfoBtn').click();
     }
   };
 
-  const updateFpInfo = async () => {  //доделать готово?
+
+
+  const updateFpInfo = async () => {  //доделать готово?////////////////////////////////////////////
     let newSCheck;
     let newBCheck;
     let newVCheck;
     document.getElementById("checkboxS").checked ? newSCheck = "" : newSCheck = fpS.replace(/0*$/, "");
     document.getElementById("checkboxB").checked ? newBCheck = "" : newBCheck = fpB.replace(/0*$/, "");
     document.getElementById("checkboxV").checked ? newVCheck = "" : newVCheck = fpV.replace(/0*$/, "");
-    // console.log(newSCheck, newBCheck, newVCheck);
     let newSDec;
     let newBDec;
     let newVDec;
@@ -206,7 +212,6 @@ export default function StatementEditPage() {
     if (newBCheck) { newBDec = calcB(newBCheck, gender) } else { newBDec = "" }
     if (newVCheck) { newVDec = calcV(newVCheck, gender) } else { newVDec = "" }
 
-    // console.log(newSDec, newBDec, newVDec);
 
     setFpBDec(newBDec);
     setFpSDec(newSDec);
@@ -225,7 +230,7 @@ export default function StatementEditPage() {
     let sumDecValuesResult;
     let countFinalResult;
     let countTotalScoreValuesResult;
-
+    console.log('auDec', auDec)
     sumDecValuesResult = sumDecValues(newBDec, newSDec, newVDec)
     countFinalResult = countFinal(sumDecValuesResult);
     countTotalScoreValuesResult = countTotalScore(countFinalResult, auDec, indPoints);
@@ -233,6 +238,9 @@ export default function StatementEditPage() {
     setFpFinal(countFinalResult);
     setTotalScore(countTotalScoreValuesResult);
 
+    console.log('newSCheck', newSCheck)
+    console.log('newBCheck', newBCheck)
+    console.log('newVCheck', newVCheck)
     const stateInfoForEdit = {
       fpB: newBCheck,
       fpS: newSCheck,
@@ -240,9 +248,9 @@ export default function StatementEditPage() {
       fpBDec: newBDec,
       fpSDec: newSDec,
       fpVDec: newVDec,
-      fpSum: fpSum,
-      fpFinal: fpFinal,
-      totalScore: totalScore,
+      fpSum: sumDecValuesResult,
+      fpFinal: countFinalResult,
+      totalScore: countTotalScoreValuesResult,
 
     };
     await window.electronAPI.updateCurrentState(id, stateInfoForEdit);
@@ -260,6 +268,9 @@ export default function StatementEditPage() {
     indPoints ? setCheckInd(false) : setCheckInd(true)
     indPoints != "" ? document.getElementById("checkboxInd").checked = false :
       document.getElementById("checkboxInd").checked = true;
+
+    document.getElementById('updateAuInfoBtn').click();
+
   }
 
   return (
@@ -283,7 +294,7 @@ export default function StatementEditPage() {
               <hr></hr>
               <div className="flex-fill mr-2 d-flex align-items-center mt-2 mb-2">
                 <label style={{ width: "170px" }}>Рейтинговый балл: </label>
-                <input type="text" value={totalScore} className="form-control w-100" />
+                <input type="text" value={totalScore} className="form-control w-100 refField" />
               </div>
             </form>
           </div>
@@ -453,7 +464,7 @@ export default function StatementEditPage() {
                   </div>
                 )}
 
-              <button type="button" onClick={updateAuInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные АУ</button>
+              <button id='updateAuInfoBtn' type="button" onClick={updateAuInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные АУ</button>
 
             </form>
           </div>
@@ -479,7 +490,7 @@ export default function StatementEditPage() {
                 <label style={{ width: "200px", whitespace: "nowrap", marginLeft: "145px" }}>Достижения отсутствуют</label>
 
                 <input id="checkboxInd" value={checkInd} type="checkbox" onChange={(event) => setCheckInd(event.target.checked)} />
-                <button type="button" onClick={updateIndInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные ИД</button>
+                <button id='updateIndInfoBtn' type="button" onClick={updateIndInfo} className="btn btn-primary mt-4 mb-2" style={{ float: "right", width: "205px" }}>Сохранить данные ИД</button>
               </form>
             </div>
           </div>
@@ -542,11 +553,11 @@ export default function StatementEditPage() {
                 <input type="text" value={fpFinal} className="form-control refField" />
               </div>
 
-              <button type="button" className="btn btn-primary mt-4 mb-2 btnSave" onClick={updateFpInfo} >Сохранить ОФП</button>
+              <button id='updateFpInfoBtn' type="button" className="btn btn-primary mt-4 mb-2 btnSave" onClick={updateFpInfo} >Сохранить ОФП</button>
             </form>
           </div>
           <hr></hr>
-          <div>
+          <div style={{ paddingBottom: '60px' }}>
             <button type="button" className="btn btn-danger mt-4 mb-4 btnDel" >Удалить заявление</button>
           </div>
         </div>
